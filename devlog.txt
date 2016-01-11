@@ -24,8 +24,10 @@ Date: 2016-01-11
 
 User: Leo Au-Yeung
 Changes: 
-- created Game.java which will run the game with basic play() function
+- created Game.java which will run the game with a play() function
 - added prompts in game.java to prompt user for gender/name
 - fixed Player.java mutators/accessors
+- added startupMsg, fixed play functionality
+- created 2 WIP methods to displayMap & executeControl
 
 ==============================================================
