@@ -1,3 +1,2 @@
-# Team-Fantastic-Baby
-Fantastic Baby -- BIGBANG
+# Team Fantastic Baby
 Project -- Pokemon: Fantastic Version
