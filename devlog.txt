@@ -27,7 +27,8 @@ Changes:
 - created Game.java which will run the game with a play() function
 - added prompts in game.java to prompt user for gender/name
 - fixed Player.java mutators/accessors
-- added startupMsg, fixed play functionality
+- added startupMsg, promptStarter, & fixed play functionality
 - created 2 WIP methods to displayMap & executeControl
+- created first Pokemon: Charmander.java !
 
 ==============================================================
