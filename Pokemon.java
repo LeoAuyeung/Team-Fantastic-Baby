@@ -1,5 +1,6 @@
 //Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
 //Pokemon.java
+package Pokedex;
 
 public abstract class Pokemon {
 	
