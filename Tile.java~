@@ -1,0 +1,31 @@
+//Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
+//Tile.java
+
+public class Tile {
+
+    private String image;
+    private boolean _isPlayerHere;
+
+    //constructor 
+    public Tile {
+	image = "~";
+	_isPlayerHere = false;
+    }
+
+    //accessor
+    public boolean isPlayerHere() {
+	return _isPlayerHere;
+    }
+
+    public void flip() {
+	_isPlayerHere = !_isPlayerHere;
+    }
+
+    public String toString() {
+	if( isPlayerHere ) {
+	    return image;
+	}
+	else {
+	    return "*";
+	}
+    }

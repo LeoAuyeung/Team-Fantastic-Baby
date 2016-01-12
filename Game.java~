@@ -72,7 +72,7 @@ public class Game {
 		Map test = new Map();
 		
 		while ( user.getQuest() != 20 ) {
-		    //displayMap();
+			//displayMap();
 			//prompt user for a command
 			String control = promptControl();
 			//executeControl();

@@ -37,3 +37,24 @@ Changes:
 java files must be in a folder named 'Pokedex'
 
 ==============================================================
+
+Date: 2016-01-12
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- created Tile.java, which will constitute Map.java that will
+govern player's movement
+- revised Map.java accordingly
+- used command prompt to enable the interaction with the player
+on command line
+
+Obstacles:
+- could not find a way to clear the console from a running java
+program.
+- should think about how to create a diversity of map with
+different structures.
+- pressing enter every time to move is annoying, but cannot think
+of another way.
+
+==============================================================
