@@ -1,6 +1,9 @@
 //Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
 //Game.java
 
+import Pokedex.*;
+//Credits to http://www.pokemon.com/ for Pokedex descriptions of all available Pokemon in our game!
+
 public class Game {
 	
 	public void startupMsg() {
