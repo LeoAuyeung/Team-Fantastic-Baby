@@ -30,5 +30,10 @@ Changes:
 - added startupMsg, promptStarter, & fixed play functionality
 - created 2 WIP methods to displayMap & executeControl
 - created first Pokemon: Charmander.java !
+- created corresponding Bulbasaur.java & Squirtle.java !
+- created package 'Pokedex' for all Pokemon, including Pokemon.java
+
+*For game to run, Pokemon.java & other corresponding Pokemon
+java files must be in a folder named 'Pokedex'
 
 ==============================================================
