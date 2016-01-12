@@ -5,7 +5,9 @@ public class Game {
 	
 	public void startupMsg() {
 		//startup message from original Pokemon games!
+		
 		//***ADD WAIT TIME LATER TO DELAY MESSAGES***
+		
 		System.out.println("\nHello there! It's a pleasure to meet you!\n");
 		System.out.println("Welcome to the world of Pokemon!");
 		System.out.println("My name is Oak, but everyone just calls me the Pokemon Professor.\n");
@@ -31,6 +33,15 @@ public class Game {
 		return name;
 	}
 	
+	public int promptStarter() {
+		int pkmn = 0;
+		System.out.println("In this world of Pokemon, you'll need a partner Pokemon to be with you.");
+		System.out.println("Tell me, which Pokemon would you like to be your partner?");
+		System.out.println("1. Charmander\t2. Squirtle\t3. Bulbasaur");
+		pkmn = Keyboard.readInt();
+		return pkmn;
+	}
+	
 	public String promptControl() {
 		String ctrl = "";
 		System.out.print("Enter a control: ");
@@ -49,9 +60,12 @@ public class Game {
 	public void play() {
 		//startup prompt; only prompts user once
 		startupMsg();
-		String g = promptGender();
-		String n = promptName();
-		Player user = new Player(g, n);
+		String gender = promptGender();
+		String name = promptName();
+		Player user = new Player(gender, name);
+		int starter = promptStarter();
+		if (starter == 1) { Pokemon baws = new Charmander(); } //getting the basics down first
+		
 		Map test = new Map();
 		
 		while ( user.getQuest() != 20 ) {
