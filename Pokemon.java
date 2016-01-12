@@ -48,7 +48,7 @@ public abstract class Pokemon {
 	
 	//Battle methods
 	public int attack (Pokemon enemy, int move) {
-		int damage = ( ( (2 * level + 10) / 250 ) * ( attack / enemy.getDefense() ) * movesDmg[move] + 2 )
+		int damage = ( ( (2 * level + 10) / 250 ) * ( attack / enemy.getDefense() ) * movesDmg[move] + 2 );
 		//actual formula for dmg in Pokemon
 		enemy.setHP ( enemy.getHP() - damage );
 		return damage;
