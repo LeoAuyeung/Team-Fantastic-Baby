@@ -112,34 +112,62 @@ public class Game {
 		
 		//Valid commands out of battle
 		if ( battleMode == false ) {
-			while (validCommand == false) {
-				//System.out.println("command: " + command); //debug purposes
-				if ( command.toLowerCase().equals("w") ) { 
-					validCommand = true;
-					//user.setX, user.setY, change map's player coordinates
-				}
-				if ( command.toLowerCase().equals("a") ) {
-					validCommand = true;
-					//user.setX, user.setY, change map's player coordinates
-				}
-				if ( command.toLowerCase().equals("s") ) {
-					validCommand = true;
-					//user.setX, user.setY, change map's player coordinates
-				}
-				if ( command.toLowerCase().equals("d") ) {
-					validCommand = true;
-					//user.setX, user.setY, change map's player coordinates
-				}
-				if ( command.toLowerCase().equals("x") ) {
-					validCommand = true;
-					//check block in front using player.getDirection()
-					//we will have: trees, rocks, walls, enemy trainers
-				}
-				else {
-					System.out.println("Invalid command.");
-					validCommand = true;
-				}
+		    while (validCommand == false) {
+			//System.out.println("command: " + command); //debug purposes
+			if ( command.toLowerCase().equals("w") ) { 
+			    if( Player.getY() != 0 ) {
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
+				Map.get( Player.getY(), Player.getX() ).setImage();
+				Player.setY(Player.getY() - 1);
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
+				Map.get( Player.getY(), Player.getX() ).setImage();		    
+			    }
+			    validCommand = true;
+			    //user.setX, user.setY, change map's player coordinates
 			}
+			if ( command.toLowerCase().equals("a") ) {
+			    if( Player.getX() != 0 ) {
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
+				Map.get( Player.getY(), Player.getX() ).setImage();
+				Player.setX(Player.getX() - 1);
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
+				Map.get( Player.getY(), Player.getX() ).setImage();		    
+			    }
+			    validCommand = true;
+			    //user.setX, user.setY, change map's player coordinates
+			}
+			if ( command.toLowerCase().equals("s") ) {
+			    if( Player.getY() != 19 ) {
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
+				Map.get( Player.getY(), Player.getX() ).setImage();
+				Player.setY(Player.getY() + 1);
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
+				Map.get( Player.getY(), Player.getX() ).setImage();		    
+			    }
+			    validCommand = true;
+			    //user.setX, user.setY, change map's player coordinates
+			}
+			if ( command.toLowerCase().equals("d") ) {
+			    if( Player.getX() != 19 ) {
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
+				Map.get( Player.getY(), Player.getX() ).setImage();
+				Player.setX(Player.getX() + 1);
+				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
+				Map.get( Player.getY(), Player.getX() ).setImage();		    
+			    }
+			    validCommand = true;
+			    //user.setX, user.setY, change map's player coordinates
+			}
+			if ( command.toLowerCase().equals("x") ) {
+			    validCommand = true;
+			    //check block in front using player.getDirection()
+			    //we will have: trees, rocks, walls, enemy trainers
+			}
+			else {
+			    System.out.println("Invalid command.");
+			    validCommand = true;
+			}
+		    }
 		}
 		
 		//Valid commands in a battle
@@ -198,13 +226,19 @@ public class Game {
 		
 		//RUNS GAME:
 		while ( user.getQuest() != 20 ) {
-			//clearDisplay(); //comment out when debugging
-			if ( battleMode == false ) { displayMap(); }
-			else if ( battleMode == true ) { displayBattle();}
-			
+		    //clearDisplay(); //comment out when debugging
+		    while( Player.getX() != 19 || Player.getY() != 19 ) {
+			System.out.println( test );
+		     
 			//prompt user for a command
 			String control = promptControl();
 			executeControl( control );
+			
+			if ( battleMode == false ) { displayMap(); }
+			else if ( battleMode == true ) { displayBattle();}
+
+			clearDisplay();
+		    }
 		}
 	}
 	

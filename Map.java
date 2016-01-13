@@ -11,20 +11,20 @@ public class Map {
 		map = new Tile[20][20];
 		for ( int row = 0; row < map.length ; row++ ) {
 			for ( int column = 0; column < map[row].length; column++ ) {
-				map[row][column] = new Tile();
+				map[row][column] = new Tile( "grass" );
 			}
 		}
-		map[0][0].setIsPlayerHere(); //player's original position
-		map[0][0].setImage();
+		map[Player.getY()][Player.getX()].setIsPlayerHere(); //player's original position
+		map[Player.getY()][Player.getX()].setImage();
 	}
 	
     //returns Tile at specified row & column   
-    private static Tile get( int row, int column ) {
+    public static Tile get( int row, int column ) {
 		return map[row][column];
 	}
 	
     //overwrite item at specified row and column with newData, returns old value
-    private static Tile set( int row, int column, Tile newData ) {
+    public static Tile set( int row, int column, Tile newData ) {
 		Tile temp = get(row,column);
 		map[row][column] = newData;
 		return temp;

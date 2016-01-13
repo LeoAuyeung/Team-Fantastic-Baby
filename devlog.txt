@@ -75,3 +75,20 @@ depends on whether a player is in battle or not
 - created Battle.java which will govern/display battles
 
 ==============================================================
+
+Date: 2016-01-13
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- Changed Player.java to "static" to allow Game.java to refer to its methods without the need of initialization.
+- Changed Map.java and Player.java accordingly
+	- eventually both are static, however, this does not affect the functionality
+- Incorporated display of map in Game.java
+- Began to try some type differentiation in Tile.java; ex) grass, wall
+
+Obstacles:
+- How to refer to methods in Player.java when a player has not yet been initialized. -> Player.java Static(?)
+	- solved
+- When "invalid command" the program doesnt end (just a blank screen). What is supposed to happen, Leo?
+==============================================================
