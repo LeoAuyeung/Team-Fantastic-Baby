@@ -4,7 +4,7 @@
 public class Player {
 	
 	private final String gender, name;
-	private int xCor, yCor, money, pokemonLeft, quest, badges;
+	private int xCor, yCor, money, pokemonLeft, quest;
 	private String direction;
 	
 	//Constructor
@@ -23,7 +23,6 @@ public class Player {
 	public void setMoney ( int m ) { money = m; }
 	public void setPokemonLeft ( int l ) { pokemonLeft = l; }
 	public void setQuest ( int q ) { quest = q; }
-	public void setBadge ( int b ) { badges = b; }
 	public void setDirection ( String d ) { direction = d; }
 	
 	public boolean blackedOut() { return pokemonLeft > 0; }
@@ -36,8 +35,6 @@ public class Player {
 	public int getMoney() { return money; }
 	public int getPokemonLeft() { return pokemonLeft; }
 	public int getQuest() { return quest; }
-	public int getBadge () { return badges; }
 	public String getDirection() { return direction; }
-	
 	
 }
