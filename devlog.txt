@@ -58,3 +58,19 @@ different structures.
 of another way.
 
 ==============================================================
+
+Date: 2016-01-12
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- added clearDisplay in Game.java to "clear" screen
+- worked on executeControl in Game.java:
+	- contains flag checking for a valid command
+	- checks whether in battle or not
+	- applies given command, setting validCommand to true
+- added displayCommands to display available commands which
+depends on whether a player is in battle or not
+- created Battle.java which will govern/display battles
+
+==============================================================
