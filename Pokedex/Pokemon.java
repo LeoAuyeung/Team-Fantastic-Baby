@@ -28,7 +28,7 @@ public abstract class Pokemon {
 	}
 	
 	//Mutators
-	public void setWild ( boolean w ) { wild = w };
+	public void setWild ( boolean w ) { wild = w; }
 	public void setName ( String n ) { name = n; }
 	public void setType ( String t ) { type = t; }
 	public void setHP ( int hp ) { currentHP = hp;}
