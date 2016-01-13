@@ -65,6 +65,7 @@ Date: 2016-01-12
 User: Leo Au-Yeung
 Changes:
 - added clearDisplay in Game.java to "clear" screen
+	- removed clearMap from Map.java
 - worked on executeControl in Game.java:
 	- contains flag checking for a valid command
 	- checks whether in battle or not
