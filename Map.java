@@ -2,105 +2,99 @@
 //Map.java
 
 public class Map {
-        
+	
     private static Tile[][] map;
 	
     //default constructor for map
     public Map() {
-	map = new Tile[20][20];
-	for ( int row = 0; row < map.length ; row++ ) {
-	    for ( int column = 0; column < map[row].length; column++ ) {
-		map[row][column] = new Tile();
-	    }
+		//can alter size later
+		map = new Tile[20][20];
+		for ( int row = 0; row < map.length ; row++ ) {
+			for ( int column = 0; column < map[row].length; column++ ) {
+				map[row][column] = new Tile();
+			}
+		}
+		map[0][0].setIsPlayerHere(); //player's original position
+		map[0][0].setImage();
 	}
-	map[0][0].setIsPlayerHere(); //player's original position
-	map[0][0].setImage();
-    }
 	
     //returns Tile at specified row & column   
     private static Tile get( int row, int column ) {
-	return map[row][column];
-    }
+		return map[row][column];
+	}
 	
     //overwrite item at specified row and column with newData, returns old value
     private static Tile set( int row, int column, Tile newData ) {
-	Tile temp = get(row,column);
-	map[row][column] = newData;
-	return temp;
-    }
+		Tile temp = get(row,column);
+		map[row][column] = newData;
+		return temp;
+	}
 	
     //toString to return String representation of map
     public String toString() {
-	String ans = "";
-	for ( int row = 0; row < map.length ; row++ ) {
-	    for ( int column = 0; column < map[row].length; column++ ) {
-		ans += map[row][column];
-	    }
-	    ans += "\n";
+		String ans = "";
+		for ( int row = 0; row < map.length ; row++ ) {
+			for ( int column = 0; column < map[row].length; column++ ) {
+				ans += map[row][column];
+			}
+			ans += "\n";
+		}
+		return ans;
 	}
-	return ans;
-    }
-
-    public static void clearMap() {
-	for( int n = 0; n < 50; n++ ) {
-	    System.out.println("");
-	}
-    }      
     
-    //for testing
-    public static void main( String[] args ) {
-
-	Player leo = new Player( "male", "Leo" );
-	Map test = new Map();
-	leo.setX( 0 ); //initializes the location of the player
-	leo.setY( 0 );
-	
-	while( leo.getX() != 19 || leo.getY() != 19 ) {
-	    System.out.println( "" + test );
-
-	    String ctrl = "";
-	    System.out.print("Enter a control: ");
-	    ctrl = Keyboard.readString();
-
-	    if( ctrl.equals( "w" ) ) {
+	/*    //for testing
+		public static void main( String[] args ) {
+		
+		Player leo = new Player( "male", "Leo" );
+		Map test = new Map();
+		leo.setX( 0 ); //initializes the location of the player
+		leo.setY( 0 );
+		
+		while( leo.getX() != 19 || leo.getY() != 19 ) {
+		System.out.println( "" + test );
+		
+		String ctrl = "";
+		System.out.print("Enter a control: ");
+		ctrl = Keyboard.readString();
+		
+		if( ctrl.equals( "w" ) ) {
 		if( leo.getY() != 0 ) {
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
-		    map[leo.getY()][leo.getX()].setImage();
-		    leo.setY(leo.getY() - 1);
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
-		    map[leo.getY()][leo.getX()].setImage();		    
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
+		map[leo.getY()][leo.getX()].setImage();
+		leo.setY(leo.getY() - 1);
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
+		map[leo.getY()][leo.getX()].setImage();		    
 		}
-	    }
-	    else if( ctrl.equals( "d" ) ) {
+		}
+		else if( ctrl.equals( "d" ) ) {
 		if( leo.getX() != 19 ) {
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
-		    map[leo.getY()][leo.getX()].setImage();
-		    leo.setX(leo.getX() + 1);
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
-		    map[leo.getY()][leo.getX()].setImage();		    
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
+		map[leo.getY()][leo.getX()].setImage();
+		leo.setX(leo.getX() + 1);
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
+		map[leo.getY()][leo.getX()].setImage();		    
 		}
-	    }
-	    else if( ctrl.equals( "s" ) ) {
+		}
+		else if( ctrl.equals( "s" ) ) {
 		if( leo.getY() != 19 ) {
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
-		    map[leo.getY()][leo.getX()].setImage();
-		    leo.setY(leo.getY() + 1);
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
-		    map[leo.getY()][leo.getX()].setImage();		    
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
+		map[leo.getY()][leo.getX()].setImage();
+		leo.setY(leo.getY() + 1);
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
+		map[leo.getY()][leo.getX()].setImage();		    
 		}
-	    }
-	    else if( ctrl.equals( "a" ) ) {
+		}
+		else if( ctrl.equals( "a" ) ) {
 		if( leo.getX() != 0 ) {
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
-		    map[leo.getY()][leo.getX()].setImage();
-		    leo.setX(leo.getX() - 1);
-		    map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
-		    map[leo.getY()][leo.getX()].setImage();		    
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //resets old location
+		map[leo.getY()][leo.getX()].setImage();
+		leo.setX(leo.getX() - 1);
+		map[leo.getY()][leo.getX()].setIsPlayerHere(); //moves to new location
+		map[leo.getY()][leo.getX()].setImage();		    
 		}
-	    }
-
-	    clearMap();
-	}//ends the while loop
-    }//ends main
+		}
+		
+		clearMap();
+		}//ends the while loop
+	}//ends main*/
 }//ends Map.java
-
