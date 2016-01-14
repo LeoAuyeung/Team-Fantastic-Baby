@@ -105,13 +105,19 @@ public class Game {
 	}
 	System.out.println(commands);
     }
-	
+    /*	
     //method to "clear" terminal
     public static void clearDisplay() {
 	for( int n = 0; n < 50; n++ ) {
 	    System.out.println("");
 	}
     }
+    */
+
+    public static void clearDisplay() {  
+	System.out.print("\033[H\033[2J");  
+	System.out.flush();  
+    }  
 	
     //~~~~~~~~~~EXECUTE-CONTROLS~~~~~~~~~~~~~~~
 	
@@ -241,7 +247,7 @@ public class Game {
 		
 	//RUNS GAME:
 	while ( user.getQuest() != 20 ) {
-	    //clearDisplay(); //comment out when debugging
+	    clearDisplay(); //comment out when debugging
 	    //CHANGE CLEARDISPLAY TO WHATEVER IS NEEDED TO FIT MAP; WE DON'T NEED LIKE 50 EMPTY LINES
 	    if ( battleMode == false ) { System.out.println( userMap ); }
 	    else if ( battleMode == true ) { System.out.println( battle ); }
@@ -254,8 +260,10 @@ public class Game {
 		control = promptControl();
 		//checks for validity of command
 		validCommand = checkControl( control );
-		//if invalid, prompts again before doing anything else
-		if (validCommand == false) { System.out.println("Invalid control.\n"); }
+		clearDisplay();
+		if ( battleMode == false ) { System.out.println( userMap ); }
+		else if ( battleMode == true ) { System.out.println( battle ); }
+		displayCommands();		
 	    }
 			
 	    executeControl( control );
