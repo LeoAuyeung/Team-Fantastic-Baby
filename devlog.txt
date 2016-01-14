@@ -76,7 +76,7 @@ depends on whether a player is in battle or not
 
 ==============================================================
 
-Date: 2016-01-12
+Date: 2016-01-13
 --------------------------------------------------------------
 
 User: Sungbin Kim
@@ -102,4 +102,16 @@ Changes:
 - added arraylists of valid commands in/out of battle
 - implemented displaying of valid commands (hard coded)
 
+==============================================================
+
+Date: 2016-01-14
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- Implemented a test version of Battle
+- updated other classes accordingly
+	- switched the order of in and out of battle commands in "executeCommand" method
+		- Maybe this wasn't necessary
+- handled a little bit of escaping feature
 ==============================================================
