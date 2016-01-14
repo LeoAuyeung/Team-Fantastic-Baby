@@ -76,7 +76,7 @@ depends on whether a player is in battle or not
 
 ==============================================================
 
-Date: 2016-01-13
+Date: 2016-01-12
 --------------------------------------------------------------
 
 User: Sungbin Kim
@@ -91,4 +91,15 @@ Obstacles:
 - How to refer to methods in Player.java when a player has not yet been initialized. -> Player.java Static(?)
 	- solved
 - When "invalid command" the program doesnt end (just a blank screen). What is supposed to happen, Leo?
+==============================================================
+
+Date: 2016-01-13
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- FIXED INVALID COMMANDS TO CHECK COMMANDS PROPERLY
+- added arraylists of valid commands in/out of battle
+- implemented displaying of valid commands (hard coded)
+
 ==============================================================
