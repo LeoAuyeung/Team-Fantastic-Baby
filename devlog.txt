@@ -114,4 +114,38 @@ Changes:
 	- switched the order of in and out of battle commands in "executeCommand" method
 		- Maybe this wasn't necessary
 - handled a little bit of escaping feature
+
+==============================================================
+
+Date: 2016-01-14
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- successfully implemented arraylist of Pokemon
+	- can now display all 6 captured Pokemon 
+		** make it so it doesn't clear the screen when we do it
+	- can get any variables of the Pokemon if needed
+
+Problems:
+- the clear display thing doesn't work; don't focus on it tho
+** check to-do list for your stuff
+
+==============================================================
+
+Date: 2016-01-15
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- Made some suggestion for moves in Pokemon.java
+- also planning to add pokemon's graphic in the battle mode so added a varaible called "image" in Pokemon.java
+	- maybe unnecessary with what I have done today
+- added int var selectedPokemon to know which pokemon is selected for a battle
+	- use this var to display image of that pokemon
+	- but even before it is set up it displays squirtle
+	- also im not sure how to prompt user to select a pokemon in the beginning of the battle
+		without having to displaying that menu again and again from the second time
+		- maybe another while loop?
+
 ==============================================================

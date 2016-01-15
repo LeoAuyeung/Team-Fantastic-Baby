@@ -1,11 +1,15 @@
 //Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
 //Game.java
 
+import java.util.ArrayList;
 import Pokedex.*;
 //Credits to http://www.pokemon.com/ for Pokedex descriptions of all available Pokemon in our game!
 
 public class Game {
 	
+    private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>(); //Pokemon of enemy; can be reused whenever trainers battle **
+    private int selectedPokemon;
     private boolean battleMode = false;
     private final String[] commandsWalk = {"w","a","s","d","x"}; //used to check valid commands outside battle
     private final String[] commandsBattle = {"1","2","3","4"}; //used to check valid commands in battle
@@ -90,7 +94,33 @@ public class Game {
 	
     //method to display Pokemon battle
     public void displayBattle() {
-	//implementation to display battle
+        if( _Pokemon.get( selectedPokemon ).getName().equals( "Squirtle" ) ) {
+	    Battle.setBattle( 12, 4, "*" );
+	    Battle.setBattle( 12, 5, "*" );
+	    Battle.setBattle( 13, 4, "*" );
+	    Battle.setBattle( 13, 5, "*" );
+	    Battle.setBattle( 14, 2, "*" );
+	    Battle.setBattle( 14, 3, "@" );
+	    Battle.setBattle( 14, 4, "@" );
+	    Battle.setBattle( 14, 5, "@" );
+	    Battle.setBattle( 14, 6, "@" );
+	    Battle.setBattle( 14, 7, "*" );
+	    Battle.setBattle( 15, 3, "@" );
+	    Battle.setBattle( 15, 4, "@" );
+	    Battle.setBattle( 15, 5, "@" );
+	    Battle.setBattle( 15, 6, "@" );
+	    Battle.setBattle( 16, 3, "@" );
+	    Battle.setBattle( 16, 4, "@" );
+	    Battle.setBattle( 16, 5, "@" );
+	    Battle.setBattle( 16, 6, "@" );
+	    Battle.setBattle( 17, 3, "@" );
+	    Battle.setBattle( 17, 4, "@" );
+	    Battle.setBattle( 17, 5, "@" );
+	    Battle.setBattle( 17, 6, "@" );
+	    Battle.setBattle( 18, 3, "*" );
+	    Battle.setBattle( 18, 6, "*" );	    
+	}
+	System.out.println( Battle.getBattle() );
     }
 	
     //method to display available commands depending on in battle or not
@@ -105,15 +135,25 @@ public class Game {
 	}
 	System.out.println(commands);
     }
+	
+    public void displayPokemon() {
+	System.out.println("AVAILABLE POKEMON: ");
+	for (int i = 0; i < _Pokemon.size(); i++ ) {
+	    Pokemon temp = _Pokemon.get(i);
+	    System.out.println(i + ": " + temp.getName());
+	    System.out.println("HP: " + temp.getHP());
+	}
+    }
+	
     /*	
     //method to "clear" terminal
     public static void clearDisplay() {
-	for( int n = 0; n < 50; n++ ) {
-	    System.out.println("");
-	}
+    for( int n = 0; n < 50; n++ ) {
+    System.out.println("");
+    }
     }
     */
-
+	
     public static void clearDisplay() {  
 	System.out.print("\033[H\033[2J");  
 	System.out.flush();  
@@ -138,8 +178,9 @@ public class Game {
 	
     //executes command
     public void executeControl( String command ) {
-
-	//Valid commands in a battle
+		
+	//BATTLE COMMANDS
+		
 	if ( battleMode == true ) {
 	    if ( command.toLowerCase().equals("1") ) { //FIGHT
 		//fight
@@ -151,8 +192,10 @@ public class Game {
 		//can also type "BACK" to go back
 	    }
 	    if ( command.toLowerCase().equals("3") ) { //POKEMON
-		//displayPokemon(); displays pkmn 1-6 with name + health
-		//prompt user to pick which to choose (1-6)
+		displayPokemon(); //displays pkmn 1-6 with name + health
+		String temp = "";
+		temp = promptControl(); //prompt user to pick which to choose (1-6)
+		selectedPokemon = Integer.parseInt( temp ); // converts the string to the int
 		//can also type "BACK" to go back
 	    }
 	    if ( command.toLowerCase().equals("4") ) { //RUN
@@ -162,8 +205,9 @@ public class Game {
 		//if not, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
 	    }
 	}//ends battlemodecommands
-	    
-	//Valid commands out of battle
+		
+	//NON-BATTLE COMMANDS
+		
 	else if ( battleMode == false ) {
 	    if ( command.toLowerCase().equals("w") ) { 
 		if( Player.getY() != 0 ) {
@@ -241,16 +285,27 @@ public class Game {
 		
 	//prompts for starter Pokemon, and creates one accordingly
 	int starter = promptStarter();
-	if (starter == 1) { Pokemon baws = new Bulbasaur(); }
-	else if (starter == 2) { Pokemon baws = new Charmander(); }
-	else if (starter == 3) { Pokemon baws = new Squirtle(); }
+	Pokemon captured;
+	if (starter == 1) {
+	    captured = new Bulbasaur();
+	    _Pokemon.add( captured );
+	}
+	else if (starter == 2) {
+	    captured = new Charmander();
+	    _Pokemon.add( captured );
+	}
+	else if (starter == 3) {
+	    captured = new Squirtle();
+	    _Pokemon.add( captured );
+	}
 		
 	//RUNS GAME:
 	while ( user.getQuest() != 20 ) {
-	    clearDisplay(); //comment out when debugging
 	    //CHANGE CLEARDISPLAY TO WHATEVER IS NEEDED TO FIT MAP; WE DON'T NEED LIKE 50 EMPTY LINES
 	    if ( battleMode == false ) { System.out.println( userMap ); }
-	    else if ( battleMode == true ) { System.out.println( battle ); }
+	    else if ( battleMode == true ) {
+		displayBattle();
+	    }
 	    displayCommands();
 			
 	    boolean validCommand = false;
@@ -260,7 +315,7 @@ public class Game {
 		control = promptControl();
 		//checks for validity of command
 		validCommand = checkControl( control );
-		clearDisplay();
+		executeControl( control );
 		if ( battleMode == false ) { System.out.println( userMap ); }
 		else if ( battleMode == true ) { System.out.println( battle ); }
 		displayCommands();		
