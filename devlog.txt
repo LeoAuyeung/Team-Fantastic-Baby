@@ -114,4 +114,21 @@ Changes:
 	- switched the order of in and out of battle commands in "executeCommand" method
 		- Maybe this wasn't necessary
 - handled a little bit of escaping feature
+
+==============================================================
+
+Date: 2016-01-14
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- successfully implemented arraylist of Pokemon
+	- can now display all 6 captured Pokemon 
+		** make it so it doesn't clear the screen when we do it
+	- can get any variables of the Pokemon if needed
+
+Problems:
+- the clear display thing doesn't work; don't focus on it tho
+** check to-do list for your stuff
+
 ==============================================================

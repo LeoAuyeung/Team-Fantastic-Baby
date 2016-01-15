@@ -1,0 +1,48 @@
+LEO:
+- Create an inventory.java
+	- Contains Pokeballs
+	- Contains Potions
+	- Contains Key Items (Including Cut/RockSmash)
+	- Contains Battle Items (Protein, Iron, etc)
+	
+- Create an arrayList of Pokemon in Game.java (SEMI-DONE)
+	- Keeps track of Pokemon that user owns
+	- Can check which Pokemon user owns
+	- Can be used to switch out Pokemon during battle
+	
+- Add Pokemon trainers
+	- Regular trainers in wild
+	- Gym leaders (QUESTLINE)
+	- Elite four + champ (QUESTLINE)
+	- User gets to prompt battles (click X)
+	
+- Implement Pokemon Battles
+	- Upon encounter, check speed to see who goes first
+	- Fight until player Blacks out or enemy is caught/defeated
+	- User gains money upon defeating trainers
+	
+SUNGBIN:
+- Add different blocks on map
+	- Grass
+	- Tree (cuttable)
+	- Rock (smashable)
+	- Wall (cannot break)
+	- Portals into next/prev rooms
+	- PokeCenter (create save spot for player to respawn if dead)
+	- PokeMart
+	- Wild items to pick up (pokeballs, potions, etc; disappears after)
+
+- Implement PokeCenters/PokeMart
+	- Stand on PokeCenter to restore all Pokemon to full hp
+		- Make player wait a moment to restore Pokemon hp
+	- Stand on PokeMart to open store to buy items
+		- Just add items into inventory.java while removing money
+		- Ability to go "Back" to get out of store
+		
+- ** DISPLAY DURING BATTLES **
+	- Fight -> Show moves of pokemon
+	- Bag -> Show bags 1-4 with stuff inside
+	- Pokemon -> Show all (up to 6) pokemon
+	- Run -> chance to run "attempting to flee..."; 
+		- if fail, show "failed to escape!"
+		- opponent gets to go after a fail
