@@ -8,6 +8,7 @@ import Pokedex.*;
 public class Game {
 	
 	private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
+	private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>(); //Pokemon of enemy; can be reused whenever trainers battle **
     private boolean battleMode = false;
     private final String[] commandsWalk = {"w","a","s","d","x"}; //used to check valid commands outside battle
     private final String[] commandsBattle = {"1","2","3","4"}; //used to check valid commands in battle
@@ -40,10 +41,10 @@ public class Game {
 		catch (InterruptedException ex) {Thread.currentThread().interrupt();}
 	}
 	
-    //~~~~~~~~~~~~~~~PROMPTS~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~PROMPTS~~~~~~~~~~~~~~~~~~~~~~~
 	
-    //method to prompt gender of player
-    public String promptGender() {
+	//method to prompt gender of player
+	public String promptGender() {
 		String gen = "";
 		System.out.println("Tell me, are you a boy? Or are you a girl?");
 		//ADD CASE WHERE INPUT IS INVALID
@@ -51,8 +52,8 @@ public class Game {
 		return gen;
 	}
 	
-    //method to prompt name of player
-    public String promptName() {
+	//method to prompt name of player
+	public String promptName() {
 		String name = "";
 		System.out.println("All right. Tell me, what is your name?");
 		name = Keyboard.readString();
@@ -63,8 +64,8 @@ public class Game {
 		return name;
 	}
 	
-    //method to prompt player to pick his/her starter Pokemon
-    public int promptStarter() {
+	//method to prompt player to pick his/her starter Pokemon
+	public int promptStarter() {
 		int pkmn = 0;
 		System.out.println("In this world of Pokemon, you'll need a partner Pokemon to be with you.");
 		System.out.println("Tell me, which Pokemon would you like to be your partner?");
@@ -74,8 +75,8 @@ public class Game {
 		return pkmn;
 	}
 	
-    //method to prompt user for a command
-    public String promptControl() {
+	//method to prompt user for a command
+	public String promptControl() {
 		String ctrl = "";
 		System.out.print("Enter a control: ");
 		ctrl = Keyboard.readString();
@@ -83,20 +84,20 @@ public class Game {
 		return ctrl;
 	}
 	
-    //~~~~~~~~~~~~~~~DISPLAYS~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~DISPLAYS~~~~~~~~~~~~~~~~~~~~~~~
 	
-    //method to display map
-    public void displayMap() {
+	//method to display map
+	public void displayMap() {
 		//implementation to display map and player
 	}
 	
-    //method to display Pokemon battle
-    public void displayBattle() {
+	//method to display Pokemon battle
+	public void displayBattle() {
 		//implementation to display battle
 	}
 	
-    //method to display available commands depending on in battle or not
-    public void displayCommands() {
+	//method to display available commands depending on in battle or not
+	public void displayCommands() {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~");
 		String commands = "";
 		if (battleMode == false) {
@@ -117,24 +118,24 @@ public class Game {
 		}
 	}
 	
-    /*	
+	/*	
 		//method to "clear" terminal
 		public static void clearDisplay() {
 		for( int n = 0; n < 50; n++ ) {
-	    System.out.println("");
+		System.out.println("");
 		}
 		}
 	*/
 	
-    public static void clearDisplay() {  
+	public static void clearDisplay() {  
 		System.out.print("\033[H\033[2J");  
 		System.out.flush();  
 	}  
 	
-    //~~~~~~~~~~EXECUTE-CONTROLS~~~~~~~~~~~~~~~
+	//~~~~~~~~~~EXECUTE-CONTROLS~~~~~~~~~~~~~~~
 	
-    //checks if command is valid
-    public boolean checkControl( String control ) {
+	//checks if command is valid
+	public boolean checkControl( String control ) {
 		if (battleMode == false) {
 			for ( int i = 0; i < commandsWalk.length; i++ ) {
 				if ( control.equals( commandsWalk[i] ) ) { return true; }
@@ -148,8 +149,8 @@ public class Game {
 		return false;
 	}
 	
-    //executes command
-    public void executeControl( String command ) {
+	//executes command
+	public void executeControl( String command ) {
 		
 		//BATTLE COMMANDS
 		
@@ -175,7 +176,7 @@ public class Game {
 				//if not, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
 			}
 		}//ends battlemodecommands
-	    
+		
 		//NON-BATTLE COMMANDS
 		
 		else if ( battleMode == false ) {
@@ -238,13 +239,13 @@ public class Game {
 		}//ends nonbattlemodecommands		
 	}
 	
-    public void opponentBattle() {
+	public void opponentBattle() {
 		//implementation for opponent Pokemon to battle
 	}
 	
-    //~~~~~~~~~~~~~~PLAYING POKEMON!!!~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~PLAYING POKEMON!!!~~~~~~~~~~~~~~~
 	
-    public void play() {
+	public void play() {
 		//startup prompts; only prompts user once
 		Map userMap = new Map();
 		startupMsg();
@@ -297,7 +298,7 @@ public class Game {
 		}
 	}
 	
-    public static void main (String[] args) {
+	public static void main (String[] args) {
 		Game POKEMON = new Game();
 		POKEMON.play();
 	}

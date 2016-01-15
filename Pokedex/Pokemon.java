@@ -31,23 +31,24 @@ public abstract class Pokemon {
 	public void setWild ( boolean w ) { wild = w; }
 	public void setName ( String n ) { name = n; }
 	public void setType ( String t ) { type = t; }
-	public void setHP ( int hp ) { currentHP = hp;}
-	public void setAttack ( int atk ) { attack = atk;}
-	public void setDefense ( int def ) { defense = def;}
-	public void setSpeed ( int spd ) { speed = spd;}
+	public void setHP ( int hp ) { currentHP = hp; }
+	public void setAttack ( int atk ) { attack = atk; }
+	public void setDefense ( int def ) { defense = def; }
+	public void setSpeed ( int spd ) { speed = spd; }
+	public void setLevel ( int lvl ) { level = lvl; }
 	public void setEXP ( double xp ) { exp = xp; }
 	
 	public boolean fainted() { return currentHP > 0; }
-	//do we also want statuses like paralyzed, frozen, etc
 	
 	//Accessors
 	public boolean getWild() { return wild; }
 	public String getName() { return name; }
 	public String getType() { return type; }
 	public int getHP() { return currentHP; }
-	public int getAttack() { return attack;}
-	public int getDefense() { return defense;}
-	public int getSpeed() { return speed;}
+	public int getAttack() { return attack; }
+	public int getDefense() { return defense; }
+	public int getSpeed() { return speed; }
+	public int getLevel() { return level; }
 	public double getEXP() { return exp; }
 	
 	//Battle methods
