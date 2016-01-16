@@ -133,11 +133,7 @@ Problems:
 
 ==============================================================
 
-<<<<<<< HEAD
 Date: 2016-01-14
-=======
-Date: 2016-01-15
->>>>>>> origin/master
 --------------------------------------------------------------
 
 User: Sungbin Kim
@@ -152,7 +148,6 @@ Changes:
 		without having to displaying that menu again and again from the second time
 		- maybe another while loop?
 
-<<<<<<< HEAD
 ==============================================================
 
 Date: 2016-01-15
@@ -176,6 +171,4 @@ should run smoothly
 wild enemy pkmn)
 - Fixed some battle command technicalities
 
-=======
->>>>>>> origin/master
 ==============================================================
