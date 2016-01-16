@@ -18,7 +18,7 @@ public class Charmander extends Pokemon {
 	public String about() {
 		return "The flame that burns at the tip of its tail is an indication of its emotions. " +
 		"The flame wavers when Charmander is enjoying itself. " +
-		"If the Pokémon becomes enraged, the flame burns fiercely.";
+		"If the Pokemon becomes enraged, the flame burns fiercely.";
 	}
 	
 }
