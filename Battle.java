@@ -7,6 +7,7 @@ public class Battle {
 	
     //default constructor for battle
     public Battle() {
+<<<<<<< HEAD
 		battle = new String[20][20];
 		for ( int row = 0; row < battle.length ; row++ ) {
 			for ( int column = 0; column < battle[row].length; column++ ) {
@@ -15,6 +16,24 @@ public class Battle {
 		}
 		//implement how to display battle here
 	}//ends Battle()
+=======
+	battle = new String[20][20];
+	for ( int row = 0; row < battle.length ; row++ ) {
+	    for ( int column = 0; column < battle[row].length; column++ ) {
+		battle[row][column] = new String(" ");
+	    }
+	}
+	//implement how to display battle here
+    }//ends Battle()
+
+    public static String[][] getBattle() {
+	return battle;
+    }
+
+    public static void setBattle( int row, int column, String newVal ) {
+	battle[row][column] = newVal;
+    }
+>>>>>>> origin/master
 	
     public static String[][] getBattle() {
 		return battle;
@@ -26,14 +45,14 @@ public class Battle {
 	
     //toString to return String representation of battle
     public String toString() {
-		String retVal = "";
-		for ( int row = 0; row < battle.length ; row++ ) {
-			for ( int column = 0; column < battle[row].length; column++ ) {
-				retVal += battle[row][column];
-			}
-			retVal += "\n";
-		}
-		return retVal;
-	}//ends toString()
+	String retVal = "";
+	for ( int row = 0; row < battle.length ; row++ ) {
+	    for ( int column = 0; column < battle[row].length; column++ ) {
+		retVal += battle[row][column];
+	    }
+	    retVal += "\n";
+	}
+	return retVal;
+    }//ends toString()
     
 }

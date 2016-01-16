@@ -83,5 +83,8 @@ SUNGBIN:
 	- add new private vars in battle:
 		- display current pkmn of player (use _Pokemon in game.java)
 		- display current pkmn of enemy (use _PokemonEnemy in game.java)
+<<<<<<< HEAD
 
 - clearing display (low priority)
+=======
+>>>>>>> origin/master
