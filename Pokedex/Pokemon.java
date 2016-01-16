@@ -6,12 +6,12 @@ public abstract class Pokemon {
 	
     //mother class governing all Pokemon in the game
     protected boolean wild; //boolean for if pkmn is wild or a Trainer's
-    protected String name, type; //will we let type change?
+    protected String name, type;
     protected int currentHP, maxHP, attack, defense, speed, level;
     protected double exp;
     protected String[] weaknesses, strengths;
     protected String[] movesName;
-    protected Integer[] movesDmg, movesCurrentPP, movesMaxPP;
+    protected Integer[] movesDmg, currentPP, maxPP;
     //if move is type weak, more dmg. if move is type strength, less dmg
 	
     //Constructor
@@ -52,18 +52,18 @@ public abstract class Pokemon {
     public double getEXP() { return exp; }
 	
     //Battle methods
-    public int attack (Pokemon enemy, int move) {
-		int damage = ( ( (2 * level + 10) / 250 ) * ( attack / enemy.getDefense() ) * movesDmg[move] + 2 );
-		//actual formula for dmg in Pokemon
-		enemy.setHP ( enemy.getHP() - damage );
-		return damage;
-	}
+    public int attack (Pokemon enemy, int n) {
 	
-    public int skill ( Pokemon enemy, int num ) {
-		int damageDealt;
-		movesCurrentPP;
-		damageDealt = movesDmg[num-1];
-		//http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
+		int move = n - 1;
+		double effectiveness = 1;
+		/*if ( weaknesses.contains( enemy.getType() ) ) { effectiveness = 0.5; }
+		else if ( strengths.contains( enemy.getType() ) ) { effectiveness = 2; }*/
+		int baseDmg = movesDmg[move];
+		int damageDealt = (int) ( ( ( (2 * level + 10) / 250 ) * ( attack / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
+		//actual formula for dmg in Pokemon; http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
+		enemy.setHP ( enemy.getHP() - damageDealt );
+		currentPP[move] -= 1;
+		
 		return damageDealt;
 	}
 	
