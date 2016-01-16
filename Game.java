@@ -10,12 +10,12 @@ public class Game {
     private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
     private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>(); //Pokemon of enemy; can be reused whenever trainers battle **
     private int selectedPokemon;
-	private Pokemon captured, currentPokemon, enemyPokemon;
+    private Pokemon captured, currentPokemon, enemyPokemon;
 	//captured: create a new pokemon() whenever a pokemon is captured, and set it equal to this then add captured pokemon to list _Pokemon
 	//currentPokemon: _Pokemon.get(selectedPokemon)
 	//enemyPokemon: create a new pokemon() whenever user enters a battle. if trainer battle, change enemyPokemon whenever an enemy faints
     private boolean battleMode = false;
-	private boolean opponentTurn = false; //this boolean will only get changed within a Pokemon battle
+    private boolean opponentTurn = false; //this boolean will only get changed within a Pokemon battle
 	
     public void startupMsg() {
 		//startup message from original Pokemon games!
@@ -88,34 +88,66 @@ public class Game {
 	
 	//~~~~~~~~~~~~~~~DISPLAYS~~~~~~~~~~~~~~~~~~~~~~~
 	
-	//method to display Pokemon battle
-	public void displayBattle() {
-		System.out.println( Battle.getBattle() );
-	}
-	
 	//method to display available commands depending on in battle or not
 	public void displayCommands() {
 		//LIST OF CONTROLS: http://pokemonessentials.wikia.com/wiki/Controls
 		//SETTING POKEMON CONTROLS: http://pokemonessentials.wikia.com/wiki/Tutorial:Set_the_Controls_Screen
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		String commands =  "W:UP " + "S:DOWN " + "A:LEFT " + "D:RIGHT " + "X:INTERACT ";
+		String commands = "";	    	
+		if (battleMode == false) {
+		  	System.out.println("============================================================");            commands = "W:UP " + "S:DOWN " + "A:LEFT " + "D:RIGHT " + "X:INTERACT ";
+		}
+		else if (battleMode == true) {
+		 	Battle.reset();
+			Battle.set( 5, 0, "     WHAT WILL " + Player.getName() + " DO? " );
+			Battle.set( 7, 0, "  -----------  -----------  " );
+			Battle.set( 8, 0, "  | 1:FIGHT |  |  2:BAG  |  " );
+			Battle.set( 9, 0, "  -----------  -----------  " );
+			Battle.set( 12, 0, "  -----------  -----------  " );
+			Battle.set( 13, 0, "  |3:POKEMON|  |  4:RUN  |  " );
+			Battle.set( 14, 0, "  -----------  -----------  " );
+		}
 		System.out.println(commands);
+	}
+	
+	//method to turn HP into a bar
+	public String displayHP( Pokemon p ) {
+		double eachBar = ( (p.getMaxHP())/20 ); // this is how much hp each bar is worth
+		int numBar = (int)((p.getCurrentHP())/eachBar); // number of bars displayed
+		String bar = "HP[";
+		for( int n = 0; n < numBar; n++ ) {
+		    bar += "|";
+		}
+		for( int n = 0; n < (20-numBar); n++ ) {
+		    bar += " ";
+		}
+		bar += "]";
+		return bar;
 	}
 	
 	//method to display Player's 6 captured Pokemon
 	public void displayPokemon() {
-		System.out.println("AVAILABLE POKEMON: ");
-		for (int i = 0; i < _Pokemon.size(); i++ ) {
-			Pokemon temp = _Pokemon.get(i);
-			System.out.println(i + ": " + temp.getName());
-			System.out.println("HP: " + temp.getHP());
-		}
+		Battle.reset();
+		Battle.set( 0, 0, "          AVAILABLE POKEMON:       //BACK" );
+		Battle.set( 1, 0, "-----------------------------------------" );
+		Battle.set( 2, 0, "(1) Lv." + _Pokemon.get(0).getLevel() + "/" + _Pokemon.get(0).getName() + "/" + _Pokemon.get(0).getType() );
+		Battle.set( 3, 0, displayHP( _Pokemon.get(0) ) );
+		Battle.set( 4, 0, "-----------------------------------------" );
+		Battle.set( 5, 0, "(2) Lv." + _Pokemon.get(1).getLevel() + "/" + _Pokemon.get(1).getName() + "/" + _Pokemon.get(1).getType() );
+		Battle.set( 6, 0, displayHP( _Pokemon.get(1) ) );
+		Battle.set( 7, 0, "-----------------------------------------" );
+		Battle.set( 8, 0, "(3) Lv." + _Pokemon.get(2).getLevel() + "/" + _Pokemon.get(2).getName() + "/" + _Pokemon.get(2).getType() );
+		Battle.set( 9, 0, displayHP( _Pokemon.get(2) ) );
+		Battle.set( 10, 0, "-----------------------------------------" );
+		Battle.set( 11, 0, "(4) Lv." + _Pokemon.get(3).getLevel() + "/" + _Pokemon.get(3).getName() + "/" + _Pokemon.get(3).getType() );
+		Battle.set( 12, 0, displayHP( _Pokemon.get(3) ) );
+		Battle.set( 13, 0, "-----------------------------------------" );
+		Battle.set( 14, 0, "(5) Lv." + _Pokemon.get(4).getLevel() + "/" + _Pokemon.get(4).getName() + "/" + _Pokemon.get(4).getType() );
+		Battle.set( 15, 0, displayHP( _Pokemon.get(4) ) );
+		Battle.set( 16, 0, "-----------------------------------------" );
+		Battle.set( 17, 0, "(6) Lv." + _Pokemon.get(5).getLevel() + "/" + _Pokemon.get(5).getName() + "/" + _Pokemon.get(5).getType() );
+		Battle.set( 18, 0, displayHP( _Pokemon.get(5) ) );
+		Battle.set( 19, 0, "-----------------------------------------" );
 	}
-	
-	public static void clearDisplay() {  
-		System.out.print("\033[H\033[2J");  
-		System.out.flush();  
-	}  
 	
 	//~~~~~~~~~~EXECUTE-CONTROLS~~~~~~~~~~~~~~~
 	
@@ -201,6 +233,7 @@ public class Game {
 			}
 			if ( command.toLowerCase().equals("3") ) { //POKEMON
 				displayPokemon(); //displays pkmn 1-6 with name + health
+				System.out.println( Battle.getBattle() );
 				String temp = promptControl(); //prompt user to pick which to choose (1-6)
 				selectedPokemon = Integer.parseInt( temp ); // converts the string to the int
 				//can also type "BACK" to go back
@@ -261,17 +294,21 @@ public class Game {
 				System.out.println( userMap );
 				displayCommands();
 			}
-			else if ( battleMode == true ) { System.out.println(battle); } //in battle -> show battle\
+			else if ( battleMode == true ) { 
+				displayCommands();
+				System.out.println( battle ); 
+			} //in battle -> show battle
 			
 			String control = promptControl(); //prompts user for a command
 			executeControl( control );
 			
+			/**
 			if (battleMode == false) { //after a player walks
 				battleMode = battleStart(); //checks if player is on grass & chance to start battle
-				enemyPokemon = new Rattata();
+				enemyPokemon = new Rattata(); // shouldnt this be a part of battleStart() that modifies _EnemyPokemon
 			}
 			//made it like this so that when a battle starts, enemy gets instantiated
-			
+			**/
 			
 			//if ( opponentTurn == true) { //opponentBattle(); }
 			
