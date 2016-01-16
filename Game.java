@@ -10,6 +10,10 @@ public class Game {
     private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
     private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>(); //Pokemon of enemy; can be reused whenever trainers battle **
     private int selectedPokemon;
+	private Pokemon captured, currentPokemon, enemyPokemon;
+	//captured: create a new pokemon() whenever a pokemon is captured, and set it equal to this then add captured pokemon to list _Pokemon
+	//currentPokemon: _Pokemon.get(selectedPokemon)
+	//enemyPokemon: create a new pokemon() whenever user enters a battle. if trainer battle, change enemyPokemon whenever an enemy faints
     private boolean battleMode = false;
 	private boolean opponentTurn = false; //this boolean will only get changed within a Pokemon battle
 	
@@ -188,7 +192,7 @@ public class Game {
 			if ( command.toLowerCase().equals("1") ) { //FIGHT
 				//DISPLAY SELECTED POKEMON'S MOVES
 				String temp = promptControl(); //prompt user to choose move (1-4)
-				String move = Integer.parseInt( temp ); //converts string input to int
+				int move = Integer.parseInt( temp ); //converts string input to int
 				//make selected pokemon from _pokemon use method attack on enemy pokemon
 			}
 			if ( command.toLowerCase().equals("2") ) { //BAG
@@ -202,7 +206,7 @@ public class Game {
 				//can also type "BACK" to go back
 			}
 			if ( command.toLowerCase().equals("4") ) { //RUN
-				if (enemyPokemon.getWild == false) { System.out.println("You cannot run from a trainer battle..."; }
+				if ( enemyPokemon.getWild() == false ) { System.out.println("You cannot run from a trainer battle..."); }
 				else if (Math.random() * 100 < 50) {
 				//if wild pkmn, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
 					System.out.println( "You have successfully escaped!" );
@@ -220,7 +224,12 @@ public class Game {
 	}
 	
 	public void opponentBattle() {
-		//implementation for opponent Pokemon to battle
+		enemyPokemon.attack( currentPokemon, 0 );
+		opponentTurn = false;
+	}
+	
+	public boolean battleStart() {
+		//check if player is on grass; chance to start battle
 	}
 	
 	//~~~~~~~~~~~~~~PLAYING POKEMON!!!~~~~~~~~~~~~~~~
@@ -233,8 +242,6 @@ public class Game {
 		
 		//instantiation of classes
 		Player user = new Player(gender, name);
-		Pokemon captured; //create a new pkmn() whenever a pokemon is captured, and set it equal to this
-		//then add captured pokemon to list _Pokemon
 		Map userMap = new Map();
 		Battle battle = new Battle(); // a temporary solution
 		
@@ -244,12 +251,8 @@ public class Game {
 		else if (starter == 2) { captured = new Charmander(); }
 		else if (starter == 3) { captured = new Squirtle(); }
 		_Pokemon.add( captured ); //adds starter to list _Pokemon
-		
-		//more instantiations
 		selectedPokemon = 0;
-		Pokemon currentPokemon = _Pokemon[selectedPokemon];
-		Pokemon enemyPokemon;
-		//WE WILL USE THESE INSTANTIATIONS DURING A BATTLE
+		currentPokemon = _Pokemon.get(selectedPokemon);
 		
 		//RUNS GAME:
 		while ( user.getQuest() != 20 ) {
@@ -258,17 +261,16 @@ public class Game {
 				System.out.println( userMap );
 				displayCommands();
 			}
-			else if ( battleMode == true ) { displayBattle(); } //in battle -> show battle
-			System.out.println(captured.getName);
+			else if ( battleMode == true ) { System.out.println(battle); } //in battle -> show battle\
 			
 			String control = promptControl(); //prompts user for a command
 			executeControl( control );
-			/*
+			
 			if (battleMode == false) { //after a player walks
-				battleMode = battleStart?(); //checks if player is on grass & chance to start battle
+				battleMode = battleStart(); //checks if player is on grass & chance to start battle
 				enemyPokemon = new Rattata();
 			}
-			//made it like this so that when a battle starts, enemy gets instantiated*/
+			//made it like this so that when a battle starts, enemy gets instantiated
 			
 			
 			//if ( opponentTurn == true) { //opponentBattle(); }
