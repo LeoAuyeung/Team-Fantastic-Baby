@@ -132,3 +132,43 @@ Problems:
 ** check to-do list for your stuff
 
 ==============================================================
+
+Date: 2016-01-14
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- Made some suggestion for moves in Pokemon.java
+- also planning to add pokemon's graphic in the battle mode so added a varaible called "image" in Pokemon.java
+	- maybe unnecessary with what I have done today
+- added int var selectedPokemon to know which pokemon is selected for a battle
+	- use this var to display image of that pokemon
+	- but even before it is set up it displays squirtle
+	- also im not sure how to prompt user to select a pokemon in the beginning of the battle
+		without having to displaying that menu again and again from the second time
+		- maybe another while loop?
+
+==============================================================
+
+Date: 2016-01-15
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+** GOT RID OF CHECKING FOR VALID COMMANDS **
+- Instead of checking for valid commands, whenever user inputs
+a command, if it's invalid the game will simply do nothing.
+However, this may pose a problem during a battle, so what I did
+was create a boolean called opponentTurn which will turn true
+when a VALID series of commands is executed during a battle.
+This creates much less complications than checking for a valid
+command because an enemy will simply go when that boolean is true
+- The only commands in battle will be numbers and B for back.
+So UNLESS the user is stupid and cannot read the screen to see
+'1. Fight 2. Bag 3. Pokemon 4. Run' and input a number, the game
+should run smoothly
+- Started implementing instantiations of Pokemon (user's pkmn, 
+wild enemy pkmn)
+- Fixed some battle command technicalities
+
+==============================================================

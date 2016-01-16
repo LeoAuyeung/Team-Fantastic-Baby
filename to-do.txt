@@ -9,6 +9,8 @@ LEO:
 	- Keeps track of Pokemon that user owns
 	- Can check which Pokemon user owns
 	- Can be used to switch out Pokemon during battle
+	
+- Properly implement wild Pokemon encounters
 
 - Implement Pokemon Battles
 	- Upon encounter, check speed to see who goes first
@@ -30,16 +32,7 @@ LEO:
 	- Elite four + champ (QUESTLINE)
 	- User gets to prompt battles (click X)
 		-implement HOW TO PROMPT TRAINERS
-	
-- Implement Pokemon Battles
-	- Upon encounter, check speed to see who goes first
-	- Fight until player Blacks out or enemy is caught/defeated
-	- User gains money upon defeating trainers
-	- Fighting math/technicalities
-		- types (weak, strong)
-		- display names of moves
-		- moves dmg based on weak/strong
-		
+
 - Fix/properly implement checking for valid commands
 	
 SUNGBIN:
@@ -62,6 +55,7 @@ SUNGBIN:
 		- M = pkmart
 		- P = portal
 		- + different things for diff types of trainers
+	- IMPLEMENT CONTROL "X" TO INTERACT WITH BLOCK/PLAYER IN FRONT (use direction)
 
 - Implement PokeCenters/PokeMart
 	- Stand on PokeCenter to restore all Pokemon to full hp
@@ -69,6 +63,15 @@ SUNGBIN:
 	- Stand on PokeMart to open store to buy items
 		- Just add items into inventory.java while removing money
 		- Ability to go "Back" to get out of store
+		
+- Implement Pokemon Battles
+	- Upon encounter, check speed to see who goes first
+	- Fight until player Blacks out or enemy is caught/defeated
+	- User gains money upon defeating trainers
+	- Fighting math/technicalities
+		- types (weak, strong)
+		- display names of moves
+		- moves dmg based on weak/strong
 		
 - ** DISPLAY DURING BATTLES **
 	- Fight -> Show moves of pokemon
@@ -80,3 +83,5 @@ SUNGBIN:
 	- add new private vars in battle:
 		- display current pkmn of player (use _Pokemon in game.java)
 		- display current pkmn of enemy (use _PokemonEnemy in game.java)
+
+- clearing display (low priority)

@@ -7,13 +7,11 @@ import Pokedex.*;
 
 public class Game {
 	
-	private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
-	private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>(); //Pokemon of enemy; can be reused whenever trainers battle **
+    private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>(); //Pokemon of enemy; can be reused whenever trainers battle **
+    private int selectedPokemon;
     private boolean battleMode = false;
-    private final String[] commandsWalk = {"w","a","s","d","x"}; //used to check valid commands outside battle
-    private final String[] commandsBattle = {"1","2","3","4"}; //used to check valid commands in battle
-    //LIST OF CONTROLS: http://pokemonessentials.wikia.com/wiki/Controls
-    //SETTING POKEMON CONTROLS: http://pokemonessentials.wikia.com/wiki/Tutorial:Set_the_Controls_Screen
+	private boolean opponentTurn = false; //this boolean will only get changed within a Pokemon battle
 	
     public void startupMsg() {
 		//startup message from original Pokemon games!
@@ -41,10 +39,10 @@ public class Game {
 		catch (InterruptedException ex) {Thread.currentThread().interrupt();}
 	}
 	
-	//~~~~~~~~~~~~~~~PROMPTS~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~PROMPTS~~~~~~~~~~~~~~~~~~~~~~~
 	
-	//method to prompt gender of player
-	public String promptGender() {
+    //method to prompt gender of player
+    public String promptGender() {
 		String gen = "";
 		System.out.println("Tell me, are you a boy? Or are you a girl?");
 		//ADD CASE WHERE INPUT IS INVALID
@@ -52,8 +50,8 @@ public class Game {
 		return gen;
 	}
 	
-	//method to prompt name of player
-	public String promptName() {
+    //method to prompt name of player
+    public String promptName() {
 		String name = "";
 		System.out.println("All right. Tell me, what is your name?");
 		name = Keyboard.readString();
@@ -86,29 +84,21 @@ public class Game {
 	
 	//~~~~~~~~~~~~~~~DISPLAYS~~~~~~~~~~~~~~~~~~~~~~~
 	
-	//method to display map
-	public void displayMap() {
-		//implementation to display map and player
-	}
-	
 	//method to display Pokemon battle
 	public void displayBattle() {
-		//implementation to display battle
+		System.out.println( Battle.getBattle() );
 	}
 	
 	//method to display available commands depending on in battle or not
 	public void displayCommands() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~");
-		String commands = "";
-		if (battleMode == false) {
-			commands = "W:UP " + "S:DOWN " + "A:LEFT " + "D:RIGHT " + "X:INTERACT ";
-		}
-		else if (battleMode == true) {
-			commands = "1: FIGHT " + "2: BAG " + "3: POKEMON " + "4: RUN ";
-		}
+		//LIST OF CONTROLS: http://pokemonessentials.wikia.com/wiki/Controls
+		//SETTING POKEMON CONTROLS: http://pokemonessentials.wikia.com/wiki/Tutorial:Set_the_Controls_Screen
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		String commands =  "W:UP " + "S:DOWN " + "A:LEFT " + "D:RIGHT " + "X:INTERACT ";
 		System.out.println(commands);
 	}
 	
+	//method to display Player's 6 captured Pokemon
 	public void displayPokemon() {
 		System.out.println("AVAILABLE POKEMON: ");
 		for (int i = 0; i < _Pokemon.size(); i++ ) {
@@ -118,15 +108,6 @@ public class Game {
 		}
 	}
 	
-	/*	
-		//method to "clear" terminal
-		public static void clearDisplay() {
-		for( int n = 0; n < 50; n++ ) {
-		System.out.println("");
-		}
-		}
-	*/
-	
 	public static void clearDisplay() {  
 		System.out.print("\033[H\033[2J");  
 		System.out.flush();  
@@ -134,52 +115,12 @@ public class Game {
 	
 	//~~~~~~~~~~EXECUTE-CONTROLS~~~~~~~~~~~~~~~
 	
-	//checks if command is valid
-	public boolean checkControl( String control ) {
-		if (battleMode == false) {
-			for ( int i = 0; i < commandsWalk.length; i++ ) {
-				if ( control.equals( commandsWalk[i] ) ) { return true; }
-			}
-		}
-		else if (battleMode == true) {
-			for ( int i = 0; i < commandsBattle.length; i++ ) {
-				if ( control.equals( commandsBattle[i] ) ) { return true; }
-			}
-		}
-		return false;
-	}
-	
 	//executes command
 	public void executeControl( String command ) {
 		
-		//BATTLE COMMANDS
-		
-		if ( battleMode == true ) {
-			if ( command.toLowerCase().equals("1") ) { //FIGHT
-				//fight
-				//can also type "BACK" to go back
-			}
-			if ( command.toLowerCase().equals("2") ) { //BAG
-				//displayBag();
-				//prompt user for another input to choose what to do
-				//can also type "BACK" to go back
-			}
-			if ( command.toLowerCase().equals("3") ) { //POKEMON
-				displayPokemon(); //displays pkmn 1-6 with name + health
-				//prompt user to pick which to choose (1-6)
-				//can also type "BACK" to go back
-			}
-			if ( command.toLowerCase().equals("4") ) { //RUN
-				//checks if battle is a Trainer battle
-				battleMode = false;
-				System.out.println( "You have successfully escaped" );
-				//if not, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
-			}
-		}//ends battlemodecommands
-		
 		//NON-BATTLE COMMANDS
 		
-		else if ( battleMode == false ) {
+		if ( battleMode == false ) {
 			if ( command.toLowerCase().equals("w") ) { 
 				if( Player.getY() != 0 ) {
 					Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
@@ -236,7 +177,46 @@ public class Game {
 				//check block in front using player.getDirection()
 				//we will have: trees, rocks, walls, enemy trainers
 			}
-		}//ends nonbattlemodecommands		
+		}//ends NON-BATTLE COMMANDS
+		
+		//BATTLE COMMANDS
+		
+		else if ( battleMode == true ) {
+		
+			// *** FOR ALL EXCEPT RUN, HAVE A "B: Back" IN THE CORNER OF DISPLAY TO ALLOW USER TO GO BACK ***
+			
+			if ( command.toLowerCase().equals("1") ) { //FIGHT
+				//DISPLAY SELECTED POKEMON'S MOVES
+				String temp = promptControl(); //prompt user to choose move (1-4)
+				String move = Integer.parseInt( temp ); //converts string input to int
+				//make selected pokemon from _pokemon use method attack on enemy pokemon
+			}
+			if ( command.toLowerCase().equals("2") ) { //BAG
+				//DISPLAY BAG: Pkballs, potions, battle items (NO KEY ITEMS)
+				//prompt user for another input to choose what to do
+			}
+			if ( command.toLowerCase().equals("3") ) { //POKEMON
+				displayPokemon(); //displays pkmn 1-6 with name + health
+				String temp = promptControl(); //prompt user to pick which to choose (1-6)
+				selectedPokemon = Integer.parseInt( temp ); // converts the string to the int
+				//can also type "BACK" to go back
+			}
+			if ( command.toLowerCase().equals("4") ) { //RUN
+				if (enemyPokemon.getWild == false) { System.out.println("You cannot run from a trainer battle..."; }
+				else if (Math.random() * 100 < 50) {
+				//if wild pkmn, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
+					System.out.println( "You have successfully escaped!" );
+					waitMS(5000);
+					battleMode = false;
+				}
+				else {
+					System.out.println( "You have failed to run away..." );
+					waitMS(5000);
+					opponentTurn = true;
+				}
+			}
+		}//ends BATTLE COMMANDS
+		
 	}
 	
 	public void opponentBattle() {
@@ -247,54 +227,52 @@ public class Game {
 	
 	public void play() {
 		//startup prompts; only prompts user once
-		Map userMap = new Map();
 		startupMsg();
 		String gender = promptGender();
 		String name = promptName();
+		
+		//instantiation of classes
 		Player user = new Player(gender, name);
+		Pokemon captured; //create a new pkmn() whenever a pokemon is captured, and set it equal to this
+		//then add captured pokemon to list _Pokemon
+		Map userMap = new Map();
 		Battle battle = new Battle(); // a temporary solution
 		
 		//prompts for starter Pokemon, and creates one accordingly
 		int starter = promptStarter();
-		Pokemon captured;
-		if (starter == 1) {
-			captured = new Bulbasaur();
-			_Pokemon.add( captured );
-		}
-		else if (starter == 2) {
-			captured = new Charmander();
-			_Pokemon.add( captured );
-		}
-		else if (starter == 3) {
-			captured = new Squirtle();
-			_Pokemon.add( captured );
-		}
+		if (starter == 1) { captured = new Bulbasaur(); }
+		else if (starter == 2) { captured = new Charmander(); }
+		else if (starter == 3) { captured = new Squirtle(); }
+		_Pokemon.add( captured ); //adds starter to list _Pokemon
+		
+		//more instantiations
+		selectedPokemon = 0;
+		Pokemon currentPokemon = _Pokemon[selectedPokemon];
+		Pokemon enemyPokemon;
+		//WE WILL USE THESE INSTANTIATIONS DURING A BATTLE
 		
 		//RUNS GAME:
 		while ( user.getQuest() != 20 ) {
-			clearDisplay(); //comment out when debugging
-			//CHANGE CLEARDISPLAY TO WHATEVER IS NEEDED TO FIT MAP; WE DON'T NEED LIKE 50 EMPTY LINES
-			if ( battleMode == false ) { System.out.println( userMap ); }
-			else if ( battleMode == true ) { System.out.println( battle ); }
-			displayCommands();
 			
-			boolean validCommand = false;
-			String control = "";
-			while (validCommand == false) {
-				//prompts user for a command
-				control = promptControl();
-				//checks for validity of command
-				validCommand = checkControl( control );
-				clearDisplay();
-				if ( battleMode == false ) { System.out.println( userMap ); }
-				else if ( battleMode == true ) { System.out.println( battle ); }
-				displayCommands();		
+			if ( battleMode == false ) { //not in battle -> show map + map commands
+				System.out.println( userMap );
+				displayCommands();
 			}
+			else if ( battleMode == true ) { displayBattle(); } //in battle -> show battle
+			System.out.println(captured.getName);
 			
+			String control = promptControl(); //prompts user for a command
 			executeControl( control );
-			if ( battleMode == true ) {
-				//opponentBattle(); //opposing Pokemon will always try to fight with 1 of its 4** moves
+			/*
+			if (battleMode == false) { //after a player walks
+				battleMode = battleStart?(); //checks if player is on grass & chance to start battle
+				enemyPokemon = new Rattata();
 			}
+			//made it like this so that when a battle starts, enemy gets instantiated*/
+			
+			
+			//if ( opponentTurn == true) { //opponentBattle(); }
+			
 		}
 	}
 	
@@ -304,5 +282,6 @@ public class Game {
 	}
 	
 }
+
 
 

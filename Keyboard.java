@@ -1,5 +1,3 @@
-//WE MAY NEED THIS FOR USER TO INPUT COMMANDS
-
 //********************************************************************
 //  Keyboard.java       Author: Lewis and Loftus
 //
