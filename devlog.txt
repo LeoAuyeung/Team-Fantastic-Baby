@@ -175,3 +175,24 @@ method called battleStart?() will check if player is on grass,
 and returns whether or not a battle starts
 
 ==============================================================
+
+Date: 2016-01-16
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- updated Game.java
+	- deleted clearScreen because I think we dont need it. ----- we dont need it because printing out
+	 	map or battle already does it for us. this is very nice.
+	- deleted displayBattle as well ------- we just need system.out.println
+	- added _Pokemon arraylist setup for display of (3) Pokemon on battle screen
+	 	- created default constructor in Pokemon.java for initial values that would be displayed.
+- added "Default.java" to replace yet uninstantiated pokemons that can return default values for display.
+- Implemented display of "3:POKEMON" and the intro screen
+- I decided to instantiate map and battle in the global scale so that other methods can refer to them easily
+
+To-do
+- get try and catch or something to catch an error within each choice during a battle (ex. when in pokemon
+	screen, it doesnt take care of an invalid command )
+
+==============================================================
