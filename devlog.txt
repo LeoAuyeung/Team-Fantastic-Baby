@@ -170,5 +170,8 @@ should run smoothly
 - Started implementing instantiations of Pokemon (user's pkmn, 
 wild enemy pkmn)
 - Fixed some battle command technicalities
+- Instead of starting battle immediately, after player moves, 
+method called battleStart?() will check if player is on grass,
+and returns whether or not a battle starts
 
 ==============================================================
