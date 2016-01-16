@@ -5,26 +5,17 @@ package Pokedex;
 public abstract class Pokemon {
 	
     //mother class governing all Pokemon in the game
-<<<<<<< HEAD
     protected boolean wild; //boolean for if pkmn is wild or a Trainer's
-=======
-    protected boolean wild = true; //boolean for if pkmn is wild or a Trainer's
->>>>>>> origin/master
     protected String name, type; //will we let type change?
     protected int currentHP, maxHP, attack, defense, speed, level;
     protected double exp;
     protected String[] weaknesses, strengths;
     protected String[] movesName;
-<<<<<<< HEAD
     protected Integer[] movesDmg, movesCurrentPP, movesMaxPP;
-=======
-    protected Integer[] movesDmg;
->>>>>>> origin/master
     //if move is type weak, more dmg. if move is type strength, less dmg
 	
     //Constructor
     public Pokemon ( String n, int hp, int atk, int def, int spd, int lvl, String t ) {
-<<<<<<< HEAD
 		name = n;
 		maxHP = hp;
 		currentHP = maxHP;
@@ -35,18 +26,6 @@ public abstract class Pokemon {
 		exp = 0;
 		type = t;
 	}
-=======
-	name = n;
-	maxHP = hp;
-	currentHP = maxHP;
-	attack = atk;
-	defense = def;
-	speed = spd;
-	level = lvl;
-	exp = 0;
-	type = t;
-    }
->>>>>>> origin/master
 	
     //Mutators
     public void setWild ( boolean w ) { wild = w; }
@@ -74,7 +53,6 @@ public abstract class Pokemon {
 	
     //Battle methods
     public int attack (Pokemon enemy, int move) {
-<<<<<<< HEAD
 		int damage = ( ( (2 * level + 10) / 250 ) * ( attack / enemy.getDefense() ) * movesDmg[move] + 2 );
 		//actual formula for dmg in Pokemon
 		enemy.setHP ( enemy.getHP() - damage );
@@ -89,21 +67,6 @@ public abstract class Pokemon {
 		return damageDealt;
 	}
 	
-=======
-	int damage = ( ( (2 * level + 10) / 250 ) * ( attack / enemy.getDefense() ) * movesDmg[move] + 2 );
-	//actual formula for dmg in Pokemon
-	enemy.setHP ( enemy.getHP() - damage );
-	return damage;
-    }
-
-    /*
-    // i think this is good? movename can be displayed in the battle mode and when the user chooses a move we can refer to these methods below.
-    public int skill1() {/*implementation in subclasses}
-    public int skill2() {}
-    public int skill3() {}
-    public int skill4() {}*/
-	
->>>>>>> origin/master
     //description of Pokemon
     public abstract String about();
 	
