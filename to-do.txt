@@ -34,6 +34,8 @@ LEO:
 		-implement HOW TO PROMPT TRAINERS
 
 - Fix/properly implement checking for valid commands
+
+- GIVE POKEMON HARD-CODED MOVES, DMG, PP
 	
 SUNGBIN:
 - Add different blocks on map
