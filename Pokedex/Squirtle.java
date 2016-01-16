@@ -6,7 +6,7 @@ public class Squirtle extends Pokemon {
 	
 	//Constructor
 	public Squirtle() {
-	    super("Squirtle", 100, 50, 50, 25, 5, "WATER");
+		super("Squirtle", 100, 50, 50, 25, 5, "WATER");
 	}
 	
 	//Constructor with nickname
@@ -18,7 +18,7 @@ public class Squirtle extends Pokemon {
 	public String about() {
 		return "Squirtle's shell is not merely used for protection. " +
 		"The shell's rounded shape and the grooves on its surface help minimize resistance in water, " + 
-		"enabling this Pokemon to swim at high speeds.";
+		"enabling this Pokémon to swim at high speeds.";
 	}
 	
 }
