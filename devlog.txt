@@ -196,3 +196,23 @@ To-do
 	screen, it doesnt take care of an invalid command )
 
 ==============================================================
+
+Date: 2016-01-16
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- CHANGED HOW INPUTTING A COMMAND WORKS:
+	- global var battleScreen keeps track of which screen
+	user is in during battle (main menu, fight, pkmn, etc)
+	- displayBattle() will display corresponding screen based
+	on int battleScreen
+	- executeBattleControl() will take input and execute it 
+	based on which screen user is in, and then changes screen
+	accordingly after execution
+	*this change was mainly done so that even if user inputs an
+	invalid command, they will stay on the same screen because
+	all these loops/trying to re-prompt makes everything too
+	technical/confusing
+
+==============================================================

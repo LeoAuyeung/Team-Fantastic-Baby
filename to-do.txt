@@ -5,7 +5,7 @@ LEO:
 	- Contains Key Items (Including Cut/RockSmash)
 	- Contains Battle Items (Protein, Iron, etc)
 	
-- Create an arrayList of Pokemon in Game.java (SEMI-DONE)
+- Create an arrayList of Pokemon in Game.java (DONE)
 	- Keeps track of Pokemon that user owns
 	- Can check which Pokemon user owns
 	- Can be used to switch out Pokemon during battle
@@ -36,6 +36,8 @@ LEO:
 - Fix/properly implement checking for valid commands
 
 - GIVE POKEMON HARD-CODED MOVES, DMG, PP
+
+- **Game balancing
 	
 SUNGBIN:
 - Add different blocks on map
