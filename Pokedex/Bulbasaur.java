@@ -6,12 +6,12 @@ public class Bulbasaur extends Pokemon {
 	
 	//Constructor
 	public Bulbasaur() {
-		super("Bulbasaur", 100, 50, 50, 25, 5, "GRASS");
+		super("Bulbasaur", 100, 50, 50, 25, 5, 100, "GRASS");
 	}
 	
 	//Constructor with nickname
 	public Bulbasaur( String nick ) {
-		super(nick, 100, 50, 50, 25, 5, "GRASS");
+		super(nick, 100, 50, 50, 25, 5, 100, "GRASS");
 	}
 	
 	//Pokedex description

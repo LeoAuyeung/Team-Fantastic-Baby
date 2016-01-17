@@ -216,3 +216,19 @@ Changes:
 	technical/confusing
 
 ==============================================================
+
+Date: 2016-01-16
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- added levelEXP in Pokemon.java for EXP bar display in the battlefield screen
+	- this is going to be calculated every time a pokemon levels up
+	- turned levelEXP and EXP to ints
+	- we are going to use "4n^3 / 5" to calculate levelEXP (?)
+		- http://bulbapedia.bulbagarden.net/wiki/Experience#Relation_to_level
+		- this is the formula for exp of medium fast group, if u want to allow level up to be faster
+			we could use another formula
+- added indent() in Game.java to equally space the columns in Pokemon display
+
+==============================================================

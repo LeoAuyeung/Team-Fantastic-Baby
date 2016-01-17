@@ -6,12 +6,12 @@ public class Rattata extends Pokemon {
 	
 	//Constructor
 	public Rattata() {
-		super("Rattata", 50, 25, 25, 10, 5, "NORMAL");
+		super("Rattata", 50, 25, 25, 10, 5, 100, "NORMAL");
 	}
 	
 	//Constructor with nickname
 	public Rattata( String nick ) {
-		super(nick, 50, 25, 25, 10, 5, "NORMAL");
+		super(nick, 50, 25, 25, 10, 5, 100, "NORMAL");
 	}
 	
 	//Pokedex description

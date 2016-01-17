@@ -6,12 +6,12 @@ public class Charmander extends Pokemon {
 	
 	//Constructor
 	public Charmander() {
-		super("Charmander", 100, 50, 50, 25, 5, "FIRE");
+		super("Charmander", 100, 50, 50, 25, 5, 100, "FIRE");
 	}
 	
 	//Constructor with nickname
 	public Charmander( String nick ) {
-		super(nick, 100, 50, 50, 25, 5, "FIRE");
+		super(nick, 100, 50, 50, 25, 5, 100, "FIRE");
 	}
 	
 	//Pokedex description

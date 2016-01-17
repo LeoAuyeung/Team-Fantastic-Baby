@@ -7,7 +7,7 @@ public class Battle {
 	
     //default constructor for battle
     public Battle() {
-		battle = new String[20][50];
+		battle = new String[20][20];
 		for ( int row = 0; row < battle.length ; row++ ) {
 			for ( int column = 0; column < battle[row].length; column++ ) {
 				battle[row][column] = new String();

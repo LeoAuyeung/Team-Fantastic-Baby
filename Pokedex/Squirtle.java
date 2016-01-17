@@ -6,12 +6,12 @@ public class Squirtle extends Pokemon {
 	
 	//Constructor
 	public Squirtle() {
-		super("Squirtle", 100, 50, 50, 25, 5, "WATER");
+		super("Squirtle", 100, 50, 50, 25, 5, 100, "WATER");
 	}
 	
 	//Constructor with nickname
 	public Squirtle( String nick ) {
-		super(nick, 100, 50, 50, 25, 5, "WATER");
+		super(nick, 100, 50, 50, 25, 5, 100, "WATER");
 	}
 	
 	//Pokedex description
