@@ -569,6 +569,8 @@ public class Game {
 			else if ( battleMode == true ) { executeBattleControl( control ); }
 			System.out.println("battlemode: " + battleMode);
 			
+			//if ( battleMode == true ) { displayBattle2(); } //displays battle msg after user does something; implementing later
+			
 			/*//Checks if Enemy Pokemon has been defeated
 			if ( battleMode == true && enemyPokemon.fainted() ) {
 				currentPokemon.normalize();
