@@ -214,10 +214,25 @@ Changes:
 	invalid command, they will stay on the same screen because
 	all these loops/trying to re-prompt makes everything too
 	technical/confusing
+	
+- Implemented ALL BATTLE COMMANDS!!!
+	- Fight
+		- Choose move -> Attack
+	- Bag
+		- Pokeballs
+			- Use pokeball -> catch/no catch
+		- Potions
+			- Use potion -> restore hp/pp
+		- Battle Items
+			- Use battle item -> increase atk/def
+	- Pokemon
+		- Choose pkmn to switch out -> switches
+	- Run
+		- Chance to run away (haven't implemented game's formula yet)
 
 ==============================================================
 
-Date: 2016-01-16
+Date: 2016-01-17
 --------------------------------------------------------------
 
 User: Sungbin Kim

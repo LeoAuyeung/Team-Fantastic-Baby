@@ -9,15 +9,15 @@ public class Player {
 	
     //Constructor
     public Player ( String g, String n ) {
-	gender = g;
-	name = n;
-	//default values given to player
-	setQuest(0);
-	setMoney(5000);
-	setDirection("RIGHT");
-	setX( 0 );
-	setY( 0 );
-    }		
+		gender = g;
+		name = n;
+		//default values given to player
+		setQuest(0);
+		setMoney(5000);
+		setDirection("RIGHT");
+		setX( 0 );
+		setY( 0 );
+	}		
 	
     //Mutators
     public static void setX ( int x ) { xCor = x; }
