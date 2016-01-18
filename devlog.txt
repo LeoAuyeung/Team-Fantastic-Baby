@@ -247,3 +247,14 @@ Changes:
 - added indent() in Game.java to equally space the columns in Pokemon display
 
 ==============================================================
+
+Date: 2016-01-18
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- added Battle moves display
+- added each bag display
+- fixed errors
+
+==============================================================
