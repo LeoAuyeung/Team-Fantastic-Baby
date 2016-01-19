@@ -1,5 +1,5 @@
 LEO:
-- Create an inventory.java (SEMI-DONE)
+- Create an inventory.java (DONE)
 	- Contains Pokeballs
 	- Contains Potions
 	- Contains Key Items (Including Cut/RockSmash)
@@ -11,12 +11,15 @@ LEO:
 	- Can be used to switch out Pokemon during battle
 	
 - Properly implement wild Pokemon encounters
+	- What does Wild Pokemon do
+	- When does battle end
+	- Exp gain (wild vs trainer)
 
-- Implement Pokemon Battles
+- Implement Pokemon Battles	(ALMOST DONE)
 	- Upon encounter, check speed to see who goes first
 	- Fight until player Blacks out or enemy is caught/defeated
 	- User gains money upon defeating trainers
-	- Fighting math/technicalities
+	- Fighting math/technicalities (DONE)
 		- types (weak, strong)
 		- display names of moves
 		- moves dmg based on weak/strong
@@ -33,9 +36,11 @@ LEO:
 	- User gets to prompt battles (click X)
 		-implement HOW TO PROMPT TRAINERS
 
-- Fix/properly implement checking for valid commands
+- Fix/properly implement checking for valid commands (DONE)
 
-- GIVE POKEMON HARD-CODED MOVES, DMG, PP
+- GIVE POKEMON HARD-CODED MOVES, DMG, PP (DONE)
+
+- Maybe add nicknames when capturing
 
 - **Game balancing
 	

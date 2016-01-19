@@ -6,12 +6,16 @@ public class Rattata extends Pokemon {
 	
 	//Constructor
 	public Rattata() {
-		super("Rattata", 50, 25, 25, 10, 5, 100, "NORMAL");
+		super( "Rattata", 5, "NORMAL" );
+		addMove("Scratch");
+		addMove("Headbutt");
 	}
 	
-	//Constructor with nickname
-	public Rattata( String nick ) {
-		super(nick, 50, 25, 25, 10, 5, 100, "NORMAL");
+	//Constructor for evolutions
+	public Rattata( String n, int lvl) {
+		super( n, lvl, "NORMAL" );
+		addMove("Scratch");
+		addMove("Headbutt");
 	}
 	
 	//Pokedex description

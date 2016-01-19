@@ -9,7 +9,7 @@ public class Game {
 	
     private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
     private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>();
-    private int selectedPokemon, battleScreen;
+    private int selectedPokemon, capturedPokemon, battleScreen;
     private Pokemon captured, currentPokemon, enemyPokemon;
     Battle battle = new Battle();
 	Inventory bag = new Inventory();
@@ -50,7 +50,6 @@ public class Game {
     public String promptGender() {
 		String gen = "";
 		System.out.println("Tell me, are you a boy? Or are you a girl?");
-		//ADD CASE WHERE INPUT IS INVALID
 		gen = Keyboard.readString();
 		return gen;
 	}
@@ -58,11 +57,16 @@ public class Game {
     //method to prompt name of player
     public String promptName() {
 		String name = "";
-		System.out.println("All right. Tell me, what is your name?");
+		System.out.println("All right. Tell me, what is your name? (1-8 characters)");
 		name = Keyboard.readString();
-		//restricts name to 12 characters; can change if necessary
+		if (name.length() < 1) {
+			name = "Ash";
+			System.out.println("No name found. Setting name to " + name + ".");
+		}
+		//restricts name to 8 characters; can change if necessary
 		if (name.length() > 8) {
 			name = name.substring(0,8);
+			System.out.println("Name too long. Setting name to " + name + ".");
 		}
 		return name;
 	}
@@ -101,7 +105,7 @@ public class Game {
 	public void displayBattle() {
 		
 		displayBattlefield(); //This method will show name, hp, level, and exp of BOTH pokemon in battle (exp only for user)
-		//I added battle.reset() into displayBattlefield() so everytime it runs it'll reset the battle, so it does the same thing
+		//I added battle.reset() into displayBattlefield() so every time it runs it'll reset the battle, so it does the same thing
 		
 		//Main Menu
 		if ( battleScreen == 0 ) { displayBattleMenu(); } 
@@ -203,8 +207,8 @@ public class Game {
 		System.out.println( battle );
 	}
 	
+	//displays user's Pokeballs; 1. Poke Ball 2. Great Ball 3. Ultra Ball 4. Master Ball
 	public void displayBag1() {
-		//displays user's Pokeballs; 1. Poke Ball 2. Great Ball 3. Ultra Ball 4. Master Ball
 	    Battle.set( 9, 0, "                        POKEBALLS               B: BACK" );
 	    Battle.set( 11, 0,"                  ----------------------" );
 	    Battle.set( 12, 0,"                  " + indent(" 1: Poke Ball  X" + bag.getPokeball(0), 22) );
@@ -218,8 +222,8 @@ public class Game {
 	    System.out.println( battle );
 	}
 	
+	//displays user's Potions; 1. Potion 2. Super Potion 3. Hyper Potion 4. Full Restore 5. Elixir 6. Max Elixir; Elixirs are for PP
 	public void displayBag2() {
-		//displays user's Potions; 1. Potion 2. Super Potion 3. Hyper Potion 4. Full Restore 5. Elixir 6. Max Elixir; Elixirs are for PP
 	    Battle.set( 10, 0, "                         POTIONS                 B: BACK" );
 	    Battle.set( 12, 0, "   ------------------------- -------------------------" );
 	    Battle.set( 13, 0, "   " + indent(" 1: Potion  X" + bag.getPotion(0), 25) );
@@ -234,8 +238,8 @@ public class Game {
 	    System.out.println( battle );
 	}
 	
+	//displays user's Battle Items; 1. Protein 2. Iron
 	public void displayBag3() {
-		//displays user's Battle Items; 1. Protein 2. Iron
 	    Battle.set( 11, 0, "                       BATTLE ITEMS              B: BACK" );
 	    Battle.set( 13, 0, "                  ----------------------" );
 	    Battle.set( 14, 0, "                  " + indent( " 1: Protein  X" + bag.getBattleItem(0), 22 ) );
@@ -467,9 +471,9 @@ public class Game {
 				if ( catchRate >= 0.75  ) {
 					captured = enemyPokemon;
 					_Pokemon.add( captured );
-				opponentTurn = false;
-				battleMode = false;
-				return;
+					opponentTurn = false;
+					battleMode = false;
+					return;
 				}
 			}
 			if ( command.equals("3") && bag.getPokeball(2) != 0 && _Pokemon.size() < 6 ) { //Throws Ultra Ball
@@ -569,11 +573,22 @@ public class Game {
 		opponentTurn = false;
 	}
 	
-	/*
-		public boolean battleStart() {
-		//check if player is on grass; chance to start battle
+	//Capturing pokemon
+	public void capturePokemon( Pokemon p ) {
+		capturedPokemon = capturedPokemon + 1;
+		_Pokemon.set( capturedPokemon - 1, p );
+	}
+	
+	//Starting a Pokemon Battle
+	public boolean battleStart() {
+		if (//conditions for battle to start)
+		{
+			enemyPokemon = new Rattata();
+			selectedPokemon = 0; //selects first Pokemon in list
+			currentPokemon = _Pokemon.get(selectedPokemon);
 		}
-	*/
+		//check if player is on grass; chance to start battle
+	}
 	
 	//~~~~~~~~~~~~~~PLAYING POKEMON!!!~~~~~~~~~~~~~~~
 	
@@ -592,22 +607,20 @@ public class Game {
 			_Pokemon.add( new Default() );
 		}
 		
-		//prompts for starter Pokemon, and creates one accordingly
+		//prompts for starter Pokemon, and captures one accordingly
+		capturedPokemon = 0;
 		int starter = promptStarter();
 		if (starter == 1) { captured = new Bulbasaur(); }
 		else if (starter == 2) { captured = new Charmander(); }
 		else if (starter == 3) { captured = new Squirtle(); }
-		_Pokemon.set( 0, captured ); //adds starter to list _Pokemon
-		selectedPokemon = 0;
-		currentPokemon = _Pokemon.get(selectedPokemon);
+		capturePokemon(captured);
 		
 		//RUNS GAME:
 		while ( user.getQuest() != 20 ) {
 			
-			//   if (battleMode == false) { //after a player walks
-			//  battleMode = battleStart(); //checks if player is on grass & chance to start battle
-			//  // shouldnt this be a part of battleStart() that modifies _EnemyPokemon
-			//  }
+			if (battleMode == false) { //after a player walks
+				battleMode = battleStart();
+			}
 			//made it like this so that when a battle starts, enemy gets instantiated
 			
 			//Display Map/Battlefield
@@ -626,7 +639,7 @@ public class Game {
 			//if ( battleMode == true ) { displayBattle(); } //displays battle msg after user does something; implementing later
 			
 			/*//Checks if Enemy Pokemon has been defeated
-			if ( battleMode == true && enemyPokemon.fainted() ) {
+				if ( battleMode == true && enemyPokemon.fainted() ) {
 				currentPokemon.normalize();
 				battleMode = false;
 			}*/

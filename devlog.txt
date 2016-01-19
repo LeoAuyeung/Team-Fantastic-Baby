@@ -258,3 +258,16 @@ Changes:
 - fixed errors
 
 ==============================================================
+
+Date: 2016-01-18
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- fullying integrated Pokemon stats
+- added Pokemon moves
+- added proper functionality of checking for weaknesses/strengths
+- added leveling up and redistributing stats based on level
+- created Trainer.java for when we implement trainer battles
+
+==============================================================
