@@ -7,15 +7,15 @@ public class Charmander extends Pokemon {
 	//Constructor
 	public Charmander() {
 		super("Charmander", 5, "FIRE");
-		addMove("Ember");
-		addMove("Fire Punch");
+		addMove("Ember", 40, 25);
+		addMove("Fire Punch", 75, 15);
 	}
 	
 	//Constructor for evolutions
 	public Charmander( String n, int lvl) {
 		super( n, lvl, "FIRE");
-		addMove("Ember");
-		addMove("Fire Punch");
+		addMove("Ember", 40, 25);
+		addMove("Fire Punch", 75, 15); // movesName, dmg, pp
 	}
 	
 	//Pokedex description

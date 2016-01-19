@@ -271,3 +271,18 @@ Changes:
 - created Trainer.java for when we implement trainer battles
 
 ==============================================================
+
+Date: 2016-01-19
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- fulfilled the first few parts of to-do list regarding battle displays
+- worked on Map.java and implementing different kinds of tiles
+	- isObstacle
+- some change in Pokemon.java such as that in addMove();
+- some change in Player.java such as mapNum var
+- needs discussion about PKMart display
+- created a test map
+
+==============================================================

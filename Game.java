@@ -11,8 +11,8 @@ public class Game {
     private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>();
     private int selectedPokemon, capturedPokemon, battleScreen;
     private Pokemon captured, currentPokemon, enemyPokemon;
-    Battle battle = new Battle();
-	Inventory bag = new Inventory();
+    private Battle battle = new Battle();
+    private Inventory bag = new Inventory();
     private boolean battleMode = false;
     private boolean opponentTurn = false;
 	
@@ -133,7 +133,7 @@ public class Game {
 		Battle.set( 0, 0, "=============================================================" );
 		Battle.set( 1, 0, " Lv." + enemyPokemon.getLevel() + "     " + enemyPokemon.getName() + "(" + enemyPokemon.getType() + ")" );
 		Battle.set( 2, 0, displayHP( enemyPokemon ) + " (" + enemyPokemon.getHP() + "/" + enemyPokemon.getMaxHP() + ")" );
-		Battle.set( 3, 0, displayEXP( enemyPokemon ) + " (" + enemyPokemon.getEXP() + "/" + enemyPokemon.getLevelEXP() + ")" );
+		
 		Battle.set( 4, 0, "-------------------------------------------------------------" );
 		Battle.set( 5, 0, " Lv." + currentPokemon.getLevel() + "     " + currentPokemon.getName() + "(" + currentPokemon.getType() + ")" );
 		Battle.set( 6, 0, displayHP( currentPokemon ) + " (" + currentPokemon.getHP() + "/" + currentPokemon.getMaxHP() + ")" );
@@ -142,107 +142,107 @@ public class Game {
 	}
 	
 	public void displayBattleMenu() {
-		Battle.set( 10, 0, "                    WHAT WILL " + Player.getName() + " DO?" );
-		Battle.set( 12, 0, "                -----------       -----------  " );
-		Battle.set( 13, 0, "                | 1:FIGHT |       |  2:BAG  |  " );
-		Battle.set( 14, 0, "                -----------       -----------  " );
-		Battle.set( 16, 0, "                -----------       -----------  " );
-		Battle.set( 17, 0, "                |3:POKEMON|       |  4:RUN  |  " );
-		Battle.set( 18, 0, "                -----------       -----------  " );
+	    Battle.set( 10, 0, center("WHAT WILL " + Player.getName() + " DO?", 61) );
+		Battle.set( 12, 0, "                -----------       -----------" );
+		Battle.set( 13, 0, "                | 1:FIGHT |       |  2:BAG  |" );
+		Battle.set( 14, 0, "                -----------       -----------" );
+		Battle.set( 16, 0, "                -----------       -----------" );
+		Battle.set( 17, 0, "                |3:POKEMON|       |  4:RUN  |" );
+		Battle.set( 18, 0, "                -----------       -----------" );
 		System.out.println( battle );
 	}
 	
 	public void displayFight() {
-	    Battle.set( 9, 0, "                    WHAT WILL " + currentPokemon.getName() + " DO?          B: BACK" );
+	    Battle.set( 9, 0, center("WHAT WILL " + currentPokemon.getName() + " DO?", 59).substring(0,54) + "B: BACK" );
 	    Battle.set( 11, 0, "      --------------------       --------------------" );
-	    Battle.set( 12, 0, "      " + indent(" (1) " + currentPokemon.getMovesName(0), 20)  );
-	    Battle.set( 13, 0, "      " + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(0) + "/" + currentPokemon.getMaxPP(0), 20) );
+	    Battle.set( 12, 0, "      |" + indent(" (1) " + currentPokemon.getMovesName(0), 18) + "|" );
+	    Battle.set( 13, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(0) + "/" + currentPokemon.getMaxPP(0), 18) + "|" );
 	    Battle.set( 14, 0, "      --------------------       --------------------" );
 	    Battle.set( 16, 0, "      --------------------       --------------------" ); 
-	    Battle.set( 17, 0, "      " + indent(" (3) " + currentPokemon.getMovesName(2), 20)  );
-	    Battle.set( 18, 0, "      " + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(2) + "/" + currentPokemon.getMaxPP(2), 20) );
+	    Battle.set( 17, 0, "      |" + indent(" (3) " + currentPokemon.getMovesName(2), 18) + "|" );
+	    Battle.set( 18, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(2) + "/" + currentPokemon.getMaxPP(2), 18) + "|" );
 	    Battle.set( 19, 0, "      --------------------       --------------------" );
-	    Battle.set( 12, 1, "       " + indent(" (2) " + currentPokemon.getMovesName(1), 20)  );
-	    Battle.set( 13, 1, "       " + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(1) + "/" + currentPokemon.getMaxPP(1), 20) );
-	    Battle.set( 17, 1, "       " + indent(" (4) " + currentPokemon.getMovesName(3), 20)  );
-	    Battle.set( 18, 1, "       " + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(3) + "/" + currentPokemon.getMaxPP(3), 20) );
+	    Battle.set( 12, 1, "       |" + indent(" (2) " + currentPokemon.getMovesName(1), 18) + "|" );
+	    Battle.set( 13, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(1) + "/" + currentPokemon.getMaxPP(1), 18) + "|" );
+	    Battle.set( 17, 1, "       |" + indent(" (4) " + currentPokemon.getMovesName(3), 18) + "|" );
+	    Battle.set( 18, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(3) + "/" + currentPokemon.getMaxPP(3), 18) + "|" );
 	    System.out.println( battle );	    
 	}
 	
 	public void displayBag() {
-	    Battle.set( 9, 0, "                      CHOOSE A BAG               B: BACK" );
-	    Battle.set( 11, 0, "                    ----------------" );
-	    Battle.set( 12, 0, "                    |  1:POKEBALLS |" );
-	    Battle.set( 13, 0, "                    ----------------" );
-	    Battle.set( 14, 0, "                    ----------------" );
-	    Battle.set( 15, 0, "                    |  2:POTIONS   |" );
-	    Battle.set( 16, 0, "                    ----------------" );
-	    Battle.set( 17, 0, "                    ----------------" );
-	    Battle.set( 18, 0, "                    |3:BATTLE ITEMS|" );
-	    Battle.set( 19, 0, "                    ----------------" );
+	    Battle.set( 9, 0, "                       CHOOSE A BAG                   B: BACK" );
+	    Battle.set( 11, 0, "                     ----------------" );
+	    Battle.set( 12, 0, "                     |  1:POKEBALLS |" );
+	    Battle.set( 13, 0, "                     ----------------" );
+	    Battle.set( 14, 0, "                     ----------------" );
+	    Battle.set( 15, 0, "                     |  2:POTIONS   |" );
+	    Battle.set( 16, 0, "                     ----------------" );
+	    Battle.set( 17, 0, "                     ----------------" );
+	    Battle.set( 18, 0, "                     |3:BATTLE ITEMS|" );
+	    Battle.set( 19, 0, "                     ----------------" );
 	    System.out.println( battle );
 	}
 	
 	public void displayPokemon() {
 		Battle.set( 9, 0,  "                      AVAILABLE POKEMON:              B: BACK" );
 		Battle.set( 10, 0, "------------------------------ ------------------------------" );
-		Battle.set( 11, 0, indent(" (1) Lv." + _Pokemon.get(0).getLevel() + " " + _Pokemon.get(0).getName() + "(" + _Pokemon.get(0).getType() + ")", 30) );
-		Battle.set( 12, 0, indent(displayHP( _Pokemon.get(0) ), 30) );
+		Battle.set( 11, 0, "|" + indent(" (1) Lv." + _Pokemon.get(0).getLevel() + " " + _Pokemon.get(0).getName() + "(" + _Pokemon.get(0).getType() + ")", 28) + "|" );
+		Battle.set( 12, 0, "|" + indent(displayHP( _Pokemon.get(0) ), 28) + "|" );
 		Battle.set( 13, 0, "------------------------------ ------------------------------" );
-		Battle.set( 14, 0, indent(" (2) Lv." + _Pokemon.get(1).getLevel() + " " + _Pokemon.get(1).getName() + "(" + _Pokemon.get(1).getType() + ")", 30) );
-		Battle.set( 15, 0, indent(displayHP( _Pokemon.get(1) ), 30) );
+		Battle.set( 14, 0, "|" + indent(" (2) Lv." + _Pokemon.get(1).getLevel() + " " + _Pokemon.get(1).getName() + "(" + _Pokemon.get(1).getType() + ")", 28) + "|" );
+		Battle.set( 15, 0, "|"+ indent(displayHP( _Pokemon.get(1) ), 28) + "|" );
 		Battle.set( 16, 0, "------------------------------ ------------------------------" );
-		Battle.set( 17, 0, indent(" (3) Lv." + _Pokemon.get(2).getLevel() + " " + _Pokemon.get(2).getName() + "(" + _Pokemon.get(2).getType() + ")", 30) );
-		Battle.set( 18, 0, indent(displayHP( _Pokemon.get(2) ), 30) );
+		Battle.set( 17, 0, "|" + indent(" (3) Lv." + _Pokemon.get(2).getLevel() + " " + _Pokemon.get(2).getName() + "(" + _Pokemon.get(2).getType() + ")", 28) + "|" );
+		Battle.set( 18, 0, "|" + indent(displayHP( _Pokemon.get(2) ), 28) + "|" );
 		Battle.set( 19, 0, "------------------------------ ------------------------------" );
 		// second column
-		Battle.set( 11, 1, " " + indent(" (4) Lv." + _Pokemon.get(3).getLevel() + " " + _Pokemon.get(3).getName() + "(" + _Pokemon.get(3).getType() + ")", 30) );
-		Battle.set( 12, 1, " " + indent(displayHP( _Pokemon.get(3) ), 30) );
-		Battle.set( 14, 1, " " + indent(" (5) Lv." + _Pokemon.get(4).getLevel() + " " + _Pokemon.get(4).getName() + "(" + _Pokemon.get(4).getType() + ")", 30) );
-		Battle.set( 15, 1, " " + indent(displayHP( _Pokemon.get(4) ), 30) );
-		Battle.set( 17, 1, " " + indent(" (6) Lv." + _Pokemon.get(5).getLevel() + " " + _Pokemon.get(5).getName() + "(" + _Pokemon.get(5).getType() + ")", 30) );
-		Battle.set( 18, 1, " " + indent(displayHP( _Pokemon.get(5) ), 30) );
+		Battle.set( 11, 1, " |" + indent(" (4) Lv." + _Pokemon.get(3).getLevel() + " " + _Pokemon.get(3).getName() + "(" + _Pokemon.get(3).getType() + ")", 28) + "|" );
+		Battle.set( 12, 1, " |" + indent(displayHP( _Pokemon.get(3) ), 28) + "|" );
+		Battle.set( 14, 1, " |" + indent(" (5) Lv." + _Pokemon.get(4).getLevel() + " " + _Pokemon.get(4).getName() + "(" + _Pokemon.get(4).getType() + ")", 28) + "|" );
+		Battle.set( 15, 1, " |" + indent(displayHP( _Pokemon.get(4) ), 28) + "|" );
+		Battle.set( 17, 1, " |" + indent(" (6) Lv." + _Pokemon.get(5).getLevel() + " " + _Pokemon.get(5).getName() + "(" + _Pokemon.get(5).getType() + ")", 28) + "|" );
+		Battle.set( 18, 1, " |" + indent(displayHP( _Pokemon.get(5) ), 28) + "|" );
 		System.out.println( battle );
 	}
 	
 	//displays user's Pokeballs; 1. Poke Ball 2. Great Ball 3. Ultra Ball 4. Master Ball
 	public void displayBag1() {
-	    Battle.set( 9, 0, "                        POKEBALLS               B: BACK" );
+	    Battle.set( 9, 0, "                        POKEBALLS                     B: BACK" );
 	    Battle.set( 11, 0,"                  ----------------------" );
-	    Battle.set( 12, 0,"                  " + indent(" 1: Poke Ball  x" + bag.getPokeball(0), 22) );
+	    Battle.set( 12, 0,"                  |" + indent(" 1: Poke Ball   x" + bag.getPokeball(0), 20) + "|" );
 	    Battle.set( 13, 0,"                  ----------------------" );
-	    Battle.set( 14, 0,"                  " + indent(" 2: Great Ball  x" + bag.getPokeball(1), 22) );
+	    Battle.set( 14, 0,"                  |" + indent(" 2: Great Ball  x" + bag.getPokeball(1), 20) + "|" );
 	    Battle.set( 15, 0,"                  ----------------------" );
-	    Battle.set( 16, 0,"                  " + indent(" 3: Ultra Ball  x" + bag.getPokeball(2), 22) );
+	    Battle.set( 16, 0,"                  |" + indent(" 3: Ultra Ball  x" + bag.getPokeball(2), 20) + "|" );
 	    Battle.set( 17, 0,"                  ----------------------" );
-	    Battle.set( 18, 0,"                  " + indent(" 4: Master Ball  x" + bag.getPokeball(3), 22) );
+	    Battle.set( 18, 0,"                  |" + indent(" 4: Master Ball x" + bag.getPokeball(3), 20) + "|" );
 	    Battle.set( 19, 0,"                  ----------------------" );
 	    System.out.println( battle );
 	}
 	
 	//displays user's Potions; 1. Potion 2. Super Potion 3. Hyper Potion 4. Full Restore 5. Elixir 6. Max Elixir; Elixirs are for PP
 	public void displayBag2() {
-	    Battle.set( 10, 0, "                         POTIONS                 B: BACK" );
+	    Battle.set( 10, 0, "                         POTIONS                      B: BACK" );
 	    Battle.set( 12, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 13, 0, "   " + indent(" 1: Potion  x" + bag.getPotion(0), 25) );
+	    Battle.set( 13, 0, "   |" + indent(" 1: Potion         x" + bag.getPotion(0), 23) + "|" );
 	    Battle.set( 14, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 15, 0, "   " + indent(" 2: Super Potion  x" + bag.getPotion(1), 25) );	    
+	    Battle.set( 15, 0, "   |" + indent(" 2: Super Potion   x" + bag.getPotion(1), 23) + "|" );	    
 	    Battle.set( 16, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 17, 0, "   " + indent(" 3: Hyper Potion  x" + bag.getPotion(2), 25) );
+	    Battle.set( 17, 0, "   |" + indent(" 3: Hyper Potion   x" + bag.getPotion(2), 23) + "|" );
 	    Battle.set( 18, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 13, 1, " " + indent(" 4: Full Restore  x" + bag.getPotion(3), 25) );
-	    Battle.set( 15, 1, " " + indent(" 5: Elixir Potion  x" + bag.getPotion(4), 25) );
-	    Battle.set( 17, 1, " " + indent(" 6: Max Elixir  x" + bag.getPotion(5), 25) );
+	    Battle.set( 13, 1, " |" + indent(" 4: Full Restore   x" + bag.getPotion(3), 23) + "|" );
+	    Battle.set( 15, 1, " |" + indent(" 5: Elixir Potion  x" + bag.getPotion(4), 23) + "|" );
+	    Battle.set( 17, 1, " |" + indent(" 6: Max Elixir     x" + bag.getPotion(5), 23) + "|" );
 	    System.out.println( battle );
 	}
 	
 	//displays user's Battle Items; 1. Protein 2. Iron
 	public void displayBag3() {
-	    Battle.set( 11, 0, "                       BATTLE ITEMS              B: BACK" );
+	    Battle.set( 11, 0, "                       BATTLE ITEMS                   B: BACK" );
 	    Battle.set( 13, 0, "                  ----------------------" );
-	    Battle.set( 14, 0, "                  " + indent( " 1: Protein  x" + bag.getBattleItem(0), 22 ) );
+	    Battle.set( 14, 0, "                  |" + indent( " 1: Protein    x" + bag.getBattleItem(0), 20 ) + "|" );
 	    Battle.set( 15, 0, "                  ----------------------" );
-	    Battle.set( 16, 0, "                  " + indent( " 2: Iron  x" + bag.getBattleItem(0), 22 ) );
+	    Battle.set( 16, 0, "                  |" + indent( " 2: Iron       x" + bag.getBattleItem(0), 20 ) + "|" );
 	    Battle.set( 17, 0, "                  ----------------------" );	    
 	    System.out.println( battle );
 	}
@@ -285,81 +285,147 @@ public class Game {
 			temp = temp.substring(1);
 			numChar++;
 		}
-		s = "|" + s;
-		for( int n = 0; n < ((x - 2) - numChar); n++ ) {
+		for( int n = 0; n < (x - numChar); n++ ) {
 			s += " ";
-		}
-		s += "|";
+		}	        
 		return s;
-	}	
+	}
+    public String center( String s, int x ) {
+		String temp = new String( s ); //copy string
+		int numChar = 0;
+		while( temp.length() > 0 ) {
+			temp = temp.substring(1);
+			numChar++;
+		}
+		for( int n = 0; n < (x - numChar)/2; n++ ) {
+		    s = " " + s;
+		    s += " ";
+		}
+		return s;
+    }
 	
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EXECUTE-CONTROLS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
     //Executes Non-Battle Commands
 	
     public void executeControl( String command ) {
-		if ( command.equals("w") ) { 
-			if( Player.getY() != 0 ) {
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
-				Map.get( Player.getY(), Player.getX() ).setImage();
-				Player.setY(Player.getY() - 1);
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
-				Map.get( Player.getY(), Player.getX() ).setImage();		    
-			}
-			//user.setX, user.setY, change map's player coordinates
-			if( (int)(Math.random()*15) == 1 ) {
-				battleStart();		    
-			}
+	int y = Player.getY();
+	int x = Player.getX();
+	Tile from = Map.get( y, x ); // a var for player's original location
+	if ( command.equals("w") ) {
+	    Tile to = Map.get( y-1, x );
+	    Player.setDirection( "UP" );
+	    if( y!=0 && !to.isObstacle() ) {
+		from.reset();
+		to.movePlayer();
+		Player.setY(y - 1);		
+	    }
+	    if( to.getType().equals("PKCenter") ) { //PKCenter heals every captured pokemon
+		for( int i = 0; i < capturedPokemon; i++ ) {
+		    _Pokemon.get(i).restoreHP( 999 );
 		}
-		
-		if ( command.equals("a") ) {
-			if( Player.getX() != 0 ) {
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
-				Map.get( Player.getY(), Player.getX() ).setImage();
-				Player.setX(Player.getX() - 1);
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
-				Map.get( Player.getY(), Player.getX() ).setImage();		    
-			}
-			//user.setX, user.setY, change map's player coordinates
-			if( (int)(Math.random()*15) == 1 ) {
-				battleStart();		    
-			}
+	    }
+	    if( to.getType().equals("ForwardPortal") ) {
+		Player.setMapNum( Player.getMapNum()+1 );
+	    }
+	    if( to.getType().equals("BackPortal") ) {
+		Player.setMapNum( Player.getMapNum()-1 );
+	    }	    
+	    //user.setX, user.setY, change map's player coordinates
+	    if( to.getType().equals("Grass") ) {
+		if( (int)(Math.random()*15) == 1 ) {
+		    battleStart();		    
 		}
+	    }	   
+	}
 		
-		if ( command.equals("s") ) {
-			if( Player.getY() != 19 ) {
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
-				Map.get( Player.getY(), Player.getX() ).setImage();
-				Player.setY(Player.getY() + 1);
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
-				Map.get( Player.getY(), Player.getX() ).setImage();		    
-			}
-			//user.setX, user.setY, change map's player coordinates
-			if( (int)(Math.random()*15) == 1 ) {
-				battleStart();		    
-			}
+	if ( command.equals("a") ) {
+	    Tile to = Map.get( y, x-1 );
+	    Player.setDirection( "LEFT" );
+	    if( x!=0 && !to.isObstacle() ) {
+		from.reset();
+		to.movePlayer();
+		Player.setX(x - 1);
+	    }
+	    if( to.getType().equals("PKCenter") ) {
+		for( int i = 0; i < capturedPokemon; i++ ) {
+		    _Pokemon.get(i).restoreHP( 999 );
 		}
-		
-		if ( command.equals("d") ) {
-			if( Player.getX() != 19 ) {
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //resets old location
-				Map.get( Player.getY(), Player.getX() ).setImage();
-				Player.setX(Player.getX() + 1);
-				Map.get( Player.getY(), Player.getX() ).setIsPlayerHere(); //moves to new location
-				Map.get( Player.getY(), Player.getX() ).setImage();		    
-			}
-			//user.setX, user.setY, change map's player coordinates
-			if( (int)(Math.random()*15) == 1 ) {
-				battleStart();
-			}
+	    }
+	    if( to.getType().equals("ForwardPortal") ) {
+		Player.setMapNum( Player.getMapNum()+1 );
+	    }
+	    if( to.getType().equals("BackPortal") ) {
+		Player.setMapNum( Player.getMapNum()-1 );
+	    }	    
+	    //user.setX, user.setY, change map's player coordinates
+	    if( to.getType().equals("Grass") ) {
+		if( (int)(Math.random()*15) == 1 ) {
+		    battleStart();		    
 		}
+	    }	
+	}
 		
-		if ( command.equals("x") ) {
-			//check block in front using player.getDirection()
-			//we will have: trees, rocks, walls, enemy trainers
+	if ( command.equals("s") ) {
+	    Tile to = Map.get( y+1, x );
+	    Player.setDirection( "DOWN" );	    
+	    if( y!=19 && !to.isObstacle() ) {
+		from.reset();
+		to.movePlayer();
+		Player.setY(y + 1);
+	    }
+	    if( to.getType().equals("PKCenter") ) {
+		for( int i = 0; i < capturedPokemon; i++ ) {
+		    _Pokemon.get(i).restoreHP( 999 );
 		}
+	    }
+	    if( to.getType().equals("ForwardPortal") ) {
+		Player.setMapNum( Player.getMapNum()+1 );
+	    }
+	    if( to.getType().equals("BackPortal") ) {
+		Player.setMapNum( Player.getMapNum()-1 );
+	    }	    
+	    //user.setX, user.setY, change map's player coordinates
+	    if( to.getType().equals("Grass") ) {
+		if( (int)(Math.random()*15) == 1 ) {
+		    battleStart();		    
+		}
+	    }	
+	}
 		
-	}//ends NON-BATTLE COMMANDS
+	if ( command.equals("d") ) {
+	    Tile to = Map.get( y, x+1 );
+	    Player.setDirection( "RIGHT" );	    
+	    if( x!=19 && !to.isObstacle() ) {
+		from.reset();
+		to.movePlayer();
+		Player.setX(x + 1);
+	    }
+	    if( to.getType().equals("PKCenter") ) {
+		for( int i = 0; i < capturedPokemon; i++ ) {
+		    _Pokemon.get(i).restoreHP( 999 );
+		}
+	    }
+	    if( to.getType().equals("ForwardPortal") ) {
+		Player.setMapNum( Player.getMapNum()+1 );
+	    }
+	    if( to.getType().equals("BackPortal") ) {
+		Player.setMapNum( Player.getMapNum()-1 );
+	    }	    
+	    //user.setX, user.setY, change map's player coordinates
+	    if( to.getType().equals("Grass") ) {
+		if( (int)(Math.random()*15) == 1 ) {
+		    battleStart();		    
+		}
+	    }	
+	}
+		
+	if ( command.equals("x") ) {
+	    //check block in front using player.getDirection()
+	    //we will have: trees, rocks, walls, enemy trainers
+	}
+		
+    }//ends NON-BATTLE COMMANDS
 	
 	//Executes Battle Commands
 	
@@ -592,7 +658,7 @@ public class Game {
 		
 		//instantiation of classes
 		Player user = new Player(gender, name);
-		Map userMap = new Map();
+		Map userMap = new Map(Player.getMapNum());
 		
 		//sets up _Pokemon ArrayList
 		for( int i = 0; i < 6; i++ ) {

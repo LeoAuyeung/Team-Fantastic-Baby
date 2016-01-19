@@ -7,15 +7,15 @@ public class Squirtle extends Pokemon {
 	//Constructor
 	public Squirtle() {
 		super( "Squirtle", 5, "WATER" );
-		addMove("Water Gun");
-		addMove("Bubble Beam");
+		addMove("Water Gun", 40, 25);
+		addMove("Bubble Beam", 65, 20);
 	}
 	
 	//Constructor for evolutions
 	public Squirtle( String n, int lvl) {
 		super( n, lvl, "WATER" );
-		addMove("Water Gun");
-		addMove("Bubble Beam");
+		addMove("Water Gun", 40, 25); // movesName, dmg, pp
+		addMove("Bubble Beam", 65, 20);
 	}
 	
 	//Pokedex description

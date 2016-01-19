@@ -49,7 +49,7 @@ SUNGBIN:
 - get rid of enemy Pkmn's exp
 - take length of name into consideration for default menu (min 1, max 8)
 - make it so that fight menu only shows up to # of moves pkmn has; leave others empty/none
-
+====================================complete line=========================================
 - Add different blocks on map
 	- Grass
 	- Tree (cuttable)
@@ -87,7 +87,7 @@ SUNGBIN:
 		- display names of moves
 		- moves dmg based on weak/strong
 		
-- ** DISPLAY DURING BATTLES **
+- ** DISPLAY DURING BATTLES ** 
 	- Fight -> Show moves of pokemon
 	- Bag -> Show bags 1-4 with stuff inside
 	- Pokemon -> Show all (up to 6) pokemon

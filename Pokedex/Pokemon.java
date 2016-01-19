@@ -14,11 +14,11 @@ public abstract class Pokemon {
     protected ArrayList weaknesses = new ArrayList();
 	protected ArrayList strengths = new ArrayList();
     protected int movesNum;
-    protected String[] movesName = {"A","B","C","D"};
-    protected Integer[] movesDmg = {40,70,90,115};
+    protected String[] movesName = {"None","None","None","None"};
+    protected Integer[] movesDmg = {0,0,0,0};
 	//same PP for all Pokemon
-    protected Integer[] currentPP = {25,15,10,5};
-    protected Integer[] maxPP = {25,15,10,5};
+    protected Integer[] currentPP = {0,0,0,0};
+    protected Integer[] maxPP = {0,0,0,0};
 	
     //Constructor
     public Pokemon() {
@@ -97,8 +97,11 @@ public abstract class Pokemon {
 	
 	//Adding moves
 	//Lists of moves from: http://pokemondb.net/move/all
-	public void addMove( String move ) {
+    public void addMove( String move, int d, int p ) {
 		movesName[movesNum] = move;
+		maxPP[movesNum] = p;
+		currentPP[movesNum] = maxPP[movesNum];
+		movesDmg[movesNum] = d;
 		movesNum += 1;
 	}
 	

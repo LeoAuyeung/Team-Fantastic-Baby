@@ -4,7 +4,7 @@
 public class Player {
 	
     private static String gender, name;
-    private static int xCor, yCor, money, pokemonLeft, quest;
+    private static int xCor, yCor, money, pokemonLeft, quest, mapNum;
     private static String direction;
 	
     //Constructor
@@ -12,6 +12,7 @@ public class Player {
 		gender = g;
 		name = n;
 		//default values given to player
+		setMapNum(1);
 		setQuest(0);
 		setMoney(5000);
 		setDirection("RIGHT");
@@ -26,7 +27,7 @@ public class Player {
     public static void setPokemonLeft ( int l ) { pokemonLeft = l; }
     public static void setQuest ( int q ) { quest = q; }
     public static void setDirection ( String d ) { direction = d; }
-	
+    public static void setMapNum ( int n ) { mapNum = n; }
     public static boolean blackedOut() { return pokemonLeft > 0; }
 	
     //Accessors
@@ -37,6 +38,7 @@ public class Player {
     public static int getMoney() { return money; }
     public static int getPokemonLeft() { return pokemonLeft; }
     public static int getQuest() { return quest; }
+    public static int getMapNum() { return mapNum; }
     public static String getDirection() { return direction; }
 	
 }
