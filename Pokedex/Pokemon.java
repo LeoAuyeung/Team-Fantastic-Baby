@@ -2,6 +2,8 @@
 //Pokemon.java
 package Pokedex;
 
+import java.util.ArrayList;
+
 public abstract class Pokemon {
 	
     //mother class governing all Pokemon in the game
@@ -9,7 +11,8 @@ public abstract class Pokemon {
     protected String name, type;
     protected int HP, maxHP, attack, baseAttack, defense, baseDefense, speed, level, exp, levelEXP;
 	//Types: Normal, Fighting, Flying, Grass, Fire, Water, Electric, Rock, Ice, Dark, Steel
-    protected String[] weaknesses, strengths;
+    protected ArrayList weaknesses = new ArrayList();
+	protected ArrayList strengths = new ArrayList();
     protected int movesNum;
     protected String[] movesName = {"A","B","C","D"};
     protected Integer[] movesDmg = {40,70,90,115};
@@ -33,7 +36,7 @@ public abstract class Pokemon {
 		level = lvl;
 		normalize();
 		HP = maxHP;
-		exp = (level - 1) * (level - 1) * (level - 1);
+		exp = 0;
 		attack = baseAttack;
 		defense = baseDefense;
 		type = t;
@@ -89,7 +92,7 @@ public abstract class Pokemon {
 		baseAttack = (int) ( (2 * 50 * level) / 100 ) + 5;
 		baseDefense = (int) ( (2 * 45 * level) / 100 ) + 5;
 		speed = (int) ( (2 * 45 * level) / 100 ) + 5;
-		levelEXP = level * level * level;
+		levelEXP = (level * level * level) - ((level - 1) * (level - 1) * (level - 1));
 	}
 	
 	//Adding moves
@@ -100,44 +103,45 @@ public abstract class Pokemon {
 	}
 	
 	//Types: Normal, Fire, Water, Electric, Grass, Ice, Fighting, Flying, Rock, Dark, Steel
+	
 	public void addWeaknesses() {
-		if ( type.equals("NORMAL") ) { weaknesses = {"ROCK", "STEEL"}; }
-		else if ( type.equals("FIRE") ) { weaknesses = {"FIRE", "WATER", "ROCK"}; }
-		else if ( type.equals("WATER") ) { weaknesses = {"WATER", "GRASS"}; }
-		else if ( type.equals("ELECTRIC") ) { weaknesses = {"ELECTRIC", "GRASS"}; }
-		else if ( type.equals("GRASS") ) { weaknesses = {"FIRE", "GRASS", "FLYING"}; }
-		else if ( type.equals("ICE") ) { weaknesses = {"FIRE", "WATER", "ICE", "STEEL"}; }
-		else if ( type.equals("FIGHTING") ) { weaknesses = {"FLYING"}; }
-		else if ( type.equals("FLYING") ) { weaknesses = {"ELECTRIC", "ROCK"}; }
-		else if ( type.equals("ROCK") ) { weaknesses = {"FIGHTING", "STEEL"}; }
-		else if ( type.equals("DARK") ) { weaknesses = {"FIGHTING", "DARK"}; }
-		else if ( type.equals("STEEL") ) { weaknesses = {"FIRE", "WATER", "ELECTRIC", "STEEL"}; }
+		if ( type.equals("NORMAL") ) { weaknesses.add("ROCK"); weaknesses.add("STEEL"); }
+		else if ( type.equals("FIRE") ) { weaknesses.add("FIRE"); weaknesses.add("WATER"); weaknesses.add("ROCK"); }
+		else if ( type.equals("WATER") ) { weaknesses.add("WATER"); weaknesses.add("GRASS"); }
+		else if ( type.equals("ELECTRIC") ) { weaknesses.add("ELECTRIC"); weaknesses.add("GRASS"); }
+		else if ( type.equals("GRASS") ) { weaknesses.add("FIRE"); weaknesses.add("GRASS"); weaknesses.add("FLYING"); }
+		else if ( type.equals("ICE") ) { weaknesses.add("FIRE"); weaknesses.add("WATER"); weaknesses.add("ICE"); weaknesses.add("STEEL");}
+		else if ( type.equals("FIGHTING") ) { weaknesses.add("FLYING"); }
+		else if ( type.equals("FLYING") ) { weaknesses.add("ELECTRIC"); weaknesses.add("ROCK"); }
+		else if ( type.equals("ROCK") ) { weaknesses.add("FIGHTING"); weaknesses.add("STEEL"); }
+		else if ( type.equals("DARK") ) { weaknesses.add("FIGHTING"); weaknesses.add("DARK"); }
+		else if ( type.equals("STEEL") ) { weaknesses.add("FIRE"); weaknesses.add("WATER"); weaknesses.add("ELECTRIC"); weaknesses.add("STEEL"); }
 	}
 	
 	public void addStrengths() {
-		if ( type.equals("NORMAL") ) { strengths = {"NONE"}; }
-		else if ( type.equals("FIRE") ) { strengths = {"GRASS", "ICE", "STEEL"}; }
-		else if ( type.equals("WATER") ) { strengths = {"FIRE", "ROCK"}; }
-		else if ( type.equals("ELECTRIC") ) { strengths = {"WATER", "FLYING"}; }
-		else if ( type.equals("GRASS") ) { strengths = {"WATER", "ROCK"}; }
-		else if ( type.equals("ICE") ) { strengths = {"GRASS", "FLYING"}; }
-		else if ( type.equals("FIGHTING") ) { strengths = {"NORMAL", "ICE", "ROCK", "STEEL"}; }
-		else if ( type.equals("FLYING") ) { strengths = {"GRASS", "FIGHTING"}; }
-		else if ( type.equals("ROCK") ) { strengths = {"FIRE", "ICE", "FLYING"}; }
-		else if ( type.equals("DARK") ) { strengths = {"NONE"}; }
-		else if ( type.equals("STEEL") ) { strengths = {"ICE", "ROCK"}; }
+		if ( type.equals("NORMAL") ) { strengths.add("NONE"); }
+		else if ( type.equals("FIRE") ) { strengths.add("GRASS"); strengths.add("ICE"); strengths.add("STEEL"); }
+		else if ( type.equals("WATER") ) { strengths.add("FIRE"); strengths.add("ROCK"); }
+		else if ( type.equals("ELECTRIC") ) { strengths.add("WATER"); strengths.add("FLYING"); }
+		else if ( type.equals("GRASS") ) { strengths.add("WATER"); strengths.add("ROCK"); }
+		else if ( type.equals("ICE") ) { strengths.add("GRASS"); strengths.add("FLYING"); }
+		else if ( type.equals("FIGHTING") ) { strengths.add("NORMAL"); strengths.add("ICE"); strengths.add("ROCK"); strengths.add("STEEL"); }
+		else if ( type.equals("FLYING") ) { strengths.add("GRASS"); strengths.add("FIGHTING"); }
+		else if ( type.equals("ROCK") ) { strengths.add("FIRE"); strengths.add("ICE"); strengths.add("FLYING"); }
+		else if ( type.equals("DARK") ) { strengths.add("NONE"); }
+		else if ( type.equals("STEEL") ) { strengths.add("ICE"); strengths.add("ROCK"); }
 	}
 	
 	public boolean hasWeak ( String s ) {
-		for ( int i = 0; i < weaknesses.length; i++ ) {
-			if ( (weaknesses[i]).equals(s) ) { return true; }
+		for ( int i = 0; i < weaknesses.size(); i++ ) {
+			if ( (weaknesses.get(i)).equals(s) ) { return true; }
 		}
 		return false;
 	}
 	
 	public boolean hasStr ( String s ) {
-		for ( int i = 0; i < strengths.length; i++ ) {
-			if ( (strengths[i]).equals(s) ) { return true; }
+		for ( int i = 0; i < strengths.size(); i++ ) {
+			if ( (strengths.get(i)).equals(s) ) { return true; }
 		}
 		return false;
 	}
@@ -145,12 +149,15 @@ public abstract class Pokemon {
 	//Battle methods
 	public void attack (Pokemon enemy, int n) {
 		int move = n - 1;
+		
 		double effectiveness = 1;
 		if ( hasWeak( enemy.getType() ) ) { effectiveness = 0.5; }
 		else if ( hasWeak( enemy.getType() ) ) { effectiveness = 2; }
 		int baseDmg = movesDmg[move];
+		
 		//actual formula for dmg in Pokemon; http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
 		int damageDealt = (int) ( ( ( (2 * getLevel() + 10) / 250 ) * ( getAttack() / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
+		
 		enemy.lowerHP(damageDealt);
 		currentPP[move] -= 1;
 	}
@@ -187,5 +194,5 @@ public abstract class Pokemon {
 	//description of Pokemon
 	public abstract String about();
 	
-}
-
+	}
+	

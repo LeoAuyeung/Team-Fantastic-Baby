@@ -45,6 +45,11 @@ LEO:
 - **Game balancing
 	
 SUNGBIN:
+- line up x0's in bags
+- get rid of enemy Pkmn's exp
+- take length of name into consideration for default menu (min 1, max 8)
+- make it so that fight menu only shows up to # of moves pkmn has; leave others empty/none
+
 - Add different blocks on map
 	- Grass
 	- Tree (cuttable)

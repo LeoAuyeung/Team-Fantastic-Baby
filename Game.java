@@ -59,27 +59,25 @@ public class Game {
 		String name = "";
 		System.out.println("All right. Tell me, what is your name? (1-8 characters)");
 		name = Keyboard.readString();
-		if (name.length() < 1) {
-			name = "Ash";
-			System.out.println("No name found. Setting name to " + name + ".");
-		}
 		//restricts name to 8 characters; can change if necessary
 		if (name.length() > 8) {
 			name = name.substring(0,8);
-			System.out.println("Name too long. Setting name to " + name + ".");
+			System.out.println("Name too long. Setting name to " + name + ".\n");
 		}
 		return name;
 	}
 	
     //method to prompt player to pick his/her starter Pokemon
     public int promptStarter() {
-		int pkmn = 0;
+		String pkmn = "";
+		int n = 0;
 		System.out.println("In this world of Pokemon, you'll need a partner Pokemon to be with you.");
 		System.out.println("Tell me, which Pokemon would you like to be your partner?");
 		System.out.println("1. Bulbasaur\t2. Charmander\t3. Squirtle");
-		pkmn = Keyboard.readInt();
-		//ADD CASE WHERE INT IS NOT 1-3 OR IS INVALID
-		return pkmn;
+		pkmn = Keyboard.readString();
+		try { n = Integer.parseInt(pkmn); }
+		catch (Exception e) { n = 0; }
+		return n;
 	}
 	
     //method to prompt user for a command
@@ -211,13 +209,13 @@ public class Game {
 	public void displayBag1() {
 	    Battle.set( 9, 0, "                        POKEBALLS               B: BACK" );
 	    Battle.set( 11, 0,"                  ----------------------" );
-	    Battle.set( 12, 0,"                  " + indent(" 1: Poke Ball  X" + bag.getPokeball(0), 22) );
+	    Battle.set( 12, 0,"                  " + indent(" 1: Poke Ball  x" + bag.getPokeball(0), 22) );
 	    Battle.set( 13, 0,"                  ----------------------" );
-	    Battle.set( 14, 0,"                  " + indent(" 2: Great Ball  X" + bag.getPokeball(1), 22) );
+	    Battle.set( 14, 0,"                  " + indent(" 2: Great Ball  x" + bag.getPokeball(1), 22) );
 	    Battle.set( 15, 0,"                  ----------------------" );
-	    Battle.set( 16, 0,"                  " + indent(" 3: Ultra Ball  X" + bag.getPokeball(2), 22) );
+	    Battle.set( 16, 0,"                  " + indent(" 3: Ultra Ball  x" + bag.getPokeball(2), 22) );
 	    Battle.set( 17, 0,"                  ----------------------" );
-	    Battle.set( 18, 0,"                  " + indent(" 4: Master Ball  X" + bag.getPokeball(3), 22) );
+	    Battle.set( 18, 0,"                  " + indent(" 4: Master Ball  x" + bag.getPokeball(3), 22) );
 	    Battle.set( 19, 0,"                  ----------------------" );
 	    System.out.println( battle );
 	}
@@ -226,15 +224,15 @@ public class Game {
 	public void displayBag2() {
 	    Battle.set( 10, 0, "                         POTIONS                 B: BACK" );
 	    Battle.set( 12, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 13, 0, "   " + indent(" 1: Potion  X" + bag.getPotion(0), 25) );
+	    Battle.set( 13, 0, "   " + indent(" 1: Potion  x" + bag.getPotion(0), 25) );
 	    Battle.set( 14, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 15, 0, "   " + indent(" 2: Super Potion  X" + bag.getPotion(1), 25) );	    
+	    Battle.set( 15, 0, "   " + indent(" 2: Super Potion  x" + bag.getPotion(1), 25) );	    
 	    Battle.set( 16, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 17, 0, "   " + indent(" 3: Hyper Potion  X" + bag.getPotion(2), 25) );
+	    Battle.set( 17, 0, "   " + indent(" 3: Hyper Potion  x" + bag.getPotion(2), 25) );
 	    Battle.set( 18, 0, "   ------------------------- -------------------------" );
-	    Battle.set( 13, 1, " " + indent(" 4: Full Restore  X" + bag.getPotion(3), 25) );
-	    Battle.set( 15, 1, " " + indent(" 5: Elixir Potion  X" + bag.getPotion(4), 25) );
-	    Battle.set( 17, 1, " " + indent(" 6: Max Elixir  X" + bag.getPotion(5), 25) );
+	    Battle.set( 13, 1, " " + indent(" 4: Full Restore  x" + bag.getPotion(3), 25) );
+	    Battle.set( 15, 1, " " + indent(" 5: Elixir Potion  x" + bag.getPotion(4), 25) );
+	    Battle.set( 17, 1, " " + indent(" 6: Max Elixir  x" + bag.getPotion(5), 25) );
 	    System.out.println( battle );
 	}
 	
@@ -242,9 +240,9 @@ public class Game {
 	public void displayBag3() {
 	    Battle.set( 11, 0, "                       BATTLE ITEMS              B: BACK" );
 	    Battle.set( 13, 0, "                  ----------------------" );
-	    Battle.set( 14, 0, "                  " + indent( " 1: Protein  X" + bag.getBattleItem(0), 22 ) );
+	    Battle.set( 14, 0, "                  " + indent( " 1: Protein  x" + bag.getBattleItem(0), 22 ) );
 	    Battle.set( 15, 0, "                  ----------------------" );
-	    Battle.set( 16, 0, "                  " + indent( " 2: Iron  X" + bag.getBattleItem(0), 22 ) );
+	    Battle.set( 16, 0, "                  " + indent( " 2: Iron  x" + bag.getBattleItem(0), 22 ) );
 	    Battle.set( 17, 0, "                  ----------------------" );	    
 	    System.out.println( battle );
 	}
@@ -310,9 +308,7 @@ public class Game {
 			}
 			//user.setX, user.setY, change map's player coordinates
 			if( (int)(Math.random()*15) == 1 ) {
-				battleMode = true;
-				enemyPokemon = new Rattata();
-				enemyPokemon.setWild( true );		    
+				battleStart();		    
 			}
 		}
 		
@@ -326,9 +322,7 @@ public class Game {
 			}
 			//user.setX, user.setY, change map's player coordinates
 			if( (int)(Math.random()*15) == 1 ) {
-				battleMode = true;
-				enemyPokemon = new Rattata();
-				enemyPokemon.setWild( true );		    
+				battleStart();		    
 			}
 		}
 		
@@ -342,9 +336,7 @@ public class Game {
 			}
 			//user.setX, user.setY, change map's player coordinates
 			if( (int)(Math.random()*15) == 1 ) {
-				battleMode = true;
-				enemyPokemon = new Rattata();
-				enemyPokemon.setWild( true );		    
+				battleStart();		    
 			}
 		}
 		
@@ -358,9 +350,7 @@ public class Game {
 			}
 			//user.setX, user.setY, change map's player coordinates
 			if( (int)(Math.random()*15) == 1 ) {
-				battleMode = true;
-				enemyPokemon = new Rattata();
-				enemyPokemon.setWild( true );
+				battleStart();
 			}
 		}
 		
@@ -401,22 +391,22 @@ public class Game {
 		//Fight
 		else if ( battleScreen == 1 ) {
 			if ( command.equals("1") ) { //Attacks with first move
-				currentPokemon.attack(enemyPokemon, 0);
-				battleScreen = 0; //Goes back to default menu
-				opponentTurn = true;
-			}
-			if ( command.equals("2") ) { //Attacks with second move
 				currentPokemon.attack(enemyPokemon, 1);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
 			}
-			if ( command.equals("3") && currentPokemon.getMovesNum() >= 3 ) { //Attacks with third move
+			if ( command.equals("2") ) { //Attacks with second move
 				currentPokemon.attack(enemyPokemon, 2);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
 			}
-			if ( command.equals("4") && currentPokemon.getMovesNum() == 4 ) { //Attacks with fourth move
+			if ( command.equals("3") && currentPokemon.getMovesNum() >= 3 ) { //Attacks with third move
 				currentPokemon.attack(enemyPokemon, 3);
+				battleScreen = 0; //Goes back to default menu
+				opponentTurn = true;
+			}
+			if ( command.equals("4") && currentPokemon.getMovesNum() == 4 ) { //Attacks with fourth move
+				currentPokemon.attack(enemyPokemon, 4);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
 			}
@@ -438,7 +428,7 @@ public class Game {
 				selectedPokemon = selectedPokemon - 1;
 			}
 			catch (Exception e) { battleScreen = 3; }
-			if ( selectedPokemon <= _Pokemon.size() && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) ) {
+			if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) ) {
 				currentPokemon = _Pokemon.get( selectedPokemon ); //Swaps out Pokemon
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
@@ -580,14 +570,13 @@ public class Game {
 	}
 	
 	//Starting a Pokemon Battle
-	public boolean battleStart() {
-		if (//conditions for battle to start)
-		{
-			enemyPokemon = new Rattata();
-			selectedPokemon = 0; //selects first Pokemon in list
-			currentPokemon = _Pokemon.get(selectedPokemon);
-		}
-		//check if player is on grass; chance to start battle
+	public void battleStart() {
+		battleMode = true;
+		enemyPokemon = new Rattata();
+		enemyPokemon.setWild(true);
+		//later implement diff wild pkmn on random chance
+		selectedPokemon = 0;
+		currentPokemon = _Pokemon.get(selectedPokemon);
 	}
 	
 	//~~~~~~~~~~~~~~PLAYING POKEMON!!!~~~~~~~~~~~~~~~
@@ -595,7 +584,10 @@ public class Game {
 	public void play() {
 		//startup prompts; only prompts user once
 		startupMsg();
-		String gender = promptGender();
+		String gender = "";
+		while ( !(gender.equals("boy")) && !(gender.equals("girl")) ) {
+			gender = promptGender();
+		}
 		String name = promptName();
 		
 		//instantiation of classes
@@ -609,7 +601,11 @@ public class Game {
 		
 		//prompts for starter Pokemon, and captures one accordingly
 		capturedPokemon = 0;
-		int starter = promptStarter();
+		int starter = 0;
+		while (starter != 1 && starter != 2 && starter != 3) {
+			starter = promptStarter();
+		}
+		
 		if (starter == 1) { captured = new Bulbasaur(); }
 		else if (starter == 2) { captured = new Charmander(); }
 		else if (starter == 3) { captured = new Squirtle(); }
@@ -617,11 +613,6 @@ public class Game {
 		
 		//RUNS GAME:
 		while ( user.getQuest() != 20 ) {
-			
-			if (battleMode == false) { //after a player walks
-				battleMode = battleStart();
-			}
-			//made it like this so that when a battle starts, enemy gets instantiated
 			
 			//Display Map/Battlefield
 			if ( battleMode == false ) { //not in battle -> show map + map commands
