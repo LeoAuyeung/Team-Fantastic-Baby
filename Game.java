@@ -674,7 +674,7 @@ public class Game {
 		//Using: http://bulbapedia.bulbagarden.net/wiki/Catch_rate#Modified_catch_rate_3
 		else if ( battleScreen == 4 ) {
 			if ( command.equals("b") ) { battleScreen = 2; } //Goes back to previous screen
-			else if ( command.equals("1") && bag.getPokeball(0) != 0 && _Pokemon.size() < 6 ) { //Throws Poke Ball
+			else if ( command.equals("1") && bag.getPokeball(0) != 0 && capturedPokemon < 6 ) { //Throws Poke Ball
 				battleScreen = 41;
 			}
 			else if ( command.equals("2") && bag.getPokeball(1) != 0 && _Pokemon.size() < 6 ) { //Throws Great Ball
