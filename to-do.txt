@@ -91,7 +91,7 @@ EXTRA THINGS:
 				- A wild Pikachu has appeared!
 			Trainer:
 				- You are challenged by Elite Four Lucian!
-				- Lucian has sent out Mr.Mime!
+				- Lucian sent out Mr.Mime!
 			- Go, Charmander!
 			
 		- DisplayBattle

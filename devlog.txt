@@ -299,5 +299,25 @@ Changes:
 - Reverted changes to addmove
 	- will only show pp if movesNum >= move whose pp game is trying
 	to get. if not, then pp will show as 0
+	
+- HUGEST CHANGE OF MY LIFE:
+	IMPLEMENTED POKEMON-LIKE BATTLE MESSAGES (TOOK LIKE 4 HOURS !!)
+	*****TIMING NEEDS A LOT OF EDITING THOUGH****
+	**PROPERLY CHANGE HOW IT'S DISPLAYED + TIMING PLEASE***
+	Basically while game runs in a battle:
+		- battle is displayed
+		- user inputs command
+		- executeCommand changes battleScreen, which is used in
+			executeBattleEffects more thoroughly to display diff
+			screens
+		- executeBattleEffects takes battleScreen and actually executes
+			the command (attack, use item, etc), and while it does it,
+			it changes to different battleScreens and repeats until
+			battleScreen is set to 0, signaling that all the battle
+			effects are OVER.
+			While executeBattleEffects runs, the processes within 
+			the game run (attack, changing PP, changing HP) and the 
+			method changes the systemMsg, which is displayed over and
+			over until the battleScreen is back at 0.
 
 ==============================================================

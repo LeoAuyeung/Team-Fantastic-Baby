@@ -72,12 +72,13 @@ public abstract class Pokemon {
 	public int getEXP() { return exp; }
 	public int getMovesNum() { return movesNum; }
 	public String getMovesName( int n ) { return movesName[n]; }
+	
 	public int getPP( int n ) {
-		if (movesNum >= n) { return PP[n];}
+		if (movesNum > n) { return PP[n];}
 		else { return 0; }
-		}
+	}
 	public int getMaxPP( int n ) {
-		if (movesNum >= n) { return maxPP[n]; }
+		if (movesNum > n) { return maxPP[n]; }
 		else { return 0; }
 	}
 	
@@ -103,7 +104,7 @@ public abstract class Pokemon {
 	
 	//Adding moves
 	//Lists of moves from: http://pokemondb.net/move/all
-    public void addMove( String move ) {
+	public void addMove( String move ) {
 		movesName[movesNum] = move;
 		movesNum += 1;
 	}
@@ -154,11 +155,11 @@ public abstract class Pokemon {
 	
 	//Battle methods
 	public void attack (Pokemon enemy, int n) {
-		int move = n - 1;
+		int move = n;
 		
 		double effectiveness = 1;
 		if ( hasWeak( enemy.getType() ) ) { effectiveness = 0.5; }
-		else if ( hasWeak( enemy.getType() ) ) { effectiveness = 2; }
+		else if ( hasStr( enemy.getType() ) ) { effectiveness = 2; }
 		int baseDmg = movesDmg[move];
 		
 		//actual formula for dmg in Pokemon; http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
@@ -200,5 +201,5 @@ public abstract class Pokemon {
 	//description of Pokemon
 	public abstract String about();
 	
-	}
-	
+}
+

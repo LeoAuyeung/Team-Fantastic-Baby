@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Inventory {
 	
-	private Integer[] pokeballs = {0, 0, 0, 0};
+	private Integer[] pokeballs = {5, 0, 0, 0};
 	private Integer[] potions = {0, 0, 0, 0, 0, 0};
 	private Integer[] battleItems = {0, 0};
 	private ArrayList keyItems = new ArrayList();
