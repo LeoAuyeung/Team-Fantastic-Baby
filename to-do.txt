@@ -1,75 +1,71 @@
-LEO:
-- Create an inventory.java (DONE)
-	- Contains Pokeballs
-	- Contains Potions
-	- Contains Key Items (Including Cut/RockSmash)
-	- Contains Battle Items (Protein, Iron, etc)
-	
-- Create an arrayList of Pokemon in Game.java (DONE)
-	- Keeps track of Pokemon that user owns
-	- Can check which Pokemon user owns
-	- Can be used to switch out Pokemon during battle
-	
-- Properly implement wild Pokemon encounters
-	- What does Wild Pokemon do
-	- When does battle end
-	- Exp gain (wild vs trainer)
+MAIN THINGS TO GET DONE:
 
-- Implement Pokemon Battles	(ALMOST DONE)
-	- Upon encounter, check speed to see who goes first
-	- Fight until player Blacks out or enemy is caught/defeated
-	- User gains money upon defeating trainers
-	- Fighting math/technicalities (DONE)
-		- types (weak, strong)
-		- display names of moves
-		- moves dmg based on weak/strong
-		- add leveling-up of Pokemon (in battle)
-	
-- Add Pokemon trainers
-	- **NEED TO HARD CODE EACH TRAINER + LIST OF THEIR POKEMON
-		- upon prompting trainer to battle, add their pkmn to enemypkmn (hard coded)
-		- whenever their pkmn faints, get rid of it
-		- when they run out of pkmn, user wins
-	- Regular trainers in wild
-	- Gym leaders (QUESTLINE)
-	- Elite four + champ (QUESTLINE)
-	- User gets to prompt battles (click X)
-		-implement HOW TO PROMPT TRAINERS
+Leo:
 
-- Fix/properly implement checking for valid commands (DONE)
+- Wild Pokemon
+	- Only attacks
+	- Randomly uses one of its moves
 
-- GIVE POKEMON HARD-CODED MOVES, DMG, PP (DONE)
+- Pokemon Battles:
+	- Check speed to see who goes first (?)
+	- How does a battle end?
+		- Enemy faints
+			- User gains exp
+			- Pokemon evolving after battle
+		- Player blacks out
+			- User's Pokemon faint -> select new pokemon
+		- Enemy is caught
+			- No exp gained
+			- Asks for nickname (low priority)
 
-- Maybe add nicknames when capturing
+- Pokemon
+	- Keeping track of when pkmn is fainted
+	- Pkmn can only revive at pkcenter
+		- Pkmn cannot use potion at hp=0
+	- Add hard-coded moves for evolutions (*Do last/semi-last*)
 
-- **Game balancing
-	
-SUNGBIN:
-- line up x0's in bags
-- get rid of enemy Pkmn's exp
-- take length of name into consideration for default menu (min 1, max 8)
-- make it so that fight menu only shows up to # of moves pkmn has; leave others empty/none
-====================================complete line=========================================
-- Add different blocks on map
-	- Grass
-	- Tree (cuttable)
-	- Rock (smashable)
-	- Wall (cannot break)
-	- Portals into next/prev rooms
-	- TRAINERS/GYM LEADERS/ELITE FOUR
+- Implement Trainers
+	- var defeated?
+	- Vision of trainers = straight line
+	- Player walks into vision -> battle
+	- if trainer hasn't been defeated yet, trainer walks up to player & fights them
+	*GYM LEADERS only fight when prompted by trainer
+		- after defeat, trainer is rewarded an item
+		- gym leaders can use potion once per pkmn
+	- if player tries to catch pokemon
+		- player throws pkball
+		- but since wild = false, pkball misses, trainer loses turn
+
+Sungbin:
+
+- Add different blocks in map
+	- Grass	^^^
+	- Tree (cuttable)	.T.
+	- Rock (smashable)	o0o
+	- Wall (cannot break)	|| ---
+	- Portals into next/prev rooms [_]
+	- TRAINERS/GYM LEADERS/ELITE FOUR *later
 	- PokeCenter (create save spot for player to respawn if dead)
 	- PokeMart
+		- Do we want player to go inside PokeMart and then talk to 
+			someone at desk to open up shop?
+		- Same idea can be for Pokecenter?
 	- Wild items to pick up (pokeballs, potions, etc; disappears after)
-	- also maybe a Key to show what characters mean what
+	- also maybe a Key to show which symbols mean what
+	- have names for maps in top corner (Route 101, Newleaf City, etc.)
 		- ^^^ = grass
-		- T = tree
-		- O = rock
-		- | _ = walls
-		- C = pkcenter
+		- vTv = tree
+		- oO0 = rock
+		- || -- __ = walls
+		- P = pkcenter
 		- M = pkmart
-		- P = portal
+		- [_]= portal
+		- o = pokeball (hard-coded item; disappears after being taken)
 		- + different things for diff types of trainers
 	- IMPLEMENT CONTROL "X" TO INTERACT WITH BLOCK/PLAYER IN FRONT (use direction)
+		- Prompt trainer battles
+		- Cut/smash rocks/trees
+		- Pick up Items (pokeballs)
 
 - Implement PokeCenters/PokeMart
 	- Stand on PokeCenter to restore all Pokemon to full hp
@@ -77,26 +73,58 @@ SUNGBIN:
 	- Stand on PokeMart to open store to buy items
 		- Just add items into inventory.java while removing money
 		- Ability to go "Back" to get out of store
-		
-- Implement Pokemon Battles
-	- Upon encounter, check speed to see who goes first
-	- Fight until player Blacks out or enemy is caught/defeated
-	- User gains money upon defeating trainers
-	- Fighting math/technicalities
-		- types (weak, strong)
-		- display names of moves
-		- moves dmg based on weak/strong
-		
-- ** DISPLAY DURING BATTLES ** 
-	- Fight -> Show moves of pokemon
-	- Bag -> Show bags 1-4 with stuff inside
-	- Pokemon -> Show all (up to 6) pokemon
-	- Run -> chance to run "attempting to flee..."; 
-		- if fail, show "failed to escape!"
-		- opponent gets to go after a fail
-	- add new private vars in battle:
-		- display current pkmn of player (use _Pokemon in game.java)
-		- display current pkmn of enemy (use _PokemonEnemy in game.java)
-	- utilize battleScreen variable and implement 2x3 pokemon screen and battlefield screen
 
-- clearing display (low priority)
+EXTRA THINGS:
+
+- Start menu in map
+	- List of Pokemon
+		- Rearrange Pokemon? (Pick a Pokemon to Swap + Pick to swap with)
+		- Pokemon.about()
+	- View bags
+	- View profile (Only button to press in thsi screen is b)
+	
+*************DisplaySystemMsg***********
+
+	**	Thinking of:	**
+		- Start Battle (ONE TIME ONLY):
+			Wild:
+				- A wild Pikachu has appeared!
+			Trainer:
+				- You are challenged by Elite Four Lucian!
+				- Lucian has sent out Mr.Mime!
+			- Go, Charmander!
+			
+		- DisplayBattle
+			- What would you like to do?
+		- Input Control
+		- DisplayBattle2
+			- Charmander used Ember!
+			*Damage calculated
+			- It's Super Effective!
+		- Opponent Turn
+			- Check if dead
+				- The foe's Poochyena fainted!
+			- Attack/Use potion (trainers)
+				- The foe's Mr.Mime used Slap!
+				- The foe's Mr.Mime restored 200 HP!
+		- AfterBattle
+			- Charmander has fainted!
+				- New Pkmn
+					- Player has sent out Deoxys!
+			- Charmander gained 2312 Exp. Points!
+				- set exp accordingly
+			If trainer battle:
+				- Elite Four Lucian has sent out Pikachu!
+					- sends out new pkmn
+				- Player has defeated dasdsa! Player has earned $500
+					- Give player $500
+		- DisplayBattleEffects
+			while battleScreen not default, continue to switch battle screens & display accordingly
+	
+	In Map:
+		- DisplayMap
+		- Enter a Control
+		- If interact:
+			- This tree looks like it can be cut down. 
+				- Use/don't have cut
+			- **You picked up a HM01(Cut) (?) or have this happen after gym battles

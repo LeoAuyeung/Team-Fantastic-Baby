@@ -7,21 +7,21 @@ public class Rattata extends Pokemon {
 	//Constructor
 	public Rattata() {
 		super( "Rattata", 5, "NORMAL" );
-		addMove("Scratch", 40, 35);
-		addMove("Headbutt", 70, 15);
+		addMove("Scratch");
+		addMove("Headbutt");
 	}
 	
 	//Constructor for evolutions
 	public Rattata( String n, int lvl) {
 		super( n, lvl, "NORMAL" );
-		addMove("Scratch", 40, 35);
-		addMove("Headbutt", 70, 15);
+		addMove("Scratch");
+		addMove("Headbutt");
 	}
 	
 	//Pokedex description
 	public String about() {
-		return "Rattata is cautious in the extreme. " +
-		"Even while it is asleep, it constantly listens by moving its ears around. " +
+		return "Rattata is cautious in the extreme. \n" +
+		"Even while it is asleep, it constantly listens by moving its ears around. \n" +
 		"It is not picky about where it lives—it will make its nest anywhere.";
 	}
 	

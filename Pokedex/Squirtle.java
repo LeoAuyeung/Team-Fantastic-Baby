@@ -7,21 +7,21 @@ public class Squirtle extends Pokemon {
 	//Constructor
 	public Squirtle() {
 		super( "Squirtle", 5, "WATER" );
-		addMove("Water Gun", 40, 25);
-		addMove("Bubble Beam", 65, 20);
+		addMove("Water Gun");
+		addMove("Bubble Beam");
 	}
 	
 	//Constructor for evolutions
 	public Squirtle( String n, int lvl) {
 		super( n, lvl, "WATER" );
-		addMove("Water Gun", 40, 25); // movesName, dmg, pp
-		addMove("Bubble Beam", 65, 20);
+		addMove("Water Gun");
+		addMove("Bubble Beam");
 	}
 	
 	//Pokedex description
 	public String about() {
-		return "Squirtle's shell is not merely used for protection. " +
-		"The shell's rounded shape and the grooves on its surface help minimize resistance in water, " + 
+		return "Squirtle's shell is not merely used for protection. \n" +
+		"The shell's rounded shape and the grooves on its surface help minimize resistance in water, \n" + 
 		"enabling this Pokémon to swim at high speeds.";
 	}
 	

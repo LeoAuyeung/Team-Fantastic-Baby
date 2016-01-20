@@ -286,3 +286,18 @@ Changes:
 - created a test map
 
 ==============================================================
+
+Date: 2016-01-19
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- big change ups to to-do list
+	- still kept main stuff of trainer battles/blocks in map
+- want to have idea of displaysystemmsg to show battle
+	effects such as "Charmander used Ember!" "It's super effective!"
+- Reverted changes to addmove
+	- will only show pp if movesNum >= move whose pp game is trying
+	to get. if not, then pp will show as 0
+
+==============================================================

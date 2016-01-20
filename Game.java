@@ -156,16 +156,16 @@ public class Game {
 	    Battle.set( 9, 0, center("WHAT WILL " + currentPokemon.getName() + " DO?", 59).substring(0,54) + "B: BACK" );
 	    Battle.set( 11, 0, "      --------------------       --------------------" );
 	    Battle.set( 12, 0, "      |" + indent(" (1) " + currentPokemon.getMovesName(0), 18) + "|" );
-	    Battle.set( 13, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(0) + "/" + currentPokemon.getMaxPP(0), 18) + "|" );
+	    Battle.set( 13, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(0) + "/" + currentPokemon.getMaxPP(0), 18) + "|" );
 	    Battle.set( 14, 0, "      --------------------       --------------------" );
 	    Battle.set( 16, 0, "      --------------------       --------------------" ); 
 	    Battle.set( 17, 0, "      |" + indent(" (3) " + currentPokemon.getMovesName(2), 18) + "|" );
-	    Battle.set( 18, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(2) + "/" + currentPokemon.getMaxPP(2), 18) + "|" );
+	    Battle.set( 18, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(2) + "/" + currentPokemon.getMaxPP(2), 18) + "|" );
 	    Battle.set( 19, 0, "      --------------------       --------------------" );
 	    Battle.set( 12, 1, "       |" + indent(" (2) " + currentPokemon.getMovesName(1), 18) + "|" );
-	    Battle.set( 13, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(1) + "/" + currentPokemon.getMaxPP(1), 18) + "|" );
+	    Battle.set( 13, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(1) + "/" + currentPokemon.getMaxPP(1), 18) + "|" );
 	    Battle.set( 17, 1, "       |" + indent(" (4) " + currentPokemon.getMovesName(3), 18) + "|" );
-	    Battle.set( 18, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getCurrentPP(3) + "/" + currentPokemon.getMaxPP(3), 18) + "|" );
+	    Battle.set( 18, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(3) + "/" + currentPokemon.getMaxPP(3), 18) + "|" );
 	    System.out.println( battle );	    
 	}
 	
@@ -442,11 +442,13 @@ public class Game {
 				if ( enemyPokemon.getWild() == false ) { System.out.println("You cannot run from a trainer battle..."); }
 				else if (Math.random() * 100 < 50) {
 					//if wild pkmn, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
+					waitMS(1000);
 					System.out.println( "You have successfully escaped!" );
 					waitMS(1000);
 					battleMode = false;
 				}
 				else {
+					waitMS(1000);
 					System.out.println( "You have failed to run away..." );
 					waitMS(1000);
 					opponentTurn = true;
@@ -456,22 +458,22 @@ public class Game {
 		
 		//Fight
 		else if ( battleScreen == 1 ) {
-			if ( command.equals("1") ) { //Attacks with first move
+			if ( command.equals("1") && currentPokemon.getPP(0) != 0 ) { //Attacks with first move
 				currentPokemon.attack(enemyPokemon, 1);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
 			}
-			if ( command.equals("2") ) { //Attacks with second move
+			if ( command.equals("2") && currentPokemon.getPP(1) != 0) { //Attacks with second move
 				currentPokemon.attack(enemyPokemon, 2);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
 			}
-			if ( command.equals("3") && currentPokemon.getMovesNum() >= 3 ) { //Attacks with third move
+			if ( command.equals("3") && currentPokemon.getPP(2) != 0 && currentPokemon.getMovesNum() >= 3 ) { //Attacks with third move
 				currentPokemon.attack(enemyPokemon, 3);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;
 			}
-			if ( command.equals("4") && currentPokemon.getMovesNum() == 4 ) { //Attacks with fourth move
+			if ( command.equals("4") && currentPokemon.getPP(3) != 0 && currentPokemon.getMovesNum() == 4 ) { //Attacks with fourth move
 				currentPokemon.attack(enemyPokemon, 4);
 				battleScreen = 0; //Goes back to default menu
 				opponentTurn = true;

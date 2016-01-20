@@ -15,10 +15,10 @@ public abstract class Pokemon {
 	protected ArrayList strengths = new ArrayList();
     protected int movesNum;
     protected String[] movesName = {"None","None","None","None"};
-    protected Integer[] movesDmg = {0,0,0,0};
+    protected Integer[] movesDmg = {40,75,90,120}; //hard coded damage for all moves
 	//same PP for all Pokemon
-    protected Integer[] currentPP = {0,0,0,0};
-    protected Integer[] maxPP = {0,0,0,0};
+    protected Integer[] PP = {25,15,10,5};
+    protected Integer[] maxPP = {25,15,10,5};
 	
     //Constructor
     public Pokemon() {
@@ -72,8 +72,14 @@ public abstract class Pokemon {
 	public int getEXP() { return exp; }
 	public int getMovesNum() { return movesNum; }
 	public String getMovesName( int n ) { return movesName[n]; }
-	public int getCurrentPP( int n ) { return currentPP[n]; }
-	public int getMaxPP( int n ) { return maxPP[n]; }
+	public int getPP( int n ) {
+		if (movesNum >= n) { return PP[n];}
+		else { return 0; }
+		}
+	public int getMaxPP( int n ) {
+		if (movesNum >= n) { return maxPP[n]; }
+		else { return 0; }
+	}
 	
 	public boolean fainted() { return HP > 0; }
 	
@@ -97,11 +103,8 @@ public abstract class Pokemon {
 	
 	//Adding moves
 	//Lists of moves from: http://pokemondb.net/move/all
-    public void addMove( String move, int d, int p ) {
+    public void addMove( String move ) {
 		movesName[movesNum] = move;
-		maxPP[movesNum] = p;
-		currentPP[movesNum] = maxPP[movesNum];
-		movesDmg[movesNum] = d;
 		movesNum += 1;
 	}
 	
@@ -162,7 +165,7 @@ public abstract class Pokemon {
 		int damageDealt = (int) ( ( ( (2 * getLevel() + 10) / 250 ) * ( getAttack() / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
 		
 		enemy.lowerHP(damageDealt);
-		currentPP[move] -= 1;
+		PP[move] -= 1;
 	}
 	
 	public void resetStats() {
@@ -182,14 +185,14 @@ public abstract class Pokemon {
 	
 	public void restorePP( int amount ) {
 		for ( int i = 0; i < movesNum; i++ ) {
-			currentPP[i] = currentPP[i] + amount;
-			if ( currentPP[i] > maxPP[i] ) { currentPP[i] = maxPP[i]; }
+			PP[i] = PP[i] + amount;
+			if ( PP[i] > maxPP[i] ) { PP[i] = maxPP[i]; }
 		}
 	}
 	
 	public boolean allMaxPP() {
 		for ( int i = 0; i < movesNum; i++ ) {
-			if ( currentPP[i] < maxPP[i] ) { return false; }
+			if ( PP[i] < maxPP[i] ) { return false; }
 		}
 		return true;
 	}
