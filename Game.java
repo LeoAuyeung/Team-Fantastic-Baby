@@ -134,6 +134,8 @@ public class Game {
 	public void displayBattleEffects() {
 		
 		while ( battleScreen >= 10 ) {
+
+			displayBattlefield();
 			
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FIGHTING MESSAGES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			
@@ -307,7 +309,7 @@ public class Game {
 				systemMsg = currentPokemon.getName() + "'s Defense went up by 10!";
 				battleScreen = 0;
 			}
-			displayBattle();
+			
 			displaySystemMsg();
 			waitMS(1000);
 			
@@ -341,9 +343,8 @@ public class Game {
 	}*/
 	
 	public void displaySystemMsg() {
-		System.out.println("===========================================");
-		System.out.println(systemMsg);
-		System.out.println("===========================================");
+		Battle.set( 15, 0, systemMsg );
+		System.out.println( battle );
 	}
 	
 	public void displayBattlefield() {
@@ -361,7 +362,7 @@ public class Game {
 	}
 	
 	public void displayBattleMenu() {
-	    Battle.set( 10, 0, center("WHAT WILL " + Player.getName() + " DO?", 61) );
+	    	Battle.set( 10, 0, center("WHAT WILL " + Player.getName() + " DO?", 61) );
 		Battle.set( 12, 0, "                -----------       -----------" );
 		Battle.set( 13, 0, "                | 1:FIGHT |       |  2:BAG  |" );
 		Battle.set( 14, 0, "                -----------       -----------" );
@@ -372,9 +373,9 @@ public class Game {
 	}
 	
 	public void displayFight() {
-	    Battle.set( 9, 0, center("WHAT WILL " + currentPokemon.getName() + " DO?", 59).substring(0,54) + "B: BACK" );
-	    Battle.set( 11, 0, "      --------------------       --------------------" );
-	    Battle.set( 12, 0, "      |" + indent(" (1) " + currentPokemon.getMovesName(0), 18) + "|" );
+	    	Battle.set( 9, 0, center("WHAT WILL " + currentPokemon.getName() + " DO?", 59).substring(0,54) + "B: BACK" );
+	    	Battle.set( 11, 0, "      --------------------       --------------------" );
+	    	Battle.set( 12, 0, "      |" + indent(" (1) " + currentPokemon.getMovesName(0), 18) + "|" );
 		Battle.set( 13, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(0) + "/" + currentPokemon.getMaxPP(0), 18) + "|" );
 		Battle.set( 14, 0, "      --------------------       --------------------" );
 		Battle.set( 16, 0, "      --------------------       --------------------" ); 
