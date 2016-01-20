@@ -319,5 +319,12 @@ Changes:
 			the game run (attack, changing PP, changing HP) and the 
 			method changes the systemMsg, which is displayed over and
 			over until the battleScreen is back at 0.
+			
+- What I think we should do for displaying everything:
+	- have battle.reset() in every display of available menus
+		(bag, pkmn, moves, etc)
+	- in displayBattleField(), use SOP( battle) to display the actual
+		battle instead of just changing the stuff but not displaying it
+		until the bottom menu is changed
 
 ==============================================================
