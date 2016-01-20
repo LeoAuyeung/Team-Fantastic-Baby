@@ -176,7 +176,7 @@ public class Game {
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SWITCHING POKEMON MESSAGES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			
 			//Player enters invalid Pokemon to switch
-			else if ( battleScreen == 30 ) {
+			if ( battleScreen == 30 ) {
 				waitMS(125);
 				systemMsg = "Cannot swap with this Pokemon...";
 				battleScreen = 3;
@@ -200,7 +200,7 @@ public class Game {
 			//~~~~~~~~~~Poke Balls~~~~~~~~~~
 			
 			//Player chooses an invalid Poke Ball
-			else if ( battleScreen == 40 ) {
+			if ( battleScreen == 40 ) {
 				waitMS(125);
 				systemMsg = "Invalid Poke Ball...";
 				battleScreen = 4;
@@ -211,9 +211,9 @@ public class Game {
 				//Checks which ball used
 				int ball = 0;
 				if ( battleScreen == 41 ) { ball = 0; ballRate = 1; }
-				if ( battleScreen == 42 ) { ball = 1; ballRate = 1.5; }
-				if ( battleScreen == 43 ) { ball = 2; ballRate = 2; }
-				if ( battleScreen == 44 ) { ball = 3; ballRate = 100; }
+				else if ( battleScreen == 42 ) { ball = 1; ballRate = 1.5; }
+				else if ( battleScreen == 43 ) { ball = 2; ballRate = 2; }
+				else if ( battleScreen == 44 ) { ball = 3; ballRate = 100; }
 				//Sets message
 				systemMsg = Player.getName() + " used one " + bag.getPokeball( ball ) + "!";
 				//Throws ball
@@ -234,7 +234,7 @@ public class Game {
 			//~~~~~~~~~~Restorative Items~~~~~~~~~~
 			
 			//Player chooses invalid Potion
-			else if ( battleScreen == 50 ) {
+			if ( battleScreen == 50 ) {
 				waitMS(125);
 				systemMsg = "Invalid Item...";
 				battleScreen = 5;
@@ -245,17 +245,18 @@ public class Game {
 				//Checks which potion used
 				int pot = 0;
 				if ( battleScreen == 51 ) { pot = 0; hpRestored = 20; }
-				if ( battleScreen == 52 ) { pot = 1; hpRestored = 50; }
-				if ( battleScreen == 53 ) { pot = 2; hpRestored = 200; }
-				if ( battleScreen == 54 ) { pot = 3; hpRestored = 999; }
-				if ( battleScreen == 55 ) { pot = 4; ppRestored = 10; }
-				if ( battleScreen == 56 ) { pot = 5; ppRestored = 999; }
+				else if ( battleScreen == 52 ) { pot = 1; hpRestored = 50; battleScreen = 58; }
+				else if ( battleScreen == 53 ) { pot = 2; hpRestored = 200; battleScreen = 58; }
+				else if ( battleScreen == 54 ) { pot = 3; hpRestored = 999; battleScreen = 58; }
+				else if ( battleScreen == 55 ) { pot = 4; ppRestored = 10; battleScreen = 59; }
+				else if ( battleScreen == 56 ) { pot = 5; ppRestored = 999; battleScreen = 59; }
 				//Sets message
 				systemMsg = "Player used a " + bag.getPotion( pot ) + "!";
 				//Restores HP/PP
 				bag.lowerAmount( 1, pot );
+				/*
 				if ( battleScreen >= 51 && battleScreen <= 54 ) { battleScreen = 58; }
-				else if ( battleScreen >= 55 && battleScreen <= 56 ) { battleScreen = 59; }
+				else if ( battleScreen >= 55 && battleScreen <= 56 ) { battleScreen = 59; }*/
 			}
 			//Restoring HP
 			else if ( battleScreen == 58 ) {
@@ -278,7 +279,7 @@ public class Game {
 			
 			//~~~~~~~~~~Battle Items~~~~~~~~~~
 			//Player chooses invalid battle item
-			else if ( battleScreen == 60 ) {
+			if ( battleScreen == 60 ) {
 			        waitMS(125);
 				systemMsg = "Invalid battle item...";
 				battleScreen = 6;
@@ -745,7 +746,7 @@ public class Game {
 	//Starting a Pokemon Battle
 	public void battleStart() {
 		battleMode = true;
-		enemyPokemon = new Rattata();
+		enemyPokemon = new Oddish();
 		enemyPokemon.setWild(true);
 		//later implement diff wild pkmn on random chance
 		selectedPokemon = 0;
