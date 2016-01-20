@@ -6,15 +6,9 @@ public class Tile {
     private String type;
     private String image;
     private boolean _isPlayerHere;
-    private final String[] obstacles = { "_", "Tree", "Rock", "PKCenter", "PKMart", "\\", "|", "/", "-" };
+    private final String[] obstacles = { "Wall", "Tree", "Rock", "PKCenter", "PKMart", "\\", "|", "/", "-" };
 	
-    //constructor
-    public Tile() {
-	this.type = "";
-	setImage();
-	_isPlayerHere = false;
-    }
-    
+    //constructor 
     public Tile( String type ) {
 	this.type = type;
         setImage();
@@ -42,26 +36,26 @@ public class Tile {
 	    image = " * ";
 	}
 	else {
-	    if( type.equals( "Grass" ) ) {
+	    if( type.equals( "Wall" ) ) {
+		image = "[ ]";
+	    }
+	    else if( type.equals( "Grass" ) ) {
 		image = "^^^";
 	    }
 	    else if( type.equals( "Tree" ) ) {
 		image = " T ";
 	    }
 	    else if( type.equals( "Rock" ) ) {
-		image = "oOo";
+		image = "oO0";
 	    }
 	    else if( type.equals( "/" ) ) {
-		image = " /-";
+		image = "/--";
 	    }
 	    else if( type.equals( "-" ) ) {
 		image = "---";		
 	    }
-	    else if( type.equals( "_" ) ) {
-		image = "___";
-	    }
 	    else if( type.equals( "\\" ) ) {
-		image = "-\\ ";
+		image = "--\\";
 	    }
 	    else if( type.equals( "|" ) ) {
 		image = " | ";
@@ -73,7 +67,7 @@ public class Tile {
 		image = "<M>";
 	    }
 	    else if( type.equals( "BackPortal" ) || type.equals( "ForwardPortal") ) {
-		image = "[_]";
+		image = "(P)";
 	    }
 	    else {
 		image = "   ";

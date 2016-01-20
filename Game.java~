@@ -11,7 +11,6 @@ public class Game {
     private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>();
     private int selectedPokemon, capturedPokemon, battleScreen;
     private Pokemon captured, currentPokemon, enemyPokemon;
-    private Map userMap;    
     private Battle battle = new Battle();
     private Inventory bag = new Inventory();
     private boolean battleMode = false;
@@ -139,13 +138,13 @@ public class Game {
 			
 			//Player chose an invalid move
 			if ( battleScreen == 10 ) {
-				waitMS(125);
+				waitMS(500);
 				systemMsg = "Invalid move...";
 				battleScreen = 1; //Goes back to Fight menu
 			}
 			//Player's Pokemon used skill!
 			else if ( battleScreen >= 11 && battleScreen <= 14 ) {
-				waitMS(375);
+				waitMS(2500);
 				//Checks which move used
 				int move = 0;
 				if ( battleScreen == 11 ) { move = 0; }
@@ -175,19 +174,19 @@ public class Game {
 			
 			//Player enters invalid Pokemon to switch
 			else if ( battleScreen == 30 ) {
-				waitMS(125);
+				waitMS(500);
 				systemMsg = "Cannot swap with this Pokemon...";
 				battleScreen = 3;
 			}
 			//Pokemon, switch out! Come back!
 			else if ( battleScreen == 31 ) {
-				waitMS(375);
+				waitMS(2500);
 				systemMsg = currentPokemon.getName() + ", switch out! Come back!";
 				battleScreen = 32;
 			}
 			//Go! New Pokemon!
 			else if ( battleScreen == 32 ) {
-				waitMS(375);
+				waitMS(1500);
 				currentPokemon = _Pokemon.get( selectedPokemon ); //Swaps out Pokemon
 				systemMsg = "Go! " + currentPokemon.getName() + "!";
 				battleScreen = 0;
@@ -199,13 +198,13 @@ public class Game {
 			
 			//Player chooses an invalid Poke Ball
 			else if ( battleScreen == 40 ) {
-				waitMS(125);
+				waitMS(500);
 				systemMsg = "Invalid Poke Ball...";
 				battleScreen = 4;
 			}
 			//Player used one Ball!
 			else if ( battleScreen >= 41 && battleScreen <= 44) {
-				waitMS(375);
+				waitMS(1500);
 				//Checks which ball used
 				int ball = 0;
 				if ( battleScreen == 41 ) { ball = 0; ballRate = 1; }
@@ -233,13 +232,13 @@ public class Game {
 			
 			//Player chooses invalid Potion
 			else if ( battleScreen == 50 ) {
-				waitMS(125);
+				waitMS(500);
 				systemMsg = "Invalid Item...";
 				battleScreen = 5;
 			}
 			//Player used a Potion!
 			else if ( battleScreen >= 51 && battleScreen <= 56) {
-				waitMS(375);
+				waitMS(2500);
 				//Checks which potion used
 				int pot = 0;
 				if ( battleScreen == 51 ) { pot = 0; hpRestored = 20; }
@@ -277,13 +276,13 @@ public class Game {
 			//~~~~~~~~~~Battle Items~~~~~~~~~~
 			//Player chooses invalid battle item
 			else if ( battleScreen == 60 ) {
-			        waitMS(125);
+				waitMS(500);
 				systemMsg = "Invalid battle item...";
 				battleScreen = 6;
 			}
 			//Player used a Calcium!
 			else if ( battleScreen == 61 ) {
-				waitMS(375);
+				waitMS(2500);
 				systemMsg = "Player used a Calcium!";
 				currentPokemon.setAttack( currentPokemon.getAttack() + 10 );
 				bag.lowerAmount(2, 0);
@@ -291,7 +290,7 @@ public class Game {
 			}
 			//Player used an Iron!
 			else if ( battleScreen == 62 ) {
-				waitMS(375);
+				waitMS(2500);
 				systemMsg = "Player used an Iron!";
 				currentPokemon.setDefense( currentPokemon.getDefense() + 10 );
 				bag.lowerAmount(2, 1);
@@ -307,9 +306,9 @@ public class Game {
 				systemMsg = currentPokemon.getName() + "'s Defense went up by 10!";
 				battleScreen = 0;
 			}
-			displayBattle();
+			displayBattlefield();
 			displaySystemMsg();
-			waitMS(1000);
+			waitMS(2500);
 			
 		}
 		if ( battleScreen == 0 ) { opponentTurn = true; }
@@ -471,134 +470,124 @@ public class Game {
     //Executes Non-Battle Commands
 	
     public void executeControl( String command ) {
-	int y = Player.getY();
-	int x = Player.getX();
-	Tile from = Map.get( y, x ); // a var for player's original location
-	if ( command.equals("w") ) {
-	    if( y != 0 ) {
-		Tile to = Map.get( y-1, x );
-		Player.setDirection( "UP" );
-		if( !to.isObstacle() ) {
-		    from.reset();
-		    to.movePlayer();
-		    Player.setY(y - 1);		
+		int y = Player.getY();
+		int x = Player.getX();
+		Tile from = Map.get( y, x ); // a var for player's original location
+		if ( command.equals("w") ) {
+			Tile to = Map.get( y-1, x );
+			Player.setDirection( "UP" );
+			if( y!=0 && !to.isObstacle() ) {
+				from.reset();
+				to.movePlayer();
+				Player.setY(y - 1);		
+			}
+			if( to.getType().equals("PKCenter") ) { //PKCenter heals every captured pokemon
+				for( int i = 0; i < capturedPokemon; i++ ) {
+					_Pokemon.get(i).restoreHP( 999 );
+				}
+			}
+			if( to.getType().equals("ForwardPortal") ) {
+				Player.setMapNum( Player.getMapNum()+1 );
+			}
+			if( to.getType().equals("BackPortal") ) {
+				Player.setMapNum( Player.getMapNum()-1 );
+			}	    
+			//user.setX, user.setY, change map's player coordinates
+			if( to.getType().equals("Grass") ) {
+				if( (int)(Math.random()*15) == 1 ) {
+					battleStart();		    
+				}
+			}	   
 		}
-		if( to.getType().equals("PKCenter") ) { //PKCenter heals every captured pokemon
-		    for( int i = 0; i < capturedPokemon; i++ ) {
-			_Pokemon.get(i).restoreHP( 999 );
-		    }
-		}
-		if( to.getType().equals("ForwardPortal") ) {
-			  
-		    Player.setMapNum( Player.getMapNum()+1 );
-		}
-		if( to.getType().equals("BackPortal") ) {
-		    Player.setMapNum( Player.getMapNum()-1 );
-		}	    
-		//user.setX, user.setY, change map's player coordinates
-		if( to.getType().equals("Grass") ) {
-		    if( (int)(Math.random()*15) == 1 ) {
-			battleStart();		    
-		    }
-		}	   
-	    }
-	}// ends "w" command
 		
-	if ( command.equals("a") ) {
-	    if( x!= 0 ) {
-		Tile to = Map.get( y, x-1 );
-		Player.setDirection( "LEFT" );
-		if( !to.isObstacle() ) {
-		    from.reset();
-		    to.movePlayer();
-		    Player.setX(x - 1);
+		if ( command.equals("a") ) {
+			Tile to = Map.get( y, x-1 );
+			Player.setDirection( "LEFT" );
+			if( x!=0 && !to.isObstacle() ) {
+				from.reset();
+				to.movePlayer();
+				Player.setX(x - 1);
+			}
+			if( to.getType().equals("PKCenter") ) {
+				for( int i = 0; i < capturedPokemon; i++ ) {
+					_Pokemon.get(i).restoreHP( 999 );
+				}
+			}
+			if( to.getType().equals("ForwardPortal") ) {
+				Player.setMapNum( Player.getMapNum()+1 );
+			}
+			if( to.getType().equals("BackPortal") ) {
+				Player.setMapNum( Player.getMapNum()-1 );
+			}	    
+			//user.setX, user.setY, change map's player coordinates
+			if( to.getType().equals("Grass") ) {
+				if( (int)(Math.random()*15) == 1 ) {
+					battleStart();		    
+				}
+			}	
 		}
-		if( to.getType().equals("PKCenter") ) {
-		    for( int i = 0; i < capturedPokemon; i++ ) {
-			_Pokemon.get(i).restoreHP( 999 );
-		    }
-		}
-		if( to.getType().equals("ForwardPortal") ) {
-		    Player.setMapNum( Player.getMapNum()+1 );
-		}
-		if( to.getType().equals("BackPortal") ) {
-		    Player.setMapNum( Player.getMapNum()-1 );
-		}	    
-		//user.setX, user.setY, change map's player coordinates
-		if( to.getType().equals("Grass") ) {
-		    if( (int)(Math.random()*15) == 1 ) {
-			battleStart();		    
-		    }
-		}
-	    }
-	} // ends "a" command
-	
-	if ( command.equals("s") ) {
-	    if( y!=19 ) {
-		Tile to = Map.get( y+1, x );
-		Player.setDirection( "DOWN" );	    
-		if( !to.isObstacle() ) {
-		    from.reset();
-		    to.movePlayer();
-		    Player.setY(y + 1);
-		}
-		if( to.getType().equals("PKCenter") ) {
-		    for( int i = 0; i < capturedPokemon; i++ ) {
-			_Pokemon.get(i).restoreHP( 999 );
-		    }
-		}
-		if( to.getType().equals("ForwardPortal") ) {
-		    Player.setMapNum( Player.getMapNum()+1 );
-		}
-		if( to.getType().equals("BackPortal") ) {
-		    Player.setMapNum( Player.getMapNum()-1 );
-		}	    
-		//user.setX, user.setY, change map's player coordinates
-		if( to.getType().equals("Grass") ) {
-		    if( (int)(Math.random()*15) == 1 ) {
-			battleStart();		    
-		    }
-		}
-	    }
-	} // ends "S" command
 		
-	if ( command.equals("d") ) {
-	    if( x!=19 ) {
-		Tile to = Map.get( y, x+1 );
-		Player.setDirection( "RIGHT" );	    
-		if( !to.isObstacle() ) {
-		    from.reset();
-		    to.movePlayer();
-		    Player.setX(x + 1);
+		if ( command.equals("s") ) {
+			Tile to = Map.get( y+1, x );
+			Player.setDirection( "DOWN" );	    
+			if( y!=19 && !to.isObstacle() ) {
+				from.reset();
+				to.movePlayer();
+				Player.setY(y + 1);
+			}
+			if( to.getType().equals("PKCenter") ) {
+				for( int i = 0; i < capturedPokemon; i++ ) {
+					_Pokemon.get(i).restoreHP( 999 );
+				}
+			}
+			if( to.getType().equals("ForwardPortal") ) {
+				Player.setMapNum( Player.getMapNum()+1 );
+			}
+			if( to.getType().equals("BackPortal") ) {
+				Player.setMapNum( Player.getMapNum()-1 );
+			}	    
+			//user.setX, user.setY, change map's player coordinates
+			if( to.getType().equals("Grass") ) {
+				if( (int)(Math.random()*15) == 1 ) {
+					battleStart();		    
+				}
+			}	
 		}
-		if( to.getType().equals("PKCenter") ) {
-		    for( int i = 0; i < capturedPokemon; i++ ) {
-			_Pokemon.get(i).restoreHP( 999 );
-		    }
-		}
-		if( to.getType().equals("ForwardPortal") ) {
-		    Player.setMapNum( Player.getMapNum()+1 );
-		}
-		if( to.getType().equals("BackPortal") ) {
-		    Player.setMapNum( Player.getMapNum()-1 );
-		}	    
-		//user.setX, user.setY, change map's player coordinates
-		if( to.getType().equals("Grass") ) {
-		    if( (int)(Math.random()*15) == 1 ) {
-			battleStart();		    
-		    }
-		}	
-	    }
-	} // ends "d" command
-	
 		
-	if ( command.equals("x") ) {
-	    //check block in front using player.getDirection()
-	    //we will have: trees, rocks, walls, enemy trainers
-	}
+		if ( command.equals("d") ) {
+			Tile to = Map.get( y, x+1 );
+			Player.setDirection( "RIGHT" );	    
+			if( x!=19 && !to.isObstacle() ) {
+				from.reset();
+				to.movePlayer();
+				Player.setX(x + 1);
+			}
+			if( to.getType().equals("PKCenter") ) {
+				for( int i = 0; i < capturedPokemon; i++ ) {
+					_Pokemon.get(i).restoreHP( 999 );
+				}
+			}
+			if( to.getType().equals("ForwardPortal") ) {
+				Player.setMapNum( Player.getMapNum()+1 );
+			}
+			if( to.getType().equals("BackPortal") ) {
+				Player.setMapNum( Player.getMapNum()-1 );
+			}	    
+			//user.setX, user.setY, change map's player coordinates
+			if( to.getType().equals("Grass") ) {
+				if( (int)(Math.random()*15) == 1 ) {
+					battleStart();		    
+				}
+			}	
+		}
+		
+		if ( command.equals("x") ) {
+			//check block in front using player.getDirection()
+			//we will have: trees, rocks, walls, enemy trainers
+		}
+		
+	}//ends NON-BATTLE COMMANDS
 	
-    }//ends NON-BATTLE COMMANDS
-    
 	//Executes Battle Commands
 	
 	public void executeBattleControl ( String command ) {
@@ -614,13 +603,13 @@ public class Game {
 				if ( enemyPokemon.getWild() == false ) { System.out.println("You cannot run from a trainer battle..."); }
 				else if (Math.random() * 100 < 50) {
 					//if wild pkmn, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
-					waitMS(375);
+					waitMS(1000);
 					System.out.println( "You have successfully escaped!" );
 					waitMS(1000);
 					battleMode = false;
 				}
 				else {
-					waitMS(375);
+					waitMS(1000);
 					System.out.println( "You have failed to run away..." );
 					waitMS(1000);
 					opponentTurn = true;
@@ -822,6 +811,7 @@ public class Game {
 		
 		//instantiation of classes
 		Player user = new Player(gender, name);
+		Map userMap = new Map(Player.getMapNum());
 		
 		//sets up _Pokemon ArrayList
 		for( int i = 0; i < 6; i++ ) {
@@ -842,34 +832,32 @@ public class Game {
 		
 		//RUNS GAME:
 		while ( user.getQuest() != 20 ) {
-
-		    userMap = new Map(Player.getMapNum());
 			
-		    if ( battleMode == false ) {
-			//Not in battle -> display map + map controls
-			System.out.println( userMap );
-			displayCommands();
-			String control = promptControl();
-			executeControl(control);
-			//displayMapMsg(); displays map messages when interacting
-		    }
-		    else if ( battleMode == true ) {
-			//In battle -> display battlefield + battle menus
-			displayBattle();
-			String control = promptControl();
-			executeBattleControl( control );
-			displayBattleEffects();
-		    }
-		    System.out.println("battleMode (FOR TESTING): " + battleMode);
-		    System.out.println("battleScreen (FOR TESTING): " + battleScreen);
+			if ( battleMode == false ) {
+				//Not in battle -> display map + map controls
+				System.out.println( userMap );
+				displayCommands();
+				String control = promptControl();
+				executeControl(control);
+				//displayMapMsg(); displays map messages when interacting
+			}
+			else if ( battleMode == true ) {
+				//In battle -> display battlefield + battle menus
+				displayBattle();
+				String control = promptControl();
+				executeBattleControl( control );
+				displayBattleEffects();
+			}
+			System.out.println("battleMode (FOR TESTING): " + battleMode);
+			System.out.println("battleScreen (FOR TESTING): " + battleScreen);
 			
-		    /*//Checks if Enemy Pokemon has been defeated
-		      if ( battleMode == true && enemyPokemon.fainted() ) {
-		      currentPokemon.normalize();
-		      battleMode = false;
-		      }*/
+			/*//Checks if Enemy Pokemon has been defeated
+				if ( battleMode == true && enemyPokemon.fainted() ) {
+				currentPokemon.normalize();
+				battleMode = false;
+			}*/
 			
-		    //if ( battleMode == true && opponentTurn == true ) { opponentBattle(); }
+			//if ( battleMode == true && opponentTurn == true ) { opponentBattle(); }
 			
 		}
 	}

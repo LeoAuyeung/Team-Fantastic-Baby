@@ -7,16 +7,8 @@ public class Map {
 	
     //default constructor for map
     public Map(int n) {
-	for ( int row = 0; row < map.length ; row++ ) {
-	    for ( int column = 0; column < map[row].length; column++ ) {
-		map[row][column] = new Tile();
-	    }
-	}
 	if( n == 1) {
 	    map1();
-	}
-	else if( n == 2) {
-	    map2();
 	}
     }
 	
@@ -75,12 +67,12 @@ public class Map {
 	set(0,0, new Tile("/"));
 	set(0,1, new Tile("-"));
 	set(0,2, new Tile("\\"));
-	set(1,0, new Tile("|"));
-	set(1,1, new Tile("House"));
-	set(1,2, new Tile("|"));
-	set(2,0, new Tile("|"));
-	set(2,1, new Tile("_"));
-	set(2,2, new Tile("|"));
+	set(1,0, new Tile("Wall"));
+	set(1,1, new Tile("Wall"));
+	set(1,2, new Tile("Wall"));
+	set(2,0, new Tile("Wall"));
+	set(2,1, new Tile("Wall"));
+	set(2,2, new Tile("Wall"));
 	set(3,1, new Tile("R"));
 	line( 4, 0, 4, 10, "R" );
 	line( 5, 0, 5, 10, "R" );
@@ -91,62 +83,9 @@ public class Map {
 	set( 16, 19, new Tile("ForwardPortal") );
 	set( 11, 5, new Tile("Tree") );
 	set( 3, 15, new Tile("Tree") );
-	if( Player.getFromMap() == 2 ) {
-	    Player.setY( 16 );
-	    Player.setX( 19 );
-	    Player.setFromMap( Player.getMapNum() );
-	}
+	Player.setY( 3 );
+	Player.setX( 1 );
 	map[Player.getY()][Player.getX()].movePlayer();
-    }
-
-    public static void map2() {
-	for ( int row = 0; row < map.length ; row++ ) {
-	    for ( int column = 0; column < map[row].length; column++ ) {
-		map[row][column] = new Tile( "Grass" );
-	    }
-	}
-	line( 15, 0, 15, 13, "R" );
-	line( 16, 0, 16, 13, "R" );
-	line( 0, 14, 16, 14, "R" );
-	line( 0, 15, 16, 15, "R" );
-	set(5,0, new Tile("/"));
-	set(5,1, new Tile("-"));
-	set(5,2, new Tile("\\"));
-	set(6,0, new Tile("|"));
-	set(6,1, new Tile("House"));
-	set(6,2, new Tile("|"));
-	set(7,0, new Tile("|"));
-	set(7,1, new Tile("_"));
-	set(7,2, new Tile("|"));
-	
-	set(12,9, new Tile("/"));
-	set(12,10, new Tile("-"));
-	set(12,11, new Tile("-"));
-	set(12,12, new Tile("-"));
-	set(12,13, new Tile("\\"));
-	set(13,9, new Tile("|"));
-	set(13,10, new Tile("Pokecenter"));
-	set(13,11, new Tile());    
-	set(13,12, new Tile());
-	set(13,13, new Tile("|"));
-	set(14,9, new Tile("|"));
-	set(14,10, new Tile("_"));
-	set(14,11, new Tile("PKCenter"));
-	set(14,12, new Tile("_"));
-	set(14,13, new Tile("|"));
-	set(16,0, new Tile("BackPortal"));
-	set(0,15, new Tile("ForwardPortal"));
-	if( Player.getFromMap() == 1 ) {
-	    Player.setY(16);
-	    Player.setX(0);
-	    Player.setFromMap( Player.getMapNum() );
-	}
-	else if( Player.getFromMap() == 3 ) {
-	    Player.setY(0);
-	    Player.setX(15);
-	    Player.setFromMap( Player.getMapNum() );
-	}
-	map[Player.getY()][Player.getX()].movePlayer();	
     }
 	
 	

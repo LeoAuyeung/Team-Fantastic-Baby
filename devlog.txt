@@ -328,3 +328,14 @@ Changes:
 		until the bottom menu is changed
 
 ==============================================================
+
+Date: 2016-01-20
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- implemented portals
+- created the second map 
+- managed the timing of the system msgs
+
+==============================================================
