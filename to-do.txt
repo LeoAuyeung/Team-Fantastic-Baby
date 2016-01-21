@@ -2,6 +2,9 @@ MAIN THINGS TO GET DONE:
 
 Leo:
 
+- MERGE OLD EXECUTE/NEW EXECUTE IDEA BEFORE DOING OTHERS
+	- test in diff file
+
 - Wild Pokemon
 	- Only attacks
 	- Randomly uses one of its moves
