@@ -351,3 +351,13 @@ Changes:
 
 ==============================================================
 
+Date: 2016-01-21
+--------------------------------------------------------------
+
+User: Sungbin Kim
+Changes:
+- Updated a spicier display for systemMsg
+- added lastWord() method to find where a line break should be
+
+==============================================================
+
