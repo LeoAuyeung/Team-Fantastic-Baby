@@ -339,3 +339,15 @@ Changes:
 - managed the timing of the system msgs
 
 ==============================================================
+
+Date: 2016-01-20
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- Fixed displayBattleEffects to more properly represent a Pokemon battle
+- Thinking of altering functionality a bit later on when
+	opponentbattle/pokemon fainting is implemented 
+
+==============================================================
+
