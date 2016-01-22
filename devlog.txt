@@ -361,3 +361,10 @@ Changes:
 
 ==============================================================
 
+Date: 2016-01-21
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- Updated displaySystemMsg's within Game.java so that later
+	on it's easier to incorporate within opponentBattles
