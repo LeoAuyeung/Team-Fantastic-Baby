@@ -131,3 +131,79 @@ EXTRA THINGS:
 			- This tree looks like it can be cut down. 
 				- Use/don't have cut
 			- **You picked up a HM01(Cut) (?) or have this happen after gym battles
+			
+POKEMON IN GAME:
+Normal:
+- Rattata, Raticate
+- Jigglypuff, Wigglytuff
+- Zigzagoon, Linoone
+
+Fire:
+- Charmander, Charmeleon, Charizard (Starter)
+- Vulpix, Ninetales
+- Growlithe, Arcanine
+- Ponyta, Rapidash
+
+Water:
+- Squirtle, Wartortle, Blastoise (Starter)
+- Psyduck, Golduck
+- Magikarp, Gyarados
+- Carvanha, Sharpedo
+
+Electric:
+- Pichu, Pikachu, Raichu
+- Magnemite, Magneton, Magnezone
+- Voltorb, Electrode
+- Elekid, Electabuzz, Electivire
+
+Grass:
+- Bulbasaur, Ivysaur, Venasaur (Starter)
+- Oddish, Gloom, Vileplume
+- Seedot, Nuzleaf, Shiftry
+- Budew, Roselia, Roserade
+
+Ice:
+- Snorunt, Glaile
+- Spheal, Sealeo, Walrein
+
+Fighting:
+- Machop, Machoke, Machamp
+- Hitmonlee
+- Hitmonchan
+- Hitmontop
+- Riolu, Lucario
+
+Flying:
+- Spearow, Fearow
+- Zubat, Golbat, Crobat
+- Tailow, Swellow
+- Starly, Staravia, Staraptor
+
+Rock:
+- Geodude, Graveler, Golem
+- Rhyhorn, Rhydon, Rhyperior
+- Larvitar, Pupitar, Tyranitar
+
+Dark:
+- Houndour, Houndoom
+- Poochyena, Mightyena
+- Sableye
+- Absol
+
+Steel:
+- Skarmory
+- Aron, Lairon, Aggron
+- Beldum, Metang, Metagross
+
+Legendaries: (Prob not all; starred = more likely)
+- Normal: *Mew, *Arceus
+- Fire: Moltres, Entei, *Groudon, Heatran
+- Water: Suicune, *Kyogre, *Palkia
+- Electric: Zapdos, *Rotom
+- Grass: *Shaymin
+- Ice: Articuno, *Regice
+- Fighting: *Mewtwo
+- Flying: Lugia, Ho-oh, Latias, Latios, *Rayquaza
+- Rock: *Regirock
+- Dark: *Darkrai
+- Steel: *Registeel, *Dialga
