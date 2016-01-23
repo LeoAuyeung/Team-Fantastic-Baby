@@ -13,10 +13,11 @@ public abstract class Pokemon {
 	//Types: Normal, Fighting, Flying, Grass, Fire, Water, Electric, Rock, Ice, Dark, Steel
     protected ArrayList weaknesses = new ArrayList();
 	protected ArrayList strengths = new ArrayList();
+	//Variables for Pokemon moves
     protected int movesNum;
     protected String[] movesName = {"None","None","None","None"};
+	protected String[] movesType = {"NONE","NONE","NONE","NONE"};
     protected Integer[] movesDmg = {40,75,90,120}; //hard coded damage for all moves
-	//same PP for all Pokemon
     protected Integer[] PP = {25,15,10,5};
     protected Integer[] maxPP = {25,15,10,5};
 	
@@ -72,6 +73,7 @@ public abstract class Pokemon {
 	public int getEXP() { return exp; }
 	public int getMovesNum() { return movesNum; }
 	public String getMovesName( int n ) { return movesName[n]; }
+	public String getMovesType( int n ) { return movesType[n]; }
 	
 	public int getPP( int n ) {
 		if (movesNum > n) { return PP[n];}
@@ -82,7 +84,7 @@ public abstract class Pokemon {
 		else { return 0; }
 	}
 	
-	public boolean fainted() { return HP > 0; }
+	public boolean fainted() { return HP < 0; }
 	
 	//leveling up & setting stats
 	public void levelUp() {
@@ -106,6 +108,7 @@ public abstract class Pokemon {
 	//Lists of moves from: http://pokemondb.net/move/all
 	public void addMove( String move ) {
 		movesName[movesNum] = move;
+		movesType[movesNum] = getType();
 		movesNum += 1;
 	}
 	

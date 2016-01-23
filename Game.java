@@ -214,16 +214,16 @@ public class Game {
 		Battle.set( 9, 0, center("WHAT WILL " + currentPokemon.getName() + " DO?", 59).substring(0,54) + "B: BACK" );
 		Battle.set( 11, 0, "      --------------------       --------------------" );
 		Battle.set( 12, 0, "      |" + indent(" (1) " + currentPokemon.getMovesName(0), 18) + "|" );
-		Battle.set( 13, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(0) + "/" + currentPokemon.getMaxPP(0), 18) + "|" );
+		Battle.set( 13, 0, "      |" + indent(" [" + currentPokemon.getMovesType(0) + "] PP " + currentPokemon.getPP(0) + "/" + currentPokemon.getMaxPP(0), 18) + "|" );
 		Battle.set( 14, 0, "      --------------------       --------------------" );
 		Battle.set( 16, 0, "      --------------------       --------------------" ); 
 		Battle.set( 17, 0, "      |" + indent(" (3) " + currentPokemon.getMovesName(2), 18) + "|" );
-		Battle.set( 18, 0, "      |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(2) + "/" + currentPokemon.getMaxPP(2), 18) + "|" );
+		Battle.set( 18, 0, "      |" + indent(" [" + currentPokemon.getMovesType(2) + "] PP " + currentPokemon.getPP(2) + "/" + currentPokemon.getMaxPP(2), 18) + "|" );
 		Battle.set( 19, 0, "      --------------------       --------------------" );
 		Battle.set( 12, 1, "       |" + indent(" (2) " + currentPokemon.getMovesName(1), 18) + "|" );
-		Battle.set( 13, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(1) + "/" + currentPokemon.getMaxPP(1), 18) + "|" );
+		Battle.set( 13, 1, "       |" + indent(" [" + currentPokemon.getMovesType(1) + "] PP " + currentPokemon.getPP(1) + "/" + currentPokemon.getMaxPP(1), 18) + "|" );
 		Battle.set( 17, 1, "       |" + indent(" (4) " + currentPokemon.getMovesName(3), 18) + "|" );
-		Battle.set( 18, 1, "       |" + indent(" [" + currentPokemon.getType() + "] PP " + currentPokemon.getPP(3) + "/" + currentPokemon.getMaxPP(3), 18) + "|" );
+		Battle.set( 18, 1, "       |" + indent(" [" + currentPokemon.getMovesType(3) + "] PP " + currentPokemon.getPP(3) + "/" + currentPokemon.getMaxPP(3), 18) + "|" );
 		System.out.println( battle );	    
 	}
 	
@@ -450,7 +450,7 @@ public class Game {
 			if ( command.equals("2") ) { battleScreen = 2; } //Bag
 			if ( command.equals("3") ) { battleScreen = 3; } //Pokemon
 			if ( command.equals("4") ) { //Run
-				if ( enemyPokemon.getWild() == false ) { systemMsg = "You cannot run from a trainer battle..."); displaySystemMsg(); }
+				if ( enemyPokemon.getWild() == false ) { systemMsg = "You cannot run from a trainer battle..."; displaySystemMsg(); }
 				else if (Math.random() * 100 < 50) {
 					//if wild pkmn, chance of running = http://bulbapedia.bulbagarden.net/wiki/Escape#Success_conditions
 					waitMS(375);
@@ -601,9 +601,9 @@ public class Game {
 		//~~~~~~~~~~~~~~~~~~~~Bag -- Pokeballs~~~~~~~~~~~~~~~~~~~~
 		//Using: http://bulbapedia.bulbagarden.net/wiki/Catch_rate#Modified_catch_rate_3
 		else if ( battleScreen == 4 ) {
+			int ball = 0;
 			//Goes back to previous screen
 			if ( command.equals("b") ) { battleScreen = 2; }
-			int ball = 0;
 			//Uses Poke Ball
 			else if ( command.equals("1") && bag.getPokeball(0) != 0 && capturedPokemon < 6 ) {
 				//Displays first system msg
@@ -682,12 +682,12 @@ public class Game {
 		
 		//~~~~~~~~~~~~~~~~~~~~Bag -- Potions~~~~~~~~~~~~~~~~~~~~
 		else if ( battleScreen == 5 ) {
-			//Goes back to previous screen
-			if ( command.equals("b") ) { battleScreen = 2; }
 			int pot = 0;
 			int hpRestored = 0;
 			int ppRestored = 0;
 			int hpDiff = currentPokemon.getMaxHP() - currentPokemon.getHP();
+			//Goes back to previous screen
+			if ( command.equals("b") ) { battleScreen = 2; }
 			//Uses Potion
 			else if ( command.equals("1") && bag.getPotion(0) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() ) {
 				//Displays first system msg
