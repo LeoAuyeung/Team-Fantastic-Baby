@@ -606,7 +606,7 @@ public class Game {
 			//Goes back to previous screen
 			if ( command.equals("b") ) { battleScreen = 2; }
 			//Uses Poke Ball
-			else if ( command.equals("1") && bag.getPokeball(0) != 0 && capturedPokemon < 6 ) {
+			else if ( command.equals("1") && bag.getPokeball(0) != 0 && capturedPokemon < 6 enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 0;
 				systemMsg = Player.getName() + " used one Poke Ball!";
@@ -623,7 +623,7 @@ public class Game {
 			}
 			
 			//Uses Great Ball
-			else if ( command.equals("2") && bag.getPokeball(1) != 0 && capturedPokemon < 6 ) {
+			else if ( command.equals("2") && bag.getPokeball(1) != 0 && capturedPokemon < 6 enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 1;
 				systemMsg = Player.getName() + " used one Great Ball!";
@@ -633,14 +633,14 @@ public class Game {
 				double RNG = Math.random() + 1;
 				double catchRate = ( ( (double)(3 * enemyPokemon.getMaxHP()) - (double)(2 * enemyPokemon.getHP()) * RNG * 1.5) / (double)(3 * enemyPokemon.getMaxHP()) );
 				//Displays system msg depending on whether Pokemon was caught or not
-				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
+				if ( catchRate >= 1.0 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
 				else { systemMsg = enemyPokemon.getName() + " broke free!"; }
 				displaySystemMsg();
 				endTurn();
 			}
 			
 			//Uses Ultra Ball
-			else if ( command.equals("3") && bag.getPokeball(2) != 0 && capturedPokemon < 6 ) {
+			else if ( command.equals("3") && bag.getPokeball(2) != 0 && capturedPokemon < 6 enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 2;
 				systemMsg = Player.getName() + " used one Ultra Ball!";
@@ -650,14 +650,14 @@ public class Game {
 				double RNG = Math.random() + 1;
 				double catchRate = ( ( (double)(3 * enemyPokemon.getMaxHP()) - (double)(2 * enemyPokemon.getHP()) * RNG * 2) / (double)(3 * enemyPokemon.getMaxHP()) );
 				//Displays system msg depending on whether Pokemon was caught or not
-				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
+				if ( catchRate >= 1.5 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
 				else { systemMsg = enemyPokemon.getName() + " broke free!"; }
 				displaySystemMsg();
 				endTurn();
 			}
 			
 			//Uses Master Ball
-			else if ( command.equals("4") && bag.getPokeball(3) != 0 && capturedPokemon < 6 ) {
+			else if ( command.equals("4") && bag.getPokeball(3) != 0 && capturedPokemon < 6 && enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 3;
 				systemMsg = Player.getName() + " used one Master Ball!";
@@ -675,6 +675,9 @@ public class Game {
 			
 			//Already have 6 Pokemon
 			else if ( capturedPokemon == 6 ) { systemMsg = "You cannot catch any more Pokemon!"; displaySystemMsg(); }
+			
+			//Cannot catch a trainer's Pokemon
+			else if ( enemyPokemon.getWild() == false ) { systemMsg = "The Trainer blocked the Ball!"; displaySystemMsg(); }
 			
 			//Goes to error message
 			else { systemMsg = "Invalid Pokeball..."; displaySystemMsg(); }
@@ -1030,11 +1033,19 @@ public class Game {
 	public void battleStart() {
 		battleMode = true;
 		opponentTurn = false;
-		enemyPokemon = new Oddish();
-		enemyPokemon.setWild(true);
+		spawnPokemon();
 		//later implement diff wild pkmn on random chance
 		selectedPokemon = 0;
 		currentPokemon = _Pokemon.get(selectedPokemon);
+		systemMsg = "Go! " + currentPokemon.getName(); + "!";
+		displaySystemMsg();
+	}
+	
+	//Spawns wild enemy Pokemon
+	public void spawnPokemon() {
+		int lvl = 15;
+		enemyPokemon = new Oddish(lvl);
+		enemyPokemon.setWild(true);
 	}
 	
 	//Ends turn
