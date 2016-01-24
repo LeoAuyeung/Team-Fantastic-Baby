@@ -10,6 +10,12 @@ public class Roselia extends Budew {
 		addMove("Petal Dance");
 	}
 	
+	//Constructor for trainers
+	public Roselia( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Roselia( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

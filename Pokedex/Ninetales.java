@@ -10,6 +10,12 @@ public class Ninetales extends Vulpix {
 		addMove("Flamethrower");
 	}
 	
+	//Constructor for trainers
+	public Ninetales( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Ninetales( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

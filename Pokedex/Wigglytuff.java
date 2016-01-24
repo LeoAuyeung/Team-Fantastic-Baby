@@ -10,6 +10,12 @@ public class Wigglytuff extends Jigglypuff {
 		addMove("Body Slam");
 	}
 	
+	//Constructor for trainers
+	public Wigglytuff( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Wigglytuff( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

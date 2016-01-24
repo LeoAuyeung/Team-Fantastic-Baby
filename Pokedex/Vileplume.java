@@ -10,6 +10,12 @@ public class Vileplume extends Gloom {
 		addMove("Solar Beam");
 	}
 	
+	//Constructor for trainers
+	public Vileplume( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Vileplume( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

@@ -11,6 +11,12 @@ public class Jigglypuff extends Pokemon {
 		addMove("Wake-Up Slap");
 	}
 	
+	//Constructor for trainers
+	public Jigglypuff( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Jigglypuff( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "NORMAL" );

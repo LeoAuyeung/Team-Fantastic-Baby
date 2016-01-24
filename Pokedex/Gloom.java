@@ -10,6 +10,12 @@ public class Gloom extends Oddish {
 		addMove("Petal Dance");
 	}
 	
+	//Constructor for trainers
+	public Gloom( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Gloom( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

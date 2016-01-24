@@ -10,6 +10,12 @@ public class Fearow extends Spearow {
 		addMove("Drill Peck");
 	}
 	
+	//Constructor for trainers
+	public Fearow( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Fearow( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

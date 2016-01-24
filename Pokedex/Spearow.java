@@ -11,6 +11,12 @@ public class Spearow extends Pokemon {
 		addMove("Aerial Ace");
 	}
 	
+	//Constructor for trainers
+	public Spearow( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Spearow( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FLYING");

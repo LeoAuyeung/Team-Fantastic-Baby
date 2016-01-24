@@ -10,6 +10,12 @@ public class Houndoom extends Houndour {
 		addMove("Feint Attack");
 	}
 	
+	//Constructor for trainers
+	public Houndoom( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Houndoom( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

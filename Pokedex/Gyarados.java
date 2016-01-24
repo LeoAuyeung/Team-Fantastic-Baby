@@ -10,6 +10,12 @@ public class Gyarados extends Magikarp {
 		addMove("Aqua Tail");
 	}
 	
+	//Constructor for trainers
+	public Gyarados( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Gyarados( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

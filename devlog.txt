@@ -378,5 +378,7 @@ User: Leo Au-Yeung
 Changes:
 - Fully added battle functionality (fainted, catching, black out)
 - ADDED ALL POKEMON WE WANTED AND THEIR EVOLUTIONS HARD-CODED
+- Added constructor requiring only level for different
+difficulties of wild pokemon and/or trainer pokemon
 
 ==============================================================

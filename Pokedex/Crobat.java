@@ -10,6 +10,12 @@ public class Crobat extends Golbat {
 		addMove("Sky Attack");
 	}
 	
+	//Constructor for trainers
+	public Crobat( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Crobat( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

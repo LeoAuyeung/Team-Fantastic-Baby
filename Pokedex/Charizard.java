@@ -10,6 +10,12 @@ public class Charizard extends Charmeleon {
 		addMove("Blast Burn");
 	}
 	
+	//Constructor for trainers
+	public Charizard( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Charizard( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

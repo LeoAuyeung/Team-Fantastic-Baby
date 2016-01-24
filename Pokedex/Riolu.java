@@ -11,6 +11,12 @@ public class Riolu extends Pokemon {
 		addMove("Brick Break");
 	}
 	
+	//Constructor for trainers
+	public Riolu( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Riolu( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FIGHTING");

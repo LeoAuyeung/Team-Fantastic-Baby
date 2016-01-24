@@ -10,6 +10,12 @@ public class Golbat extends Zubat {
 		addMove("Air Slash");
 	}
 	
+	//Constructor for trainers
+	public Golbat( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Golbat( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

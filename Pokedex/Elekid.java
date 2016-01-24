@@ -11,6 +11,12 @@ public class Elekid extends Pokemon {
 		addMove("Shock Wave");
 	}
 	
+	//Constructor for trainers
+	public Elekid( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Elekid( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "ELECTRIC");

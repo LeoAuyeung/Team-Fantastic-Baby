@@ -208,4 +208,3 @@ public abstract class Pokemon {
 	public abstract String about();
 	
 }
-

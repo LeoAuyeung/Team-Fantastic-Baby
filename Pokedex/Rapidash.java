@@ -10,6 +10,12 @@ public class Rapidash extends Ponyta {
 		addMove("Inferno");
 	}
 	
+	//Constructor for trainers
+	public Rapidash( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Rapidash( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

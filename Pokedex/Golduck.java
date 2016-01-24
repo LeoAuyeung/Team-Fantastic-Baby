@@ -10,6 +10,12 @@ public class Golduck extends Psyduck {
 		addMove("Aqua Tail");
 	}
 	
+	//Constructor for trainers
+	public Golduck( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Golduck( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

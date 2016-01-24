@@ -10,6 +10,12 @@ public class Metang extends Beldum {
 		addMove("Meteor Mash");
 	}
 	
+	//Constructor for trainers
+	public Metang( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Metang( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

@@ -11,6 +11,12 @@ public class Magnemite extends Pokemon {
 		addMove("Spark");
 	}
 	
+	//Constructor for trainers
+	public Magnemite( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Magnemite( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "ELECTRIC");

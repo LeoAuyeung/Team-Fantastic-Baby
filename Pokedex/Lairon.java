@@ -10,6 +10,12 @@ public class Lairon extends Aron {
 		addMove("Iron Tail");
 	}
 	
+	//Constructor for trainers
+	public Lairon( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Lairon( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

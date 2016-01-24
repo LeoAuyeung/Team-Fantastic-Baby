@@ -11,6 +11,12 @@ public class Vulpix extends Pokemon {
 		addMove("Fire Fang");
 	}
 	
+	//Constructor for trainers
+	public Vulpix( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Vulpix( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FIRE" );

@@ -10,6 +10,12 @@ public class Raticate extends Rattata {
 		addMove("Hyper Fang");
 	}
 	
+	//Constructor for trainers
+	public Raticate( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Raticate( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

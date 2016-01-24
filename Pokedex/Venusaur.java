@@ -10,6 +10,12 @@ public class Venusaur extends Ivysaur {
 		addMove("Frenzy Plant");
 	}
 	
+	//Constructor for trainers
+	public Venusaur( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Venusaur( String n, int lvl, int eLvl, int xp) {
 		super( n, lvl, eLvl, xp );

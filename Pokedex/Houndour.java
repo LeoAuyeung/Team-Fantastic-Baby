@@ -11,6 +11,12 @@ public class Houndour extends Pokemon {
 		addMove("Bite");
 	}
 	
+	//Constructor for trainers
+	public Houndour( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Houndour( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "DARK");

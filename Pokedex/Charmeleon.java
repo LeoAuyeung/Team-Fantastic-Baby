@@ -10,6 +10,12 @@ public class Charmeleon extends Charmander {
 		addMove("Flamethrower");
 	}
 	
+	//Constructor for trainers
+	public Charmeleon( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Charmeleon( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

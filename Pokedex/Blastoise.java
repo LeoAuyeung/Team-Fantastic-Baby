@@ -10,6 +10,12 @@ public class Blastoise extends Wartortle {
 		addMove("Hydro Cannon");
 	}
 	
+	//Constructor for trainers
+	public Blastoise( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Blastoise( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

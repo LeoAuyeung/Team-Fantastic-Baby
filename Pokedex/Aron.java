@@ -11,6 +11,12 @@ public class Aron extends Pokemon {
 		addMove("Iron Head");
 	}
 	
+	//Constructor for trainers
+	public Aron( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Aron( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "STEEL");

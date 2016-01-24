@@ -11,6 +11,12 @@ public class Beldum extends Pokemon {
 		addMove("Iron Head");
 	}
 	
+	//Constructor for trainers
+	public Beldum( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Beldum( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "STEEL");

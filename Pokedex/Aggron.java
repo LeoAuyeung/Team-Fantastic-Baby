@@ -10,6 +10,12 @@ public class Aggron extends Lairon {
 		addMove("Metal Burst");
 	}
 	
+	//Constructor for trainers
+	public Aggron( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Aggron( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

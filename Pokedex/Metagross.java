@@ -10,6 +10,12 @@ public class Metagross extends Metang {
 		addMove("Metal Burst");
 	}
 	
+	//Constructor for trainers
+	public Metagross( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Metagross( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

@@ -10,6 +10,12 @@ public class Mightyena extends Poochyena {
 		addMove("Crunch");
 	}
 	
+	//Constructor for trainers
+	public Mightyena( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Mightyena( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

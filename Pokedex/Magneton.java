@@ -10,6 +10,12 @@ public class Magneton extends Magnemite {
 		addMove("Discharge");
 	}
 	
+	//Constructor for trainers
+	public Magneton( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Magneton( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

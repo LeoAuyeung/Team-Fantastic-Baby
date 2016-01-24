@@ -11,6 +11,12 @@ public class Spheal extends Pokemon {
 		addMove("Aurora Beam");
 	}
 	
+	//Constructor for trainers
+	public Spheal( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Spheal( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "ICE");

@@ -10,6 +10,12 @@ public class Magnezone extends Magneton {
 		addMove("Zap Cannon");
 	}
 	
+	//Constructor for trainers
+	public Magnezone( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Magnezone( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

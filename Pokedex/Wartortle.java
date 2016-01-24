@@ -10,6 +10,12 @@ public class Wartortle extends Squirtle {
 		addMove("Aqua Tail");
 	}
 	
+	//Constructor for trainers
+	public Wartortle( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Wartortle( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

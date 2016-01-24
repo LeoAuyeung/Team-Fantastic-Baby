@@ -11,6 +11,12 @@ public class Psyduck extends Pokemon {
 		addMove("Water Pulse");
 	}
 	
+	//Constructor for trainers
+	public Psyduck( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Psyduck( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "WATER" );

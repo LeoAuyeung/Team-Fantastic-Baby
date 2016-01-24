@@ -11,6 +11,12 @@ public class Poochyena extends Pokemon {
 		addMove("Bite");
 	}
 	
+	//Constructor for trainers
+	public Poochyena( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Poochyena( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "DARK");

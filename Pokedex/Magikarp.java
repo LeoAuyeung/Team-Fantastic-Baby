@@ -11,6 +11,12 @@ public class Magikarp extends Pokemon {
 		addMove("Water Pulse");
 	}
 	
+	//Constructor for trainers
+	public Magikarp( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Magikarp( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "WATER");

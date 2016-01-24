@@ -10,6 +10,12 @@ public class Glalie extends Snorunt {
 		addMove("Ice Beam");
 	}
 	
+	//Constructor for trainers
+	public Glalie( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Glalie( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

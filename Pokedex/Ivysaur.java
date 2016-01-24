@@ -10,6 +10,12 @@ public class Ivysaur extends Bulbasaur {
 		addMove("Magical Leaf");
 	}
 	
+	//Constructor for trainers
+	public Ivysaur( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Ivysaur( String n, int lvl, int eLvl, int xp) {
 		super( n, lvl, eLvl );

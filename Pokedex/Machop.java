@@ -11,6 +11,12 @@ public class Machop extends Pokemon {
 		addMove("Karate Chop");
 	}
 	
+	//Constructor for trainers
+	public Machop( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Machop( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FIGHTING");

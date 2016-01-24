@@ -11,6 +11,12 @@ public class Oddish extends Pokemon {
 		addMove("Razor Leaf");
 	}
 	
+	//Constructor for trainers
+	public Oddish( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Oddish( String n, int lvl, int eLvl) {
 		super( n, lvl, eLvl, "GRASS" );

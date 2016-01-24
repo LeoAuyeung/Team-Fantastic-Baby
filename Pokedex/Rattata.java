@@ -11,6 +11,12 @@ public class Rattata extends Pokemon {
 		addMove("Scratch");
 	}
 	
+	//Constructor for trainers
+	public Rattata( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Rattata( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "NORMAL" );

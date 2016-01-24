@@ -10,6 +10,12 @@ public class Raichu extends Pikachu {
 		addMove("Volt Tackle");
 	}
 	
+	//Constructor for trainers
+	public Raichu( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Raichu( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

@@ -11,6 +11,12 @@ public class Pichu extends Pokemon {
 		addMove("Spark");
 	}
 	
+	//Constructor for trainers
+	public Pichu( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Pichu( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "ELECTRIC");

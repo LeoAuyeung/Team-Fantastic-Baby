@@ -11,6 +11,12 @@ public class Geodude extends Pokemon {
 		addMove("Rock Throw");
 	}
 	
+	//Constructor for trainers
+	public Geodude( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Geodude( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "ROCK");

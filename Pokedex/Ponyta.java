@@ -11,6 +11,12 @@ public class Ponyta extends Pokemon {
 		addMove("Flame Charge");
 	}
 	
+	//Constructor for trainers
+	public Ponyta( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Ponyta( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FIRE" );

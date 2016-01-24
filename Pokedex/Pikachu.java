@@ -10,6 +10,11 @@ public class Pikachu extends Pichu{
 		addMove("Thunderbolt");
 	}
 	
+	//Constructor for trainers
+	public Pikachu( int lvl ) {
+		this();
+		level = lvl;
+	}
 	//Constructor for evolutions
 	public Pikachu( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

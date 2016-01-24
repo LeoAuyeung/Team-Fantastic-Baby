@@ -10,6 +10,12 @@ public class Electabuzz extends Elekid {
 		addMove("Thunder Punch");
 	}
 	
+	//Constructor for trainers
+	public Electabuzz( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Electabuzz( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

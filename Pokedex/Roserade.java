@@ -10,6 +10,12 @@ public class Roserade extends Roselia {
 		addMove("Solar Beam");
 	}
 	
+	//Constructor for trainers
+	public Roserade( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Roserade( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

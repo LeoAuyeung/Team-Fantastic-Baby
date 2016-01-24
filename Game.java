@@ -1040,7 +1040,7 @@ public class Game {
 	public int gainEXP() {
 		int gained;
 		//Math for exp gain
-		gained = 200;
+		gained = 500;
 		currentPokemon.gainEXP(gained);
 		return gained;
 	}
@@ -1126,6 +1126,7 @@ public class Game {
 		String gender = "";
 		while ( !(gender.equals("boy")) && !(gender.equals("girl")) ) {
 			gender = promptGender();
+			gender = gender.toLowerCase();
 		}
 		String name = promptName();
 		
@@ -1146,8 +1147,6 @@ public class Game {
 		if (starter == 1) { captured = new Bulbasaur(); }
 		else if (starter == 2) { captured = new Charmander(); }
 		else if (starter == 3) { captured = new Squirtle(); }
-		capturePokemon(captured);
-		captured = new Rattata();
 		capturePokemon(captured);
 		
 		//RUNS GAME:

@@ -11,6 +11,12 @@ public class Budew extends Pokemon {
 		addMove("Magical Leaf");
 	}
 	
+	//Constructor for trainers
+	public Budew( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Budew( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "GRASS");

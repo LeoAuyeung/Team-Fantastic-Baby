@@ -10,6 +10,12 @@ public class Linoone extends Zigzagoon {
 		addMove("Take Down");
 	}
 	
+	//Constructor for trainers
+	public Linoone( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Linoone( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

@@ -6,9 +6,15 @@ public class Charmander extends Pokemon {
 	
 	//Constructor
 	public Charmander() {
-		super("Charmander", 5, 16, "FIRE");
+		super("Charmander", 5, 7, "FIRE");
 		addMove("Ember");
 		addMove("Fire Punch");
+	}
+	
+	//Constructor for trainers
+	public Charmander( int lvl ) {
+		this();
+		level = lvl;
 	}
 	
 	//Constructor for evolutions

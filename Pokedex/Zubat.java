@@ -11,6 +11,12 @@ public class Zubat extends Pokemon {
 		addMove("Wing Attack");
 	}
 	
+	//Constructor for trainers
+	public Zubat( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Zubat( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FLYING");

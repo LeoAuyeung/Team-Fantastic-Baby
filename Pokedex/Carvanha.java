@@ -11,6 +11,12 @@ public class Carvanha extends Pokemon {
 		addMove("Water Pulse");
 	}
 	
+	//Constructor for trainers
+	public Carvanha( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Carvanha( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "WATER");

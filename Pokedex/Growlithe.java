@@ -11,6 +11,12 @@ public class Growlithe extends Pokemon {
 		addMove("Fire Fang");
 	}
 	
+	//Constructor for trainers
+	public Growlithe( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Growlithe( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "FIRE" );

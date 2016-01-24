@@ -11,6 +11,12 @@ public class Squirtle extends Pokemon {
 		addMove("Bubble Beam");
 	}
 	
+	//Constructor for trainers
+	public Squirtle( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Squirtle( String n, int lvl, int eLvl) {
 		super( n, lvl, eLvl, "WATER" );

@@ -11,6 +11,12 @@ public class Snorunt extends Pokemon {
 		addMove("Ice Fang");
 	}
 	
+	//Constructor for trainers
+	public Snorunt( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Snorunt( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "ICE");

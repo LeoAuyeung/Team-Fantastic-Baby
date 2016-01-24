@@ -10,6 +10,12 @@ public class Electivire extends Electabuzz {
 		addMove("Thunder");
 	}
 	
+	//Constructor for trainers
+	public Electivire( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Electivire( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

@@ -10,6 +10,12 @@ public class Machoke extends Machop {
 		addMove("Submission");
 	}
 	
+	//Constructor for trainers
+	public Machoke( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Machoke( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

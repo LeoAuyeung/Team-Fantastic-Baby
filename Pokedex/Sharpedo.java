@@ -10,6 +10,12 @@ public class Sharpedo extends Carvanha {
 		addMove("Hydro Pump");
 	}
 	
+	//Constructor for trainers
+	public Sharpedo( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Sharpedo( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

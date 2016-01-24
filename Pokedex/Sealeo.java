@@ -10,6 +10,12 @@ public class Sealeo extends Spheal {
 		addMove("Ice Beam");
 	}
 	
+	//Constructor for trainers
+	public Sealeo( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Sealeo( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

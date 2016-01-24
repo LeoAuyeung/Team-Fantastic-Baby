@@ -10,6 +10,12 @@ public class Arcanine extends Growlithe {
 		addMove("Flamethrower");
 	}
 	
+	//Constructor for trainers
+	public Arcanine( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Arcanine( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl );

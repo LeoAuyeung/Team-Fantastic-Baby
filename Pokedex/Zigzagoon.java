@@ -11,6 +11,12 @@ public class Zigzagoon extends Pokemon {
 		addMove("Headbutt");
 	}
 	
+	//Constructor for trainers
+	public Zigzagoon( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Zigzagoon( String n, int lvl, int eLvl ) {
 		super( n, lvl, eLvl, "NORMAL" );

@@ -10,6 +10,12 @@ public class Machamp extends Machoke {
 		addMove("Dynamic Punch");
 	}
 	
+	//Constructor for trainers
+	public Machamp( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Machamp( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );

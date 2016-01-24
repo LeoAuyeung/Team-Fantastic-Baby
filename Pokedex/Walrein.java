@@ -10,6 +10,12 @@ public class Walrein extends Sealeo {
 		addMove("Blizzard");
 	}
 	
+	//Constructor for trainers
+	public Walrein( int lvl ) {
+		this();
+		level = lvl;
+	}
+	
 	//Constructor for evolutions
 	public Walrein( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );
