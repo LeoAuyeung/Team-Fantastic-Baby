@@ -7,19 +7,22 @@ import Pokedex.*;
 
 public class Game {
 	
+	//For keeping track of Pokemon
     private ArrayList<Pokemon> _Pokemon = new ArrayList<Pokemon>();
     private ArrayList<Pokemon> _PokemonEnemy = new ArrayList<Pokemon>();
-    private int selectedPokemon, capturedPokemon, battleScreen;
+    private int selectedPokemon, capturedPokemon;
+	//Instantiating global classes
     private Pokemon captured, currentPokemon, enemyPokemon;
     private Map userMap;    
     private Battle battle = new Battle();
     private Inventory bag = new Inventory();
+	private Trainer foe;
+	//For keeping track of battles/turns
     private boolean battleMode = false;
     private boolean opponentTurn = false;
     //For display
     private String systemMsg = "";
-    private double ballRate;
-    private int itemUsed, hpRestored, ppRestored;
+	private int battleScreen;
 	
     //~~~~~~~~~~~~~~~MISC.~~~~~~~~~~~~~~~~~~~~~~~
 	
@@ -105,13 +108,14 @@ public class Game {
 		System.out.println( commands );
 	}
 	
+	public void displayMapMsg() {
+		
+	}
+	
 	//~~~~~~~~~~~~~~~BATTLE-DISPLAYS~~~~~~~~~~~~~~~~
 	
 	//Main battle display (Player's Pokemon, Enemy Pokemon, Battle Menu)
 	public void displayBattle() {
-		//Displays Player's Pokemon & Enemy Pokemon
-		displayBattlefield();
-		
 		//Main Menu
 		if ( battleScreen == 0 ) { displayBattleMenu(); } 
 		//List of Moves (Fight)
@@ -131,33 +135,9 @@ public class Game {
 		
 	}
 	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OPPONENT BATTLE DISPLAY AND EXECUTE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	/*public void opponentBattle() {
-		//OPPONENTS TURN
-		
-		//DIFFERENTIATE BETWEEN WILD & NON-WILD
-		//Opponent Pokemon used skill!
-		//Opponent skill is not very effective...
-		//Opponent skill is super effective!
-		
-		//Player's Pokemon fainted!
-		//Player chooses Pokemon
-		//Go! New Pokemon!
-		//Player has sent out New Pokemon!
-		//Player has blacked out!
-		
-		//Opponent Pokemon fainted!
-		//Player's Pokemon has gained 999 Exp. Points!
-		//Player's Pokemon grew to Lv. 100!
-		//Trainer sent out New Pokemon!
-		//Player has defeated Trainer! Player has earned $500
-		//What?! Player's Pokemon is evolving!
-	}*/
-	
 	public void displaySystemMsg() {
 		//Creates a pause before displaying
 		waitMS(1000);
-		
 		//1/2 of the screen
 		displayBattlefield();
 		//1/2 of the screen
@@ -200,6 +180,8 @@ public class Game {
 	}
 	
 	public void displayBattleMenu() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 10, 0, center("WHAT WILL " + Player.getName() + " DO?", 61) );
 		Battle.set( 12, 0, "                -----------       -----------" );
 		Battle.set( 13, 0, "                | 1:FIGHT |       |  2:BAG  |" );
@@ -211,6 +193,8 @@ public class Game {
 	}
 	
 	public void displayFight() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 9, 0, center("WHAT WILL " + currentPokemon.getName() + " DO?", 59).substring(0,54) + "B: BACK" );
 		Battle.set( 11, 0, "      --------------------       --------------------" );
 		Battle.set( 12, 0, "      |" + indent(" (1) " + currentPokemon.getMovesName(0), 18) + "|" );
@@ -228,6 +212,8 @@ public class Game {
 	}
 	
 	public void displayBag() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 9, 0, "                       CHOOSE A BAG                   B: BACK" );
 		Battle.set( 11, 0, "                   ------------------" );
 		Battle.set( 12, 0, "                   | 1:POKEBALLS    |" );
@@ -242,6 +228,8 @@ public class Game {
 	}
 	
 	public void displayPokemon() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 9, 0,  "                      AVAILABLE POKEMON:              B: BACK" );
 		Battle.set( 10, 0, "------------------------------ ------------------------------" );
 		Battle.set( 11, 0, "|" + indent(" (1) Lv." + _Pokemon.get(0).getLevel() + " " + _Pokemon.get(0).getName() + "(" + _Pokemon.get(0).getType() + ")", 28) + "|" );
@@ -265,6 +253,8 @@ public class Game {
 	
 	//displays user's Pokeballs; 1. Poke Ball 2. Great Ball 3. Ultra Ball 4. Master Ball
 	public void displayBag1() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 9, 0, "                        POKEBALLS                     B: BACK" );
 		Battle.set( 11, 0,"                  ----------------------" );
 		Battle.set( 12, 0,"                  |" + indent(" 1: Poke Ball   x" + bag.getPokeball(0), 20) + "|" );
@@ -280,6 +270,8 @@ public class Game {
 	
 	//displays user's Potions; 1. Potion 2. Super Potion 3. Hyper Potion 4. Full Restore 5. Elixir 6. Max Elixir; Elixirs are for PP
 	public void displayBag2() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 10, 0, "                         POTIONS                      B: BACK" );
 		Battle.set( 12, 0, "   ------------------------- -------------------------" );
 		Battle.set( 13, 0, "   |" + indent(" 1: Potion         x" + bag.getPotion(0), 23) + "|" );
@@ -296,6 +288,8 @@ public class Game {
 	
 	//displays user's Battle Items; 1. Protein 2. Iron
 	public void displayBag3() {
+		//Displays Player's Pokemon & Enemy Pokemon
+		displayBattlefield();
 		Battle.set( 11, 0, "                       BATTLE ITEMS                   B: BACK" );
 		Battle.set( 13, 0, "                  ----------------------" );
 		Battle.set( 14, 0, "                  |" + indent( " 1: Protein    x" + bag.getBattleItem(0), 20 ) + "|" );
@@ -565,9 +559,6 @@ public class Game {
 		
 		//~~~~~~~~~~~~~~~~~~~~Pokemon~~~~~~~~~~~~~~~~~~~~
 		else if ( battleScreen == 3 ) {
-			//Goes back to previous screen
-			if ( command.equals("b") ) { battleScreen = 0; }
-			
 			//Takes input and converts to int
 			try {
 				selectedPokemon = Integer.parseInt( command );
@@ -575,8 +566,11 @@ public class Game {
 			}
 			catch (Exception e) { battleScreen = 3; }
 			
+			//Goes back to previous screen
+			if ( command.equals("b") ) { battleScreen = 0; }
+			
 			//Switches Pokemon
-			if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) && !(_Pokemon.get(selectedPokemon).fainted()) ) {
+			else if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) && !(_Pokemon.get(selectedPokemon).fainted()) ) {
 				//Displays "come back" msg
 				systemMsg = currentPokemon.getName() + ", switch out! Come back!";
 				displaySystemMsg();
@@ -615,7 +609,7 @@ public class Game {
 				double RNG = Math.random() + 1;
 				double catchRate = ( ( (double)(3 * enemyPokemon.getMaxHP()) - (double)(2 * enemyPokemon.getHP()) * RNG * 1) / (double)(3 * enemyPokemon.getMaxHP()) );
 				//Displays system msg depending on whether Pokemon was caught or not
-				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; }
+				if ( catchRate >= 0.5 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false;}
 				else { systemMsg = enemyPokemon.getName() + " broke free!"; }
 				displaySystemMsg();
 				endTurn();
@@ -632,7 +626,7 @@ public class Game {
 				double RNG = Math.random() + 1;
 				double catchRate = ( ( (double)(3 * enemyPokemon.getMaxHP()) - (double)(2 * enemyPokemon.getHP()) * RNG * 1.5) / (double)(3 * enemyPokemon.getMaxHP()) );
 				//Displays system msg depending on whether Pokemon was caught or not
-				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; }
+				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
 				else { systemMsg = enemyPokemon.getName() + " broke free!"; }
 				displaySystemMsg();
 				endTurn();
@@ -649,7 +643,7 @@ public class Game {
 				double RNG = Math.random() + 1;
 				double catchRate = ( ( (double)(3 * enemyPokemon.getMaxHP()) - (double)(2 * enemyPokemon.getHP()) * RNG * 2) / (double)(3 * enemyPokemon.getMaxHP()) );
 				//Displays system msg depending on whether Pokemon was caught or not
-				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; }
+				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
 				else { systemMsg = enemyPokemon.getName() + " broke free!"; }
 				displaySystemMsg();
 				endTurn();
@@ -666,7 +660,7 @@ public class Game {
 				double RNG = Math.random() + 1;
 				double catchRate = 255;
 				//Displays system msg depending on whether Pokemon was caught or not
-				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; }
+				if ( catchRate >= 0.6 ) { capturePokemon( enemyPokemon ); systemMsg = "Gotcha! " + enemyPokemon.getName() + " was caught!"; battleMode = false; }
 				else { systemMsg = enemyPokemon.getName() + " broke free!"; }
 				displaySystemMsg();
 				endTurn();
@@ -839,14 +833,132 @@ public class Game {
 	}//ends BATTLE COMMANDS
 	
 	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC USEFUL HELPER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
-	//TEMPORARY OPPONENT BATTLE
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~OPPONENT BATTLE DISPLAY AND EXECUTE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void opponentBattle() {
-		//further changes later
-		enemyPokemon.attack( currentPokemon, 0 );
-		opponentTurn = false;
+		if ( battleMode == true && opponentTurn == true ) {
+			String name = "";
+			if ( enemyPokemon.getWild() == true ) {
+				name = "Wild " + enemyPokemon.getName();
+			}
+			else if ( enemyPokemon.getWild() == false ) {
+				name = foe.getName() + "'s " + enemyPokemon.getName();
+			}
+			//***********not sure if we want this test it out
+			//Display an empty message for aesthetics
+			systemMsg = "";
+			displaySystemMsg();
+			
+			//If Enemy Fainted
+			if ( enemyPokemon.fainted() == true ) {
+				systemMsg = name + " has fainted!";
+				displaySystemMsg();
+				//Pokemon gains exp
+				systemMsg = currentPokemon.getName() + " has gained " + gainEXP() + " Exp. Points!";
+				displaySystemMsg();
+				//If Pokemon has exp to level up
+				while ( currentPokemon.getEXP() > currentPokemon.getLevelEXP() ) {
+					currentPokemon.levelUp();
+					systemMsg = currentPokemon.getName() + " grew to Lv. " + currentPokemon.getLevel() + "!";
+					displaySystemMsg();
+				}
+				battleMode = false;
+			}
+			
+			//If Enemy is still alive
+			else {
+				//Changes system msg & displays it
+				systemMsg = name + " used " + enemyPokemon.getMovesName(0) + "!";
+				displaySystemMsg();
+				//Attack and change system msg + display effectiveness
+				enemyPokemon.attack( currentPokemon, 0 );
+				if ( enemyPokemon.hasWeak( currentPokemon.getType() )) {
+					systemMsg = "It's not very effective...";
+					displaySystemMsg();
+				}
+				else if ( enemyPokemon.hasStr( currentPokemon.getType() )) {
+					systemMsg = "It's super effective!";
+					displaySystemMsg();
+				}
+				else { waitMS(500); }
+			}
+			//Trainer sent out New Pokemon!
+			//Player has defeated Trainer! Player has earned $500
+			endTurn();
+		}
 	}
+	
+	public void afterBattle() {
+		//If player's Pokemon fainted
+		if ( currentPokemon.fainted() == true ) {
+			Player.setPokemonLeft( Player.getPokemonLeft() - 1 );
+			systemMsg = currentPokemon.getName() + " fainted!";
+			displaySystemMsg();
+			//Prompts for new Pokemon to send out if able
+			while ( currentPokemon.fainted() == true && !Player.blackedOut() ) {
+				displayPokemon();
+				String control = Keyboard.readString();
+				try {
+					selectedPokemon = Integer.parseInt( control );
+					selectedPokemon = selectedPokemon - 1;
+				}
+				catch (Exception e) { battleScreen = 3; }
+				
+				//Sends out Pokemon
+				if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) && !(_Pokemon.get(selectedPokemon).fainted()) ) {
+					//Displays "Go" msg
+					systemMsg = "Go " + (_Pokemon.get(selectedPokemon)).getName() + "!";
+					displaySystemMsg();
+					currentPokemon = _Pokemon.get(selectedPokemon);
+				}
+				
+				//Trying to swap with fainted Pokemon
+				else if ( _Pokemon.get(selectedPokemon).fainted() ) { systemMsg = "You cannot send out a fainted Pokemon..."; displaySystemMsg(); }
+				
+				//Goes to error message
+				else { systemMsg = "Invalid Pokemon choice..."; displaySystemMsg(); }
+			}
+			//If player has no more Pokemon
+			if ( Player.blackedOut() ) {
+				systemMsg = Player.getName() + " has blacked out!";
+				displaySystemMsg();
+				battleMode = false;
+			}
+		}
+		
+		//Evolution
+		//else if ( currentPokemon.getLevel() >= currentPokemon.getEvolveLevel() ) { evolve(); }
+	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EVOLUTION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	/*public void evolve() {
+		int lvl = currentPokemon.getLevel();
+		int xp = currentPokemon.getEXP();
+		String name = currentPokemon.getName();
+		String newMove = "";
+		//Displays "What? Pokemon is evolving!"
+		systemMsg = "What? " + name + " is evolving!";
+		displaySystemMsg();
+		
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ALL EVOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		if ( currentPokemon.getName().equals( "CHARMANDER" ) ) { currentPokemon = new Charmeleon( "CHARMELEON", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		//Permanently sets the new Pokemon in arrayList of Pokemon
+		_Pokemon.set(selectedPokemon, currentPokemon);
+		
+		//Displays "Congratulations! Your Pokemon evolved into New Pokemon!"
+		systemMsg = "Congratulations! Your " + name + " evolved into " + currentPokemon.getName() + "!";
+		displaySystemMsg();
+		//Displays "New Pokemon has learned New Move!"
+		systemMsg = currentPokemon.getName() + " has learned " + newMove + "!";
+		displaySystemMsg();
+	}*/
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC USEFUL HELPER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	//Capturing pokemon
 	public void capturePokemon( Pokemon p ) {
@@ -857,6 +969,7 @@ public class Game {
 	//Starting a Pokemon Battle
 	public void battleStart() {
 		battleMode = true;
+		opponentTurn = false;
 		enemyPokemon = new Oddish();
 		enemyPokemon.setWild(true);
 		//later implement diff wild pkmn on random chance
@@ -864,13 +977,22 @@ public class Game {
 		currentPokemon = _Pokemon.get(selectedPokemon);
 	}
 	
-	//ends player's turn
+	//Ends turn
 	public void endTurn() {
 		opponentTurn = !opponentTurn;
 		battleScreen = 0;
 	}
 	
-	//method to turn HP into a bar
+	//Gaining exp/leveling up
+	public int gainEXP() {
+		int gained;
+		//Math for exp gain
+		gained = 200;
+		currentPokemon.gainEXP(gained);
+		return gained;
+	}
+	
+	//Method to turn HP into a bar
 	public String displayHP( Pokemon p ) {
 		double eachBar = ( ( p.getMaxHP() ) / 20.0 ); // this is how much hp each bar is worth
 		int numBar = (int)( ( p.getHP() ) / eachBar); // number of bars displayed
@@ -885,10 +1007,12 @@ public class Game {
 		return bar;
 	}
 	
-	//method to turn EXP into a bar
+	//Method to turn EXP into a bar
 	public String displayEXP( Pokemon p ) {
 		double eachBar = ( ( p.getLevelEXP() ) / 20.0 ); // this is how much exp each bar is worth
 		int numBar = (int)( ( p.getEXP() ) / eachBar ); // number of bars displayed
+		int maxBar = 20;
+		if ( numBar > maxBar ) { numBar = 20; }
 		String bar = " EXP[";
 		for( int n = 0; n < numBar; n++ ) {
 			bar += "|";
@@ -900,7 +1024,7 @@ public class Game {
 		return bar;
 	}
 	
-	// helper method to equally space out the first column of "displayPokemon()"
+	//Helper method to equally space out the first column of "displayPokemon()"
 	public String indent( String s, int x ) {
 		String temp = new String( s ); //copy string
 		int numChar = 0;
@@ -966,7 +1090,6 @@ public class Game {
 		while (starter != 1 && starter != 2 && starter != 3) {
 			starter = promptStarter();
 		}
-		
 		if (starter == 1) { captured = new Bulbasaur(); }
 		else if (starter == 2) { captured = new Charmander(); }
 		else if (starter == 3) { captured = new Squirtle(); }
@@ -981,7 +1104,7 @@ public class Game {
 			
 			if ( battleMode == false ) {
 				//Not in battle -> display map + map controls
-				System.out.println( userMap );
+				System.out.println(userMap);
 				displayCommands();
 				String control = promptControl();
 				executeControl(control);
@@ -991,19 +1114,14 @@ public class Game {
 				//In battle -> display battlefield + battle menus
 				displayBattle();
 				String control = promptControl();
-				executeBattleControl( control );
-				//displayBattleEffects();
+				executeBattleControl(control);
+				//When opponentTurn is true
+				opponentBattle();
+				//After battle has ended
+				afterBattle();
 			}
 			System.out.println("battleMode (FOR TESTING): " + battleMode);
-			System.out.println("battleScreen (FOR TESTING): " + battleScreen);
-			
-			/*//Checks if Enemy Pokemon has been defeated
-				if ( battleMode == true && enemyPokemon.fainted() ) {
-				currentPokemon.normalize();
-				battleMode = false;
-			}*/
-			
-			//if ( battleMode == true && opponentTurn == true ) { opponentBattle(); }
+			System.out.println("selectedPkmn (FOR TESTING): " + selectedPokemon);
 			
 		}
 	}

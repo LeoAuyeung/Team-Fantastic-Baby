@@ -30,7 +30,7 @@ public class Player {
     public static void setDirection ( String d ) { direction = d; }
     public static void setMapNum ( int n ) { mapNum = n; }
     public static void setFromMap ( int n ) { fromMap = n; }
-    public static boolean blackedOut() { return pokemonLeft > 0; }
+    public static boolean blackedOut() { return pokemonLeft == 0; }
 	
     //Accessors
     public static String getGender() { return gender; }
