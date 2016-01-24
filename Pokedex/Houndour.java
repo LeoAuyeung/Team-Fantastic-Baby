@@ -7,7 +7,7 @@ public class Houndour extends Pokemon {
 	//Constructor
 	public Houndour() {
 		super("Houndour", 5, 24, "DARK");
-		addMove("Pursuit");
+		addMove("Feint Attack");
 		addMove("Bite");
 	}
 	

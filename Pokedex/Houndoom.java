@@ -7,7 +7,7 @@ public class Houndoom extends Houndour {
 	//Constructor
     public Houndoom() {
 		super("Houndoom", 24, 101);
-		addMove("Feint Attack");
+		addMove("Crunch");
 	}
 	
 	//Constructor for trainers

@@ -105,6 +105,7 @@ public abstract class Pokemon {
 		baseDefense = (int) ( (2 * 45 * level) / 100 ) + 5;
 		speed = (int) ( (2 * 45 * level) / 100 ) + 5;
 		levelEXP = (level * level * level) - ((level - 1) * (level - 1) * (level - 1));
+		resetStats();
 	}
 	
 	//Adding moves
