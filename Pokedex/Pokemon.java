@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public abstract class Pokemon {
 	
     //mother class governing all Pokemon in the game
-    protected boolean wild; //boolean for if pkmn is wild or a Trainer's
+    protected boolean wild = false; //boolean for if pkmn is wild or a Trainer's
     protected String name, type;
     protected int HP, maxHP, attack, baseAttack, defense, baseDefense, speed, level, exp, levelEXP, evolveLevel;
 	//Types: Normal, Fighting, Flying, Grass, Fire, Water, Electric, Rock, Ice, Dark, Steel
