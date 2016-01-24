@@ -16,7 +16,7 @@ public class Game {
     private Map userMap;    
     private Battle battle = new Battle();
     private Inventory bag = new Inventory();
-	private Trainer foe;
+	private Trainer enemy;
 	//For keeping track of battles/turns
     private boolean battleMode = false;
     private boolean opponentTurn = false;
@@ -137,7 +137,7 @@ public class Game {
 	
 	public void displaySystemMsg() {
 		//Creates a pause before displaying
-		waitMS(1000);
+		waitMS(750);
 		//1/2 of the screen
 		displayBattlefield();
 		//1/2 of the screen
@@ -162,7 +162,7 @@ public class Game {
 		System.out.println(battle);
 		
 		//Creates a pause after displaying
-		waitMS( 1500 );
+		waitMS( 1250 );
 	}
 	
 	public void displayBattlefield() {
@@ -693,7 +693,7 @@ public class Game {
 			//Goes back to previous screen
 			if ( command.equals("b") ) { battleScreen = 2; }
 			//Uses Potion
-			else if ( command.equals("1") && bag.getPotion(0) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() ) {
+			else if ( command.equals("1") && bag.getPotion(0) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() && currentPokemon.getHP() != 0 ) {
 				//Displays first system msg
 				pot = 0;
 				hpRestored = 20;
@@ -711,7 +711,7 @@ public class Game {
 			}
 			
 			//Uses Super Potion
-			else if ( command.equals("2") && bag.getPotion(1) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() ) { //Uses Super Potion
+			else if ( command.equals("2") && bag.getPotion(1) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() && currentPokemon.getHP() != 0 ) { //Uses Super Potion
 				//Displays first system msg
 				pot = 1;
 				hpRestored = 50;
@@ -729,7 +729,7 @@ public class Game {
 			}
 			
 			//Uses Hyper Potion
-			else if ( command.equals("3") && bag.getPotion(2) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() ) { //Uses Hyper Potion
+			else if ( command.equals("3") && bag.getPotion(2) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() && currentPokemon.getHP() != 0 ) { //Uses Hyper Potion
 				//Displays first system msg
 				pot = 2;
 				hpRestored = 200;
@@ -747,7 +747,7 @@ public class Game {
 			}
 			
 			//Uses Max Potion
-			else if ( command.equals("4") && bag.getPotion(3) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() ) { //Uses Max Potion
+			else if ( command.equals("4") && bag.getPotion(3) != 0 && currentPokemon.getHP() != currentPokemon.getMaxHP() && currentPokemon.getHP() != 0 ) { //Uses Max Potion
 				//Displays first system msg
 				pot = 3;
 				hpRestored = 999;
@@ -871,16 +871,32 @@ public class Game {
 					systemMsg = currentPokemon.getName() + " grew to Lv. " + currentPokemon.getLevel() + "!";
 					displaySystemMsg();
 				}
-				battleMode = false;
+				
+				//Ends battle if vs Wild pokemon
+				if ( enemyPokemon.getWild() == true ) { battleMode = false; }
+				
+				//If Trainer battle, reduce pokemon left by 1
+				else if ( enemyPokemon.getWild() == false ) {
+					enemy.setPokemonLeft( enemy.getPokemonLeft() - 1 );
+					//If trainer still has pokemon left, sends out next Pokemon
+					if ( enemy.getPokemonLeft() != 0 ) {
+						int selectedPkmn = enemy.getTotalPokemon() - enemy.getPokemonLeft();
+						enemyPokemon = enemy.getPokemon( selectedPkmn );
+						systemMsg = enemy.getName() + " has sent out " + enemyPokemon.getName() + "!";
+						displaySystemMsg();
+					}
+				}
 			}
 			
 			//If Enemy is still alive
 			else {
+				int move = (int) ( Math.random() + (enemyPokemon.getMovesNum() - 1) );
+				while ( enemyPokemon.getPP(move) == 0 ) { move = (int) ( Math.random() + (enemyPokemon.getMovesNum() - 1) ); }
 				//Changes system msg & displays it
-				systemMsg = name + " used " + enemyPokemon.getMovesName(0) + "!";
+				systemMsg = name + " used " + enemyPokemon.getMovesName(move) + "!";
 				displaySystemMsg();
 				//Attack and change system msg + display effectiveness
-				enemyPokemon.attack( currentPokemon, 0 );
+				enemyPokemon.attack( currentPokemon, move );
 				if ( enemyPokemon.hasWeak( currentPokemon.getType() )) {
 					systemMsg = "It's not very effective...";
 					displaySystemMsg();
@@ -891,8 +907,7 @@ public class Game {
 				}
 				else { waitMS(500); }
 			}
-			//Trainer sent out New Pokemon!
-			//Player has defeated Trainer! Player has earned $500
+			//Ends turn afterwards
 			endTurn();
 		}
 	}
@@ -912,7 +927,6 @@ public class Game {
 					selectedPokemon = selectedPokemon - 1;
 				}
 				catch (Exception e) { battleScreen = 3; }
-				
 				//Sends out Pokemon
 				if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) && !(_Pokemon.get(selectedPokemon).fainted()) ) {
 					//Displays "Go" msg
@@ -920,13 +934,12 @@ public class Game {
 					displaySystemMsg();
 					currentPokemon = _Pokemon.get(selectedPokemon);
 				}
-				
 				//Trying to swap with fainted Pokemon
 				else if ( _Pokemon.get(selectedPokemon).fainted() ) { systemMsg = "You cannot send out a fainted Pokemon..."; displaySystemMsg(); }
-				
 				//Goes to error message
 				else { systemMsg = "Invalid Pokemon choice..."; displaySystemMsg(); }
 			}
+			
 			//If player has no more Pokemon
 			if ( Player.blackedOut() ) {
 				systemMsg = Player.getName() + " has blacked out!";
@@ -935,8 +948,18 @@ public class Game {
 			}
 		}
 		
+		//If enemy trainer blacked out
+		else if ( enemyPokemon.getWild() == false && enemy.blackedOut() ) {
+			systemMsg = Player.getName() + " has defeated " + enemy.getName()+ "!";
+			displaySystemMsg();
+			int money = enemy.getDifficulty() * 750;
+			systemMsg = Player.getName() + " has earned $" + money + "!";
+			displaySystemMsg();
+			battleMode = false;
+		}
+		
 		//Evolution
-		else if ( currentPokemon.getLevel() >= currentPokemon.getEvolveLevel() ) { evolve(); }
+		if ( battleMode == false && currentPokemon.getLevel() >= currentPokemon.getEvolveLevel() ) { evolve(); }
 	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EVOLUTION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1023,6 +1046,8 @@ public class Game {
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC USEFUL HELPER FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~MISC BATTLE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
 	//Capturing pokemon
 	public void capturePokemon( Pokemon p ) {
 		capturedPokemon = capturedPokemon + 1;
@@ -1033,19 +1058,162 @@ public class Game {
 	public void battleStart() {
 		battleMode = true;
 		opponentTurn = false;
+		currentPokemon = new Default();
+		//Spawns wild Pokemon & displays message
 		spawnPokemon();
-		//later implement diff wild pkmn on random chance
+		systemMsg = "A wild " + enemyPokemon.getName() + " has appeared!";
+		displaySystemMsg();
+		//Player calls out first Pokemon & displays message
 		selectedPokemon = 0;
 		currentPokemon = _Pokemon.get(selectedPokemon);
 		systemMsg = "Go! " + currentPokemon.getName(); + "!";
 		displaySystemMsg();
 	}
 	
-	//Spawns wild enemy Pokemon
+	//Spawns random wild enemy Pokemon
 	public void spawnPokemon() {
+		//Lvl based on # of map
 		int lvl = 15;
-		enemyPokemon = new Oddish(lvl);
+		Pokemon pkmn;
+		//Random = # of pokemon of given type in game (not including starters/legendaries)
+		int random = (int)(Math.random() * 61);
+		
+		//Spawns a random Pokemon depending on random & map # (# increases -> higher lvl)
+		//Normal
+		if ( random == 0 ) { pkmn = new Rattata (lvl); }
+		else if ( random == 1 ) { pkmn = new Raticate (lvl); }
+		else if ( random == 2 ) { pkmn = new Jigglypuff (lvl); }
+		else if ( random == 3 ) { pkmn = new Wigglytuff (lvl); }
+		else if ( random == 4 ) { pkmn = new Zigzagoon (lvl); }
+		else if ( random == 5 ) { pkmn = new Linoone (lvl); }
+		//Fire
+		else if ( random == 6 ) { pkmn = new Vulpix (lvl); }
+		else if ( random == 7 ) { pkmn = new Ninetales (lvl); }
+		else if ( random == 8 ) { pkmn = new Growlithe (lvl); }
+		else if ( random == 9 ) { pkmn = new Arcanine (lvl); }
+		else if ( random == 10 ) { pkmn = new Ponyta (lvl); }
+		else if ( random == 11 ) { pkmn = new Rapidash (lvl); }
+		//Water
+		else if ( random == 12 ) { pkmn = new Psyduck (lvl); }
+		else if ( random == 13 ) { pkmn = new Golduck (lvl); }
+		else if ( random == 14 ) { pkmn = new Magikarp (lvl); }
+		else if ( random == 15 ) { pkmn = new Gyarados (lvl); }
+		else if ( random == 16 ) { pkmn = new Carvanha (lvl); }
+		else if ( random == 17 ) { pkmn = new Sharpedo (lvl); }
+		//Electric
+		else if ( random == 18 ) { pkmn = new Pichu (lvl); }
+		else if ( random == 19 ) { pkmn = new Pikachu (lvl); }
+		else if ( random == 20 ) { pkmn = new Raichu (lvl); }
+		else if ( random == 21 ) { pkmn = new Magnemite (lvl); }
+		else if ( random == 22 ) { pkmn = new Magneton (lvl); }
+		else if ( random == 23 ) { pkmn = new Magnezone (lvl); }
+		else if ( random == 24 ) { pkmn = new Elekid (lvl); }
+		else if ( random == 25 ) { pkmn = new Electabuzz (lvl); }
+		else if ( random == 26 ) { pkmn = new Electivire (lvl); }
+		//Grass
+		else if ( random == 27 ) { pkmn = new Oddish (lvl); }
+		else if ( random == 28 ) { pkmn = new Gloom (lvl); }
+		else if ( random == 29 ) { pkmn = new Vileplume (lvl); }
+		else if ( random == 30 ) { pkmn = new Budew (lvl); }
+		else if ( random == 31 ) { pkmn = new Roselia (lvl); }
+		else if ( random == 32 ) { pkmn = new Roserade (lvl); }
+		//Ice
+		else if ( random == 33 ) { pkmn = new Snorunt (lvl); }
+		else if ( random == 34 ) { pkmn = new Glalie (lvl); }
+		else if ( random == 35 ) { pkmn = new Spheal (lvl); }
+		else if ( random == 36 ) { pkmn = new Sealeo (lvl); }
+		else if ( random == 37 ) { pkmn = new Walrein (lvl); }
+		//Fighting
+		else if ( random == 38 ) { pkmn = new Machop (lvl); }
+		else if ( random == 39 ) { pkmn = new Machamp (lvl); }
+		else if ( random == 40 ) { pkmn = new Machoke (lvl); }
+		else if ( random == 41 ) { pkmn = new Riolu (lvl); }
+		else if ( random == 42 ) { pkmn = new Lucario (lvl); }
+		//Flying
+		else if ( random == 43 ) { pkmn = new Spearow (lvl); }
+		else if ( random == 44 ) { pkmn = new Fearow (lvl); }
+		else if ( random == 45 ) { pkmn = new Zubat (lvl); }
+		else if ( random == 46 ) { pkmn = new Golbat (lvl); }
+		else if ( random == 47 ) { pkmn = new Crobat (lvl); }
+		//Rock
+		else if ( random == 48 ) { pkmn = new Geodude (lvl); }
+		else if ( random == 49 ) { pkmn = new Graveler (lvl); }
+		else if ( random == 50 ) { pkmn = new Golem (lvl); }
+		//Dark
+		else if ( random == 51 ) { pkmn = new Houndour (lvl); }
+		else if ( random == 52 ) { pkmn = new Houndoom (lvl); }
+		else if ( random == 53 ) { pkmn = new Poochyena (lvl); }
+		else if ( random == 54 ) { pkmn = new Mightyena (lvl); }
+		//Steel
+		else if ( random == 55 ) { pkmn = new Aron (lvl); }
+		else if ( random == 56 ) { pkmn = new Lairon (lvl); }
+		else if ( random == 57 ) { pkmn = new Aggron (lvl); }
+		else if ( random == 58 ) { pkmn = new Beldum (lvl); }
+		else if ( random == 59 ) { pkmn = new Metang (lvl); }
+		else if ( random == 60 ) { pkmn = new Metagross (lvl); }
+		
+		enemyPokemon = pkmn;
 		enemyPokemon.setWild(true);
+	}
+	
+	//Starting a Trainer battle
+	public void trainerBattleStart() {
+		battleMode = true;
+		opponentTurn = false;
+		//Creation of new trainer
+		String name = randomName();
+		String type = randomType();
+		name = "Foe " + name;
+		enemy = new Trainer ( name, Player.getMapNum(), type )
+		enemyPokemon = new Default();
+		currentPokemon = new Default();
+		//Displays trainer challenging
+		systemMsg = "You have been challenged by " + enemy.getName() + "!";
+		displaySystemMsg();
+		//Trainer sends out Pokemon
+		enemyPokemon = enemy.getPokemon(0);
+		systemMsg = enemy.getName() + " sent out " + enemyPokemon.getName() + "!";
+		displaySystemMsg();
+		//Player sends out Pokemon
+		selectedPokemon = 0;
+		currentPokemon = _Pokemon.get(selectedPokemon);
+		systemMsg = "Go! " + currentPokemon.getName(); + "!";
+		displaySystemMsg();
+	}
+	
+	//Generating a random name
+	public String randomName() {
+		String name = "";
+		int random = (int)(Math.random() * 10);
+		int random = (int)(Math.random() * 10);
+		if ( random == 0 ) { name = "Andy"; }
+		else if ( random == 1 ) { name = "Richard"; }
+		else if ( random == 2 ) { name = "David"; }
+		else if ( random == 3 ) { name = "Leo"; }
+		else if ( random == 4 ) { name = "Jimmy"; }
+		else if ( random == 5 ) { name = "Vicky"; }
+		else if ( random == 6 ) { name = "Ashley"; }
+		else if ( random == 7 ) { name = "Joy"; }
+		else if ( random == 8 ) { name = "Phoebe"; }
+		else if ( random == 9 ) { name = "Helen"; }
+		return name;
+	}
+	
+	//Generating a random type
+	public String randomType() {
+		String type = "";
+		int random = (int)(Math.random() * 10);
+		if ( random == 0 ) { type = "NORMAL"; }
+		else if ( random == 1 ) { type = "FIRE"; }
+		else if ( random == 2 ) { type = "WATER"; }
+		else if ( random == 3 ) { type = "ELECTRIC"; }
+		else if ( random == 4 ) { type = "GRASS"; }
+		else if ( random == 5 ) { type = "ICE"; }
+		else if ( random == 6 ) { type = "FIGHTING"; }
+		else if ( random == 7 ) { type = "FLYING"; }
+		else if ( random == 8 ) { type = "DARK"; }
+		else if ( random == 9 ) { type = "STEEL"; }
+		return type;
 	}
 	
 	//Ends turn
@@ -1062,6 +1230,8 @@ public class Game {
 		currentPokemon.gainEXP(gained);
 		return gained;
 	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~MISC DISPLAY FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	//Method to turn HP into a bar
 	public String displayHP( Pokemon p ) {
@@ -1186,7 +1356,7 @@ public class Game {
 				executeBattleControl(control);
 				//When opponentTurn is true
 				opponentBattle();
-				//After battle has ended
+				//After battle has ended: Player black out; Trainer defeated -> gain $$; Evolutions
 				afterBattle();
 			}
 			System.out.println("battleMode (FOR TESTING): " + battleMode);

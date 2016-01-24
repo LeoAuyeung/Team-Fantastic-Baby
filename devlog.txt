@@ -382,3 +382,30 @@ Changes:
 difficulties of wild pokemon and/or trainer pokemon
 
 ==============================================================
+
+Date: 2016-01-24
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- Added Trainer functionality:
+	- Trainer example = new Trainer (name, difficulty, type)
+	- Upon creation of trainer, trainer will have a name,
+	difficulty level (used for calculating $$ earned), and 
+	an inventory of Pokemon generated based on the type & 
+	difficulty (difficulty determines level of pkmn)
+	- Upon defeating trainer, player gains $$
+	
+- Added trainerBattleStart() which will start a battle with trainer
+	
+- Added encountering wild Pokemon randomly with lvl based on map #
+- Added messages when encountering wild pokemon
+- Added Legendary pokemon
+
+- Created a README.txt
+
+- Misc details:
+	- Changed potions so player cannot use if pkmn hp is 0 (reviving)
+	- Changed timing of displaySystemMsg to be a bit quicker
+
+==============================================================
