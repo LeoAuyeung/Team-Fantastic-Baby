@@ -606,7 +606,7 @@ public class Game {
 			//Goes back to previous screen
 			if ( command.equals("b") ) { battleScreen = 2; }
 			//Uses Poke Ball
-			else if ( command.equals("1") && bag.getPokeball(0) != 0 && capturedPokemon < 6 enemyPokemon.getWild() == true ) {
+			else if ( command.equals("1") && bag.getPokeball(0) != 0 && capturedPokemon < 6 && enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 0;
 				systemMsg = Player.getName() + " used one Poke Ball!";
@@ -623,7 +623,7 @@ public class Game {
 			}
 			
 			//Uses Great Ball
-			else if ( command.equals("2") && bag.getPokeball(1) != 0 && capturedPokemon < 6 enemyPokemon.getWild() == true ) {
+			else if ( command.equals("2") && bag.getPokeball(1) != 0 && capturedPokemon < 6 && enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 1;
 				systemMsg = Player.getName() + " used one Great Ball!";
@@ -640,7 +640,7 @@ public class Game {
 			}
 			
 			//Uses Ultra Ball
-			else if ( command.equals("3") && bag.getPokeball(2) != 0 && capturedPokemon < 6 enemyPokemon.getWild() == true ) {
+			else if ( command.equals("3") && bag.getPokeball(2) != 0 && capturedPokemon < 6 && enemyPokemon.getWild() == true ) {
 				//Displays first system msg
 				ball = 2;
 				systemMsg = Player.getName() + " used one Ultra Ball!";
@@ -851,7 +851,7 @@ public class Game {
 				name = "Wild " + enemyPokemon.getName();
 			}
 			else if ( enemyPokemon.getWild() == false ) {
-				name = foe.getName() + "'s " + enemyPokemon.getName();
+				name = enemy.getName() + "'s " + enemyPokemon.getName();
 			}
 			//***********not sure if we want this test it out
 			//Display an empty message for aesthetics
@@ -1066,7 +1066,7 @@ public class Game {
 		//Player calls out first Pokemon & displays message
 		selectedPokemon = 0;
 		currentPokemon = _Pokemon.get(selectedPokemon);
-		systemMsg = "Go! " + currentPokemon.getName(); + "!";
+		systemMsg = "Go! " + currentPokemon.getName() + "!";
 		displaySystemMsg();
 	}
 	
@@ -1151,6 +1151,7 @@ public class Game {
 		else if ( random == 58 ) { pkmn = new Beldum (lvl); }
 		else if ( random == 59 ) { pkmn = new Metang (lvl); }
 		else if ( random == 60 ) { pkmn = new Metagross (lvl); }
+		else { pkmn = new Mew (lvl); }
 		
 		enemyPokemon = pkmn;
 		enemyPokemon.setWild(true);
@@ -1164,7 +1165,7 @@ public class Game {
 		String name = randomName();
 		String type = randomType();
 		name = "Foe " + name;
-		enemy = new Trainer ( name, Player.getMapNum(), type )
+		enemy = new Trainer ( name, Player.getMapNum(), type );
 		enemyPokemon = new Default();
 		currentPokemon = new Default();
 		//Displays trainer challenging
@@ -1177,14 +1178,13 @@ public class Game {
 		//Player sends out Pokemon
 		selectedPokemon = 0;
 		currentPokemon = _Pokemon.get(selectedPokemon);
-		systemMsg = "Go! " + currentPokemon.getName(); + "!";
+		systemMsg = "Go! " + currentPokemon.getName() + "!";
 		displaySystemMsg();
 	}
 	
 	//Generating a random name
 	public String randomName() {
 		String name = "";
-		int random = (int)(Math.random() * 10);
 		int random = (int)(Math.random() * 10);
 		if ( random == 0 ) { name = "Andy"; }
 		else if ( random == 1 ) { name = "Richard"; }
