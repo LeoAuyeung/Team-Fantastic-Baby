@@ -368,3 +368,15 @@ User: Leo Au-Yeung
 Changes:
 - Updated displaySystemMsg's within Game.java so that later
 	on it's easier to incorporate within opponentBattles
+
+==============================================================
+
+Date: 2016-01-23
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- Fully added battle functionality (fainted, catching, black out)
+- Adding all Pokemon and their evolutions
+
+==============================================================
