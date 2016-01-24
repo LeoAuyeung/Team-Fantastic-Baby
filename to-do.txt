@@ -19,6 +19,14 @@ Leo:
 		- player throws pkball
 		- but since wild = false, pkball misses, trainer loses turn
 
+========Something Sungbin noticed======
+- evolution and level up are beautifully done!!
+- is effective attack supposed to faint pokemon instantly? or is it for testing
+- when user has no more available pokemon, game continues.
+- and personally i think systemmsgs are little too slow(?) doesnt really matter for now
+- also doesnt matter but maybe evolving in the first battle lowers the fun? I think user should expect to 
+evolve at the first gym
+
 Sungbin:
 
 - Add different blocks in map

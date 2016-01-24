@@ -18,6 +18,15 @@ public class Map {
 	else if( n == 2) {
 	    map2();
 	}
+	else if( n == 3) {
+	    map3();
+	}
+	else if( n == 4) {
+	    map4();
+	}
+	else if( n == 5) {
+	    map5();
+	}
     }
 	
     //returns the size of the map
@@ -50,6 +59,7 @@ public class Map {
     }
 
     // precon = r1 < r2 or c1 < c2
+    // creates a line of selected type of tile 
     public static void line( int r1, int c1, int r2, int c2, String s ) {
 	if( r1 == r2 ) { // horizontal line
 	    for( int column = c1; column <= c2; column++ ) {
@@ -61,81 +71,150 @@ public class Map {
 		set( row, c1, new Tile(s) );
 	    }
 	}
+    } // ends line()
+
+    // precon r is a row numb, t1 and t2 are types of tile, c1 and c2 are concentrations respectively
+    // c1, c2 are ints between 0 ~ 100 inclusive
+    public static void sprinkle( int r, String t1, int c1, String t2, int c2 ) {
+	for( int c = 0; c < map.length; c++ ) {	    	
+	    if( (int)( Math.random()*100) < c1 ) {
+		set(r, c, new Tile(t1));
+	    }
+	    else if( (int)(Math.random()*100) < c2 ) {
+		set(r, c, new Tile(t2));
+	    }
+	    else {
+		set(r, c, new Tile(" "));
+	    }
+	}          
     }
-	
 
     //===========================MAP COLLECTION==================================
 
-    public static void map1() {
+    public static void map1() {                 //ASH VILLAGE=================================
 	for ( int row = 0; row < map.length ; row++ ) {
 	    for ( int column = 0; column < map[row].length; column++ ) {
 		map[row][column] = new Tile( "Grass" );
 	    }
 	}
-	set(0,0, new Tile("/"));
-	set(0,1, new Tile("-"));
-	set(0,2, new Tile("\\"));
-	set(1,0, new Tile("|"));
-	set(1,1, new Tile("House"));
-	set(1,2, new Tile("|"));
-	set(2,0, new Tile("|"));
-	set(2,1, new Tile("_"));
-	set(2,2, new Tile("|"));
-	set(3,1, new Tile("R"));
 	line( 4, 0, 4, 10, "R" );
 	line( 5, 0, 5, 10, "R" );
 	line( 6, 9, 16, 9, "R" );
 	line( 6, 10, 16, 10, "R" );
+	line( 7, 11, 7, 18, "R" );
+	line( 8, 11, 8, 18, "R" );	
 	line( 15, 11, 15, 19, "R" );
 	line( 16, 11, 16, 19, "R" );
+	
+	set(0,0, new Tile("/"));
+	set(0,1, new Tile("-"));
+	set(0,2, new Tile("\\"));
+	set(1,0, new Tile("|"));
+	set(1,1, new Tile("House1-1NW"));
+	set(1,2, new Tile("|"));
+	set(2,0, new Tile("|"));
+	set(2,1, new Tile("[]"));
+	set(2,2, new Tile("|"));
+	set(3,1, new Tile("R"));
+
+	set(3,16, new Tile("/"));
+	set(3,17, new Tile("-"));
+	set(3,18, new Tile("\\"));
+	set(4,16, new Tile("|"));
+	set(4,17, new Tile("House1-2NE"));
+	set(4,18, new Tile("|"));
+	set(5,16, new Tile("|"));
+	set(5,17, new Tile("[]"));
+	set(5,18, new Tile("|"));
+	set(6,17, new Tile("R"));
+
+	set(6,3, new Tile("/"));
+	set(6,4, new Tile("-"));
+	set(6,5, new Tile("\\"));
+	set(7,3, new Tile("|"));
+	set(7,4, new Tile("House1-3W"));
+	set(7,5, new Tile("|"));
+	set(8,3, new Tile("|"));
+	set(8,4, new Tile("[]"));
+	set(8,5, new Tile("|"));
+
+	set(9,13, new Tile("/"));
+	set(9,14, new Tile("-"));
+	set(9,15, new Tile("\\"));
+	set(10,13, new Tile("|"));
+	set(10,14, new Tile("House1-4E"));
+	set(10,15, new Tile("|"));
+	set(11,13, new Tile("|"));
+	set(11,14, new Tile("[]"));
+	set(11,15, new Tile("|"));	
+	
 	set( 16, 19, new Tile("ForwardPortal") );
 	set( 11, 5, new Tile("Tree") );
 	set( 3, 15, new Tile("Tree") );
+	
 	if( Player.getFromMap() == 2 ) {
 	    Player.setY( 16 );
 	    Player.setX( 19 );
 	    Player.setFromMap( Player.getMapNum() );
 	}
 	map[Player.getY()][Player.getX()].movePlayer();
-    }
+    }// ends map1()
 
-    public static void map2() {
+    public static void map2() {            //ROUTE 1 ==========================================
 	for ( int row = 0; row < map.length ; row++ ) {
 	    for ( int column = 0; column < map[row].length; column++ ) {
 		map[row][column] = new Tile( "Grass" );
 	    }
 	}
-	line( 15, 0, 15, 13, "R" );
+	line( 15, 0, 15, 13, "R" );                    
 	line( 16, 0, 16, 13, "R" );
 	line( 0, 14, 16, 14, "R" );
 	line( 0, 15, 16, 15, "R" );
-	set(5,0, new Tile("/"));
+	line( 4, 3, 14, 3, "R" );
+	line( 4, 4, 14, 4, "R" );
+	
+	set(5,0, new Tile("/"));                    // House
 	set(5,1, new Tile("-"));
 	set(5,2, new Tile("\\"));
 	set(6,0, new Tile("|"));
-	set(6,1, new Tile("House"));
+	set(6,1, new Tile("House2-1W"));
 	set(6,2, new Tile("|"));
 	set(7,0, new Tile("|"));
-	set(7,1, new Tile("_"));
+	set(7,1, new Tile("[]"));
 	set(7,2, new Tile("|"));
+
+	set(3,5, new Tile("/"));
+	set(3,6, new Tile("-"));
+	set(3,7, new Tile("\\"));
+	set(4,5, new Tile("|"));
+	set(4,6, new Tile("House2-2N"));
+	set(4,7, new Tile("|"));
+	set(5,5, new Tile("|"));
+	set(5,6, new Tile("[]"));
+	set(5,7, new Tile("|"));	
 	
-	set(12,9, new Tile("/"));
+	set(12,9, new Tile("/"));                    // Pokecenter
 	set(12,10, new Tile("-"));
 	set(12,11, new Tile("-"));
 	set(12,12, new Tile("-"));
 	set(12,13, new Tile("\\"));
 	set(13,9, new Tile("|"));
-	set(13,10, new Tile("Pokecenter"));
-	set(13,11, new Tile());    
-	set(13,12, new Tile());
+	set(13,10, new Tile("_"));
+	set(13,11, new Tile("_"));    
+	set(13,12, new Tile("_"));
 	set(13,13, new Tile("|"));
 	set(14,9, new Tile("|"));
 	set(14,10, new Tile("_"));
 	set(14,11, new Tile("PKCenter"));
 	set(14,12, new Tile("_"));
 	set(14,13, new Tile("|"));
+	
 	set(16,0, new Tile("BackPortal"));
 	set(0,15, new Tile("ForwardPortal"));
+	set(2,3, new Tile("Tree"));
+	set(10,7, new Tile("Tree"));
+	set(17,16, new Tile("Tree"));
+	
 	if( Player.getFromMap() == 1 ) {
 	    Player.setY(16);
 	    Player.setX(0);
@@ -147,8 +226,257 @@ public class Map {
 	    Player.setFromMap( Player.getMapNum() );
 	}
 	map[Player.getY()][Player.getX()].movePlayer();	
-    }
+    }// ends map2()
+
+    public static void map3() {                // ROUTE 2 =====================================
+	sprinkle(0, "Rock", 70, "Grass", 5);
+	sprinkle(1, "Rock", 70, "Grass", 5);	
+	sprinkle(2, "Rock", 70, "Grass", 5);
+	sprinkle(3, "Rock", 70, "Grass", 10);	
+	sprinkle(4, "Rock", 70, "Grass", 10);
+	sprinkle(5, "Rock", 65, "Grass", 15);
+	sprinkle(6, "Rock", 60, "Grass", 20);
+	sprinkle(7, "Rock", 50, "Grass", 30);	
+	sprinkle(8, "Rock", 50, "Grass", 40);
+	sprinkle(9, "Rock", 50, "Grass", 40);
+	sprinkle(10, "Rock", 40, "Grass", 50);	
+	sprinkle(11, "Rock", 40, "Grass", 50);
+	sprinkle(12, "Rock", 30, "Grass", 50);
+	sprinkle(13, "Rock", 20, "Grass", 60);	
+	sprinkle(14, "Rock", 15, "Grass", 65);
+	sprinkle(15, "Rock", 10, "Grass", 70);
+	sprinkle(16, "Rock", 10, "Grass", 70);
+	sprinkle(17, "Rock", 5, "Grass", 80);
+	sprinkle(18, "Rock", 0, "Grass", 90);
+	sprinkle(19, "Rock", 0, "Grass", 100);
+
+	line( 4, 14, 19, 14, "R" );                    
+	line( 4, 15, 19, 15, "R" );
+	line( 4, 8, 4, 13, "R" );
+	line( 5, 8, 5, 13, "R" );
+	line( 6, 8, 17, 8, "R" );
+	line( 6, 9, 17, 9, "R" );
+    	line( 16, 1, 16, 7, "R" );
+	line( 17, 1, 17, 7, "R" );
+	line( 1, 1, 15, 1, "R" );
+	line( 1, 2, 15, 2, "R" );
 	
+	set(9,5, new Tile("/\\"));                  // Tower
+	set(10,4, new Tile("/"));
+	set(10,5, new Tile("-"));              
+	set(10,6, new Tile("\\"));
+	set(11,4, new Tile("|"));
+	set(11,5, new Tile("_"));
+	set(11,6, new Tile("|"));	
+	set(12,4, new Tile("|"));
+	set(12,5, new Tile("_"));
+	set(12,6, new Tile("|"));
+	set(13,4, new Tile("|"));
+	set(13,5, new Tile("_"));
+	set(13,6, new Tile("|"));
+	set(14,3, new Tile("[]"));
+	set(14,4, new Tile("|"));
+	set(14,5, new Tile("_"));
+	set(14,6, new Tile("|"));
+	set(14,7, new Tile("[]"));
+	set(15,4, new Tile("[]"));
+	set(15,5, new Tile("[]"));
+	set(15,6, new Tile("[]"));
+
+	set(0,0, new Tile("[]"));                 //Stone Entrance
+	set(0,1, new Tile(" "));
+	set(0,3, new Tile(" "));
+	set(0,4, new Tile("[]"));
+	set(0,5, new Tile("[]"));
+	set(0,6, new Tile("[]"));
+	set(0,7, new Tile("[]"));
+	set(1,0, new Tile("[]"));
+	set(1,3, new Tile("[]"));		
+	set(1,4, new Tile("[]"));
+	set(1,5, new Tile("[]"));
+	set(1,6, new Tile("[]"));
+	set(2,0, new Tile("[]"));		
+	set(2,3, new Tile("[]"));
+	set(2,4, new Tile("[]"));
+	set(2,5, new Tile("[]"));
+	set(3,0, new Tile("[]"));
+	set(3,3, new Tile("[]"));
+
+	set(0,2, new Tile("ForwardPortal"));
+	set(19,15, new Tile("BackPortal"));
 	
+	if( Player.getFromMap() == 2 ) {
+	    Player.setY(19);
+	    Player.setX(15);
+	    Player.setFromMap( Player.getMapNum() );
+	}
+	else if( Player.getFromMap() == 4 ) {
+	    Player.setY(0);
+	    Player.setX(2);
+	    Player.setFromMap( Player.getMapNum() );
+	}
+	map[Player.getY()][Player.getX()].movePlayer();	
+    }// ends map3()
+
+    public static void map4() {  // ROCK TUNNEL ============================================
+	for ( int row = 0; row < map.length ; row++ ) {
+	    for ( int column = 0; column < map[row].length; column++ ) {
+		map[row][column] = new Tile("Cave");
+	    }
+	}
+
+	set(19,2,new Tile("BackPortal"));
+	set(0,14,new Tile("ForwardPortal") );
+	
+	if( Player.getFromMap() == 3 ) {
+	    Player.setY(19);
+	    Player.setX(2);
+	    Player.setFromMap( Player.getMapNum() );
+	}
+	else if( Player.getFromMap() == 5 ) {
+	    Player.setY(0);
+	    Player.setX(14);
+	    Player.setFromMap( Player.getMapNum() );
+	}
+	map[Player.getY()][Player.getX()].movePlayer();	    
+    }// ends map4()
+
+    public static void map5() { // ROCKY ROAD ================================================
+	sprinkle(19, "Rock", 30, "Grass", 100);
+	sprinkle(18, "Rock", 30, "Grass", 100);	
+	sprinkle(17, "Rock", 30, "Grass", 100);
+	sprinkle(16, "Rock", 30, "Grass", 100);	
+	sprinkle(15, "Rock", 30, "Grass", 100);
+	sprinkle(14, "Rock", 30, "Grass", 100);
+	sprinkle(13, "Rock", 30, "Grass", 100);
+	sprinkle(12, "Rock", 30, "Grass", 100);	
+	sprinkle(11, "Rock", 30, "Grass", 100);
+	sprinkle(10, "Rock", 30, "Grass", 100);
+	sprinkle(9, "Rock", 30, "Grass", 100);	
+	sprinkle(8, "Rock", 30, "Grass", 100);
+	sprinkle(7, "Rock", 30, "Grass", 100);
+	sprinkle(6, "Rock", 30, "Grass", 100);	
+	sprinkle(5, "Rock", 30, "Grass", 100);
+	sprinkle(4, "Rock", 30, "Grass", 100);
+	sprinkle(3, "Rock", 30, "Grass", 100);
+	sprinkle(2, "Rock", 30, "Grass", 100);
+	sprinkle(1, "Rock", 30, "Grass", 100);
+	sprinkle(0, "Rock", 30, "Grass", 100);
+
+
+	line( 13, 13, 19, 13, "R" );
+	line( 13, 14, 19, 14, "R" );
+	line( 12, 3, 12, 14, "R" );
+	line( 11, 3, 11, 14, "R" );
+	line( 0, 3, 10, 3, "R" );
+	line( 0, 4, 10, 4, "R" );	
+	line( 2, 5, 2, 12, "R" );
+	line( 3, 5, 3, 12, "R" );
+	line( 4, 12, 8, 12, "R" );
+	line( 8, 13, 8, 16, "R" );
+	line( 1, 16, 7, 16, "R" );
+
+	set(19,9, new Tile("[]"));
+	set(19,10, new Tile("[]"));
+	set(19,11, new Tile("[]"));
+	set(19,12, new Tile("[]"));	
+	set(19,13, new Tile(" "));
+	set(19,15, new Tile(" "));
+	set(19,16, new Tile("[]"));
+	set(19,17, new Tile("[]"));
+	set(19,18, new Tile("[]"));
+	set(18,10, new Tile("[]"));
+	set(18,11, new Tile("[]"));
+	set(18,12, new Tile("[]"));		
+	set(18,15, new Tile("[]"));
+	set(18,16, new Tile("[]"));
+	set(18,17, new Tile("[]"));
+	set(17,11, new Tile("[]"));		
+	set(17,12, new Tile("[]"));
+	set(17,15, new Tile("[]"));
+	set(17,16, new Tile("[]"));
+	set(16,12, new Tile("[]"));
+	set(16,15, new Tile("[]"));
+
+	set(0,7, new Tile("[]"));
+	set(0,9, new Tile("[]"));
+	set(0,12, new Tile("[]"));
+	set(0,14, new Tile("[]"));
+	set(0,18, new Tile("[]"));
+	set(0,19, new Tile("[]"));		
+	set(1,9, new Tile("[]"));
+	set(1,10, new Tile("[]"));
+	set(1,12, new Tile("[]"));
+	set(1,13, new Tile("[]"));		
+	set(1,15, new Tile("[]"));
+	set(1,17, new Tile("[]"));
+	set(1,19, new Tile("[]"));
+	set(2,10, new Tile("[]"));
+	set(2,11, new Tile("[]"));
+	set(2,12, new Tile("[]"));
+	set(2,14, new Tile("[]"));
+	set(2,15, new Tile("[]"));
+	set(2,17, new Tile("[]"));		
+	set(2,18, new Tile("[]"));
+	set(3,13, new Tile("[]"));
+	set(3,14, new Tile("[]"));
+	set(3,15, new Tile("[]"));		
+	set(3,17, new Tile("[]"));
+	set(3,18, new Tile("[]"));
+	set(3,19, new Tile("[]"));
+	set(4,8, new Tile("[]"));
+	set(4,9, new Tile("[]"));
+	set(4,10, new Tile("[]"));
+	set(4,11, new Tile("[]"));
+	set(4,13, new Tile("[]"));
+	set(4,15, new Tile("[]"));		
+	set(4,19, new Tile("[]"));
+	set(5,9, new Tile("[]"));
+	set(5,10, new Tile("[]"));
+	set(5,11, new Tile("[]"));		
+	set(5,13, new Tile("[]"));
+	set(5,15, new Tile("[]"));
+	set(5,17, new Tile("[]"));
+	set(5,18, new Tile("[]"));
+	set(5,19, new Tile("[]"));
+	set(6,10, new Tile("[]"));
+	set(6,11, new Tile("[]"));
+	set(6,13, new Tile("[]"));
+	set(6,15, new Tile("[]"));		
+	set(6,17, new Tile("[]"));
+	set(6,18, new Tile("[]"));
+	set(6,19, new Tile("[]"));
+	set(7,11, new Tile("[]"));		
+	set(7,13, new Tile("[]"));
+	set(7,14, new Tile("[]"));
+	set(7,15, new Tile("[]"));
+	set(7,17, new Tile("[]"));
+	set(7,18, new Tile("[]"));
+	set(8,11, new Tile("[]"));
+	set(8,17, new Tile("[]"));
+	set(9,12, new Tile("[]"));
+	set(9,13, new Tile("[]"));		
+	set(9,14, new Tile("[]"));
+	set(9,15, new Tile("[]"));
+	set(9,16, new Tile("[]"));
+	set(10,14, new Tile("[]"));
+	set(0,16, new Tile("Trainer"));
+	set(1,16, new Tile("TrainerZone"));
+
+	set(19,14, new Tile("BackPortal"));
+	set(0,4, new Tile("ForwardPortal"));
+	
+	if( Player.getFromMap() == 4 ) {
+	    Player.setY(19);
+	    Player.setX(14);
+	    Player.setFromMap( Player.getMapNum() );
+	}
+	else if( Player.getFromMap() == 6 ) {
+	    Player.setY(0);
+	    Player.setX(4);
+	    Player.setFromMap( Player.getMapNum() );
+	}
+	map[Player.getY()][Player.getX()].movePlayer();	    
+    }// ends map5()
 }//ends Map.java
 

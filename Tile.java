@@ -6,7 +6,7 @@ public class Tile {
     private String type;
     private String image;
     private boolean _isPlayerHere;
-    private final String[] obstacles = { "_", "Tree", "Rock", "PKCenter", "PKMart", "\\", "|", "/", "-" };
+    private final String[] obstacles = { "_", "Trainer", "Tree", "Rock","\\", "|", "/", "-", "/\\", "[]" };
 	
     //constructor
     public Tile() {
@@ -35,7 +35,7 @@ public class Tile {
     public void setIsPlayerHere() {
 	_isPlayerHere = !_isPlayerHere;
     }
-	
+
     //changes the image according to _isPlayerHere
     public void setImage() {
 	if( isPlayerHere() ) {
@@ -50,6 +50,18 @@ public class Tile {
 	    }
 	    else if( type.equals( "Rock" ) ) {
 		image = "oOo";
+	    }
+	    else if( type.equals( "Trainer1" ) ) {
+		image = "(!)";
+	    }
+	    else if( type.equals( "TrainerZone" )) {
+		image = "   ";
+	    }
+	    else if( type.equals( "/\\" ) ) {
+		image = "/ \\";
+	    }
+	    else if( type.equals( "[]" )) {
+		image = "[ ]";
 	    }
 	    else if( type.equals( "/" ) ) {
 		image = " /-";
@@ -74,6 +86,9 @@ public class Tile {
 	    }
 	    else if( type.equals( "BackPortal" ) || type.equals( "ForwardPortal") ) {
 		image = "[_]";
+	    }
+	    else if( type.equals( "Cave" ) ) {
+		image = "   ";
 	    }
 	    else {
 		image = "   ";

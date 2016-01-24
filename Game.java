@@ -321,15 +321,16 @@ public class Game {
 						_Pokemon.get(i).restoreHP( 999 );
 					}
 				}
-				if( to.getType().equals("ForwardPortal") ) {
-					
+				if( to.getType().equals("ForwardPortal") ) {				    
 					Player.setMapNum( Player.getMapNum()+1 );
+					userMap = new Map(Player.getMapNum());
 				}
 				if( to.getType().equals("BackPortal") ) {
 					Player.setMapNum( Player.getMapNum()-1 );
+					userMap = new Map(Player.getMapNum());
 				}	    
 				//user.setX, user.setY, change map's player coordinates
-				if( to.getType().equals("Grass") ) {
+				if( to.getType().equals("Grass")||to.getType().equals("Cave")) {
 					if( (int)(Math.random()*15) == 1 ) {
 						battleStart();		    
 					}
@@ -353,12 +354,14 @@ public class Game {
 				}
 				if( to.getType().equals("ForwardPortal") ) {
 					Player.setMapNum( Player.getMapNum()+1 );
+					userMap = new Map(Player.getMapNum());
 				}
 				if( to.getType().equals("BackPortal") ) {
 					Player.setMapNum( Player.getMapNum()-1 );
+					userMap = new Map(Player.getMapNum());
 				}	    
 				//user.setX, user.setY, change map's player coordinates
-				if( to.getType().equals("Grass") ) {
+				if( to.getType().equals("Grass")||to.getType().equals("Cave") ) {
 					if( (int)(Math.random()*15) == 1 ) {
 						battleStart();		    
 					}
@@ -382,12 +385,14 @@ public class Game {
 				}
 				if( to.getType().equals("ForwardPortal") ) {
 					Player.setMapNum( Player.getMapNum()+1 );
+					userMap = new Map(Player.getMapNum());
 				}
 				if( to.getType().equals("BackPortal") ) {
 					Player.setMapNum( Player.getMapNum()-1 );
+					userMap = new Map(Player.getMapNum());
 				}	    
 				//user.setX, user.setY, change map's player coordinates
-				if( to.getType().equals("Grass") ) {
+				if( to.getType().equals("Grass")||to.getType().equals("Cave") ) {
 					if( (int)(Math.random()*15) == 1 ) {
 						battleStart();		    
 					}
@@ -411,12 +416,14 @@ public class Game {
 				}
 				if( to.getType().equals("ForwardPortal") ) {
 					Player.setMapNum( Player.getMapNum()+1 );
+					userMap = new Map(Player.getMapNum());					
 				}
 				if( to.getType().equals("BackPortal") ) {
 					Player.setMapNum( Player.getMapNum()-1 );
+					userMap = new Map(Player.getMapNum());					
 				}	    
 				//user.setX, user.setY, change map's player coordinates
-				if( to.getType().equals("Grass") ) {
+				if( to.getType().equals("Grass")||to.getType().equals("Cave") ) {
 					if( (int)(Math.random()*15) == 1 ) {
 						battleStart();		    
 					}
@@ -1132,6 +1139,7 @@ public class Game {
 		
 		//instantiation of classes
 		Player user = new Player(gender, name);
+		userMap = new Map(Player.getMapNum());
 		
 		//sets up _Pokemon ArrayList
 		for( int i = 0; i < 6; i++ ) {
@@ -1150,9 +1158,7 @@ public class Game {
 		capturePokemon(captured);
 		
 		//RUNS GAME:
-		while ( user.getQuest() != 20 ) {
-			
-			userMap = new Map(Player.getMapNum());
+		while ( user.getQuest() != 20 ) {			
 			
 			if ( battleMode == false ) {
 				//Not in battle -> display map + map controls
