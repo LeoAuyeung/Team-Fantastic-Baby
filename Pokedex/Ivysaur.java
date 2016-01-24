@@ -2,7 +2,7 @@
 //Ivysaur.java
 package Pokedex;
 
-public class Ivysaur extends Pokemon {
+public class Ivysaur extends Bulbasaur {
 	
 	//Constructor
 	public Ivysaur() {

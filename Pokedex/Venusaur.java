@@ -2,7 +2,7 @@
 //Venusaur.java
 package Pokedex;
 
-public class Venusaur extends Pokemon {
+public class Venusaur extends Ivysaur {
 	
 	//Constructor
 	public Venusaur() {

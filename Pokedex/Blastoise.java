@@ -2,7 +2,7 @@
 //Blastoise.java
 package Pokedex;
 
-public class Blastoise extends Pokemon {
+public class Blastoise extends Wartortle {
 	
 	//Constructor
     public Blastoise() {

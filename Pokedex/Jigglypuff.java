@@ -6,15 +6,14 @@ public class Jigglypuff extends Pokemon {
 	
 	//Constructor
     public Jigglypuff() {
-		super("Jigglypuff", 5, 16);
+		super("Jigglypuff", 5, 16, "NORMAL");
 		addMove("Pound");
 		addMove("Wake-Up Slap");
 	}
 	
 	//Constructor for evolutions
 	public Jigglypuff( String n, int lvl, int eLvl ) {
-		super( n, lvl, eLvl );
-		exp = xp;
+		super( n, lvl, eLvl, "NORMAL" );
 		addMove("Pound");
 		addMove("Wake-Up Slap");
 	}

@@ -6,14 +6,14 @@ public class Charmander extends Pokemon {
 	
 	//Constructor
 	public Charmander() {
-		super("Charmander", 5, "FIRE");
+		super("Charmander", 5, 16, "FIRE");
 		addMove("Ember");
 		addMove("Fire Punch");
 	}
 	
 	//Constructor for evolutions
-	public Charmander( String n, int lvl) {
-		super( n, lvl, "FIRE");
+	public Charmander( String n, int lvl, int eLvl) {
+		super( n, lvl, eLvl, "FIRE");
 		addMove("Ember");
 		addMove("Fire Punch");
 	}

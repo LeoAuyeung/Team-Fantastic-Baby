@@ -2,7 +2,7 @@
 //Machoke.java
 package Pokedex;
 
-public class Machoke extends Pokemon {
+public class Machoke extends Machop {
 	
 	//Constructor
     public Machoke() {

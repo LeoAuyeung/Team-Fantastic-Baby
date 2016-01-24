@@ -1,17 +1,17 @@
 //Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
-//Golbat.java
+//Crobat.java
 package Pokedex;
 
-public class Golbat extends Zubat {
+public class Crobat extends Golbat {
 	
 	//Constructor
-    public Golbat() {
-		super("Golbat", 44, 101, 0);
+    public Crobat() {
+		super("Crobat", 44, 101, 0);
 		addMove("Sky Attack");
 	}
 	
 	//Constructor for evolutions
-	public Golbat( String n, int lvl, int eLvl, int xp ) {
+	public Crobat( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );
 		addMove("Sky Attack");
 	}

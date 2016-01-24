@@ -989,7 +989,7 @@ public class Game {
 		else if ( currentPokemon.getName().equals( "Graveler" ) ) { currentPokemon = new Golem( "Golem", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
 		//Dark
 		else if ( currentPokemon.getName().equals( "Houndour" ) ) { currentPokemon = new Houndoom( "Houndoom", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
-		else if ( currentPokemon.getName().equals( "Poochyena" ) ) { currentPokemon = new Poochyena( "Poochyena", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Poochyena" ) ) { currentPokemon = new Mightyena( "Mightyena", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
 		//Steel
 		else if ( currentPokemon.getName().equals( "Aron" ) ) { currentPokemon = new Lairon( "Lairon", lvl, 42 , xp ); newMove = currentPokemon.getMovesName(2); }
 		else if ( currentPokemon.getName().equals( "Lairon" ) ) { currentPokemon = new Aggron( "Aggron", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }

@@ -13,7 +13,7 @@ public class Psyduck extends Pokemon {
 	
 	//Constructor for evolutions
 	public Psyduck( String n, int lvl, int eLvl ) {
-		super( n, lvl, eLvl, "WATER" )
+		super( n, lvl, eLvl, "WATER" );
 		addMove("Water Gun");
 		addMove("Water Pulse");
 	}

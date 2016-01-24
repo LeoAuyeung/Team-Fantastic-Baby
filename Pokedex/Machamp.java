@@ -1,17 +1,17 @@
 //Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
-//Machoke.java
+//Machamp.java
 package Pokedex;
 
-public class Machoke extends Pokemon {
+public class Machamp extends Machoke {
 	
 	//Constructor
-    public Machoke() {
-		super("Machoke", 44, 101, 0);
+    public Machamp() {
+		super("Machamp", 44, 101, 0);
 		addMove("Dynamic Punch");
 	}
 	
 	//Constructor for evolutions
-	public Machoke( String n, int lvl, int eLvl, int xp ) {
+	public Machamp( String n, int lvl, int eLvl, int xp ) {
 		super( n, lvl, eLvl, xp );
 		addMove("Dynamic Punch");
 	}

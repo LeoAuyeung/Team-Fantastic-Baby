@@ -6,14 +6,13 @@ public class Raichu extends Pikachu {
 	
 	//Constructor
     public Raichu() {
-		super("Raichu", 36, 101);
+		super("Raichu", 36, 101, 0);
 		addMove("Volt Tackle");
 	}
 	
 	//Constructor for evolutions
 	public Raichu( String n, int lvl, int eLvl, int xp ) {
-		super( n, lvl, eLvl );
-		exp = xp;
+		super( n, lvl, eLvl, xp );
 		addMove("Volt Tackle");
 	}
 	
