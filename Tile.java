@@ -10,115 +10,115 @@ public class Tile {
 	
     //constructor
     public Tile() {
-		this.type = "";
-		setImage();
-		_isPlayerHere = false;
-	}
+	this.type = "";
+	setImage();
+	_isPlayerHere = false;
+    }
     
     public Tile( String type ) {
-		this.type = type;
+	this.type = type;
         setImage();
-		_isPlayerHere = false;
-	}
+	_isPlayerHere = false;
+    }
     
     //accessor
     public boolean isPlayerHere() {
-		return _isPlayerHere;
-	}
-	
+	return _isPlayerHere;
+    }
+
     public String getType() {
-		return type;
-	}
+	return type;
+    }
     
     //mutators
     //switches _isPlayerHere
     public void setIsPlayerHere() {
-		_isPlayerHere = !_isPlayerHere;
-	}
-	
+	_isPlayerHere = !_isPlayerHere;
+    }
+
     //changes the image according to _isPlayerHere
     public void setImage() {
-		if( isPlayerHere() ) {
-			image = " * ";
-		}
-		else {
-			if( type.equals( "Grass" ) ) {
-				image = "^^^";
-			}
-			else if( type.equals( "Tree" ) ) {
-				image = " T ";
-			}
-			else if( type.equals( "Rock" ) ) {
-				image = "oOo";
-			}
-			else if( type.equals( "Trainer1" ) ) {
-				image = "(!)";
-			}
-			else if( type.equals( "TrainerZone" )) {
-				image = "   ";
-			}
-			else if( type.equals( "/\\" ) ) {
-				image = "/ \\";
-			}
-			else if( type.equals( "[]" )) {
-				image = "[ ]";
-			}
-			else if( type.equals( "/" ) ) {
-				image = " /-";
-			}
-			else if( type.equals( "-" ) ) {
-				image = "---";		
-			}
-			else if( type.equals( "_" ) ) {
-				image = "___";
-			}
-			else if( type.equals( "\\" ) ) {
-				image = "-\\ ";
-			}
-			else if( type.equals( "|" ) ) {
-				image = " | ";
-			}
-			else if( type.equals( "PKCenter" ) ) {
-				image = "<C>";
-			}
-			else if( type.equals( "PKMart" ) ) {
-				image = "<M>";
-			}
-			else if( type.equals( "BackPortal" ) || type.equals( "ForwardPortal") ) {
-				image = "[_]";
-			}
-			else if( type.equals( "Cave" ) ) {
-				image = "   ";
-			}
-			else {
-				image = "   ";
-			}
-		}
+	if( isPlayerHere() ) {
+	    image = " * ";
 	}
-	
+	else {
+	    if( type.equals( "Grass" ) ) {
+		image = "^^^";
+	    }
+	    else if( type.equals( "Tree" ) ) {
+		image = " T ";
+	    }
+	    else if( type.equals( "Rock" ) ) {
+		image = "oOo";
+	    }
+	    else if( type.equals( "Trainer1" ) ) {
+		image = "(!)";
+	    }
+	    else if( type.equals( "TrainerZone" )) {
+		image = "   ";
+	    }
+	    else if( type.equals( "/\\" ) ) {
+		image = "/ \\";
+	    }
+	    else if( type.equals( "[]" )) {
+		image = "[ ]";
+	    }
+	    else if( type.equals( "/" ) ) {
+		image = " /-";
+	    }
+	    else if( type.equals( "-" ) ) {
+		image = "---";		
+	    }
+	    else if( type.equals( "_" ) ) {
+		image = "___";
+	    }
+	    else if( type.equals( "\\" ) ) {
+		image = "-\\ ";
+	    }
+	    else if( type.equals( "|" ) ) {
+		image = " | ";
+	    }
+	    else if( type.equals( "PKCenter" ) ) {
+		image = "<C>";
+	    }
+	    else if( type.equals( "PKMart" ) ) {
+		image = "<M>";
+	    }
+	    else if( type.equals( "BackPortal" ) || type.equals( "ForwardPortal") ) {
+		image = "[_]";
+	    }
+	    else if( type.equals( "Cave" ) ) {
+		image = "   ";
+	    }
+	    else {
+		image = "   ";
+	    }
+	}
+    }
+
     public Boolean isObstacle() {
-		for( int i = 0; i < obstacles.length; i++ ) {
-			if( type.equals( obstacles[i] ) ) {
-				return true;
-			}
-		}
-		return false;
+	for( int i = 0; i < obstacles.length; i++ ) {
+	    if( type.equals( obstacles[i] ) ) {
+		return true;
+	    }
 	}
+	return false;
+    }
     
     public void reset() {
-		_isPlayerHere = false;
-		setImage();
-	}
-	
+	_isPlayerHere = false;
+	setImage();
+    }
+
     public void movePlayer() {
-		_isPlayerHere = true;
-		setImage();
-	}
+	_isPlayerHere = true;
+	setImage();
+    }
     
     //overwritten toString that will display the image
     public String toString() {
-		return image;
-	}
+	return image;
+    }
 	
 }//ends Tile.java
 
