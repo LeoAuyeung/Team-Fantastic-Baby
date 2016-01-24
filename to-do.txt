@@ -2,29 +2,9 @@ MAIN THINGS TO GET DONE:
 
 Leo:
 
-- MERGE OLD EXECUTE/NEW EXECUTE IDEA BEFORE DOING OTHERS
-	- test in diff file
-
-- Wild Pokemon
-	- Only attacks
-	- Randomly uses one of its moves
-
-- Pokemon Battles:
-	- Check speed to see who goes first (?)
-	- How does a battle end?
-		- Enemy faints
-			- User gains exp
-			- Pokemon evolving after battle
-		- Player blacks out
-			- User's Pokemon faint -> select new pokemon
-		- Enemy is caught
-			- No exp gained
-			- Asks for nickname (low priority)
-
 - Pokemon
-	- Keeping track of when pkmn is fainted
 	- Pkmn can only revive at pkcenter
-		- Pkmn cannot use potion at hp=0
+		- Pkmn cannot use potion at hp = 0
 	- Add hard-coded moves for evolutions (*Do last/semi-last*)
 
 - Implement Trainers
@@ -77,15 +57,7 @@ Sungbin:
 		- Just add items into inventory.java while removing money
 		- Ability to go "Back" to get out of store
 
-EXTRA THINGS:
 
-- Start menu in map
-	- List of Pokemon
-		- Rearrange Pokemon? (Pick a Pokemon to Swap + Pick to swap with)
-		- Pokemon.about()
-	- View bags
-	- View profile (Only button to press in thsi screen is b)
-	
 *************DisplaySystemMsg***********
 
 	**	Thinking of:	**
@@ -97,13 +69,6 @@ EXTRA THINGS:
 				- Lucian sent out Mr.Mime!
 			- Go, Charmander!
 			
-		- DisplayBattle
-			- What would you like to do?
-		- Input Control
-		- DisplayBattle2
-			- Charmander used Ember!
-			*Damage calculated
-			- It's Super Effective!
 		- Opponent Turn
 			- Check if dead
 				- The foe's Poochyena fainted!
