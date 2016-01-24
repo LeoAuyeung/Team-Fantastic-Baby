@@ -97,7 +97,7 @@ Sungbin:
 				- Use/don't have cut
 			- **You picked up a HM01(Cut) (?) or have this happen after gym battles
 			
-POKEMON IN GAME:
+POKEMON IN GAME: (DONE)
 Normal:
 - Rattata, Raticate
 - Jigglypuff, Wigglytuff
@@ -118,13 +118,11 @@ Water:
 Electric:
 - Pichu, Pikachu, Raichu
 - Magnemite, Magneton, Magnezone
-- Voltorb, Electrode
 - Elekid, Electabuzz, Electivire
 
 Grass:
-- Bulbasaur, Ivysaur, Venasaur (Starter)
+- Bulbasaur, Ivysaur, Venusaur (Starter)
 - Oddish, Gloom, Vileplume
-- Seedot, Nuzleaf, Shiftry
 - Budew, Roselia, Roserade
 
 Ice:
@@ -133,30 +131,20 @@ Ice:
 
 Fighting:
 - Machop, Machoke, Machamp
-- Hitmonlee
-- Hitmonchan
-- Hitmontop
 - Riolu, Lucario
 
 Flying:
 - Spearow, Fearow
 - Zubat, Golbat, Crobat
-- Tailow, Swellow
-- Starly, Staravia, Staraptor
 
 Rock:
 - Geodude, Graveler, Golem
-- Rhyhorn, Rhydon, Rhyperior
-- Larvitar, Pupitar, Tyranitar
 
 Dark:
 - Houndour, Houndoom
 - Poochyena, Mightyena
-- Sableye
-- Absol
 
 Steel:
-- Skarmory
 - Aron, Lairon, Aggron
 - Beldum, Metang, Metagross
 

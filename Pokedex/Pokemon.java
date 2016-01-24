@@ -9,7 +9,7 @@ public abstract class Pokemon {
     //mother class governing all Pokemon in the game
     protected boolean wild; //boolean for if pkmn is wild or a Trainer's
     protected String name, type;
-    protected int HP, maxHP, attack, baseAttack, defense, baseDefense, speed, level, exp, levelEXP;
+    protected int HP, maxHP, attack, baseAttack, defense, baseDefense, speed, level, exp, levelEXP, evolveLevel;
 	//Types: Normal, Fighting, Flying, Grass, Fire, Water, Electric, Rock, Ice, Dark, Steel
     protected ArrayList weaknesses = new ArrayList();
 	protected ArrayList strengths = new ArrayList();
@@ -31,10 +31,11 @@ public abstract class Pokemon {
 	}
 	
 	//Constructor with varying level
-    public Pokemon ( String n, int lvl, String t ) {
+    public Pokemon ( String n, int lvl, int eLvl, String t ) {
 		//hard coded formulas of Pokemon stats for all Pokemon
 		name = n;
 		level = lvl;
+		evolveLevel = eLvl;
 		normalize();
 		HP = maxHP;
 		exp = 0;
@@ -56,7 +57,8 @@ public abstract class Pokemon {
 	public void setSpeed ( int spd ) { speed = spd; }
 	public void setLevel ( int lvl ) { level = lvl; }
 	public void setLevelEXP ( int lvlxp ) { levelEXP = lvlxp; }
-	public void setEXP ( int xp ) { exp = xp; }
+	public void gainEXP ( int xp ) { if ( level != 100 ) { exp = exp + xp; } }
+	public void setEvolveLevel ( int lvl ) { evolveLevel = lvl; }
 	public void setMoves ( int mvs ) { movesNum = mvs; }
 	
 	//Accessors
@@ -71,6 +73,7 @@ public abstract class Pokemon {
 	public int getLevel() { return level; }
 	public int getLevelEXP() { return levelEXP; }
 	public int getEXP() { return exp; }
+	public int getEvolveLevel() { return evolveLevel; }
 	public int getMovesNum() { return movesNum; }
 	public String getMovesName( int n ) { return movesName[n]; }
 	public String getMovesType( int n ) { return movesType[n]; }
@@ -84,20 +87,20 @@ public abstract class Pokemon {
 		else { return 0; }
 	}
 	
-	public boolean fainted() { return HP < 0; }
+	public boolean fainted() { return HP == 0; }
 	
 	//leveling up & setting stats
 	public void levelUp() {
-		while (exp > levelEXP) {
-			level += 1;
-			System.out.println(name + " grew to Lv. " + level + "!");
-			normalize();
-		}
+		level += 1;
+		exp = exp - levelEXP;
+		normalize();
 	}
 	
 	//Formulas for stats: http://bulbapedia.bulbagarden.net/wiki/Statistic#In_Generation_III_onward
 	public void normalize() {
+		int oldHP = maxHP;
 		maxHP = (int) ( (2 * 45 * level) / 100) + level + 10;
+		HP += maxHP - oldHP;
 		baseAttack = (int) ( (2 * 50 * level) / 100 ) + 5;
 		baseDefense = (int) ( (2 * 45 * level) / 100 ) + 5;
 		speed = (int) ( (2 * 45 * level) / 100 ) + 5;
@@ -162,7 +165,7 @@ public abstract class Pokemon {
 		
 		double effectiveness = 1;
 		if ( hasWeak( enemy.getType() ) ) { effectiveness = 0.5; }
-		else if ( hasStr( enemy.getType() ) ) { effectiveness = 2; }
+		else if ( hasStr( enemy.getType() ) ) { effectiveness = 40; }
 		int baseDmg = movesDmg[move];
 		
 		//actual formula for dmg in Pokemon; http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
@@ -201,7 +204,7 @@ public abstract class Pokemon {
 		return true;
 	}
 	
-	//description of Pokemon
+	//Description of Pokemon
 	public abstract String about();
 	
 }

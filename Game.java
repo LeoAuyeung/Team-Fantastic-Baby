@@ -926,12 +926,12 @@ public class Game {
 		}
 		
 		//Evolution
-		//else if ( currentPokemon.getLevel() >= currentPokemon.getEvolveLevel() ) { evolve(); }
+		else if ( currentPokemon.getLevel() >= currentPokemon.getEvolveLevel() ) { evolve(); }
 	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EVOLUTION~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	/*public void evolve() {
+	public void evolve() {
 		int lvl = currentPokemon.getLevel();
 		int xp = currentPokemon.getEXP();
 		String name = currentPokemon.getName();
@@ -941,7 +941,60 @@ public class Game {
 		displaySystemMsg();
 		
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ALL EVOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		if ( currentPokemon.getName().equals( "CHARMANDER" ) ) { currentPokemon = new Charmeleon( "CHARMELEON", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		//Starters
+		if ( currentPokemon.getName().equals( "Bulbasaur" ) ) { currentPokemon = new Ivysaur( "Ivysaur", lvl, 32 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Ivysaur" ) ) { currentPokemon = new Venusaur( "Venusaur", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Charmander" ) ) { currentPokemon = new Charmeleon( "Charmeleon", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Charmeleon" ) ) { currentPokemon = new Charizard( "Charizard", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Squirtle" ) ) { currentPokemon = new Wartortle( "Wartortle", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Wartortle" ) ) { currentPokemon = new Blastoise( "Blastoise", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		//Normal
+		else if ( currentPokemon.getName().equals( "Rattata" ) ) { currentPokemon = new Raticate( "Raticate", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Jigglypuff" ) ) { currentPokemon = new Wigglytuff( "Wigglytuff", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Zigzagoon" ) ) { currentPokemon = new Linoone( "Linoone", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		//Fire
+		else if ( currentPokemon.getName().equals( "Vulpix" ) ) { currentPokemon = new Ninetales( "Ninetales", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Growlithe" ) ) { currentPokemon = new Arcanine( "Arcanine", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Ponyta" ) ) { currentPokemon = new Rapidash( "Rapidash", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		//Water
+		else if ( currentPokemon.getName().equals( "Psyduck" ) ) { currentPokemon = new Golduck( "Golduck", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Magikarp" ) ) { currentPokemon = new Gyarados( "Gyarados", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Carvanha" ) ) { currentPokemon = new Sharpedo( "Sharpedo", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		//Electric
+		else if ( currentPokemon.getName().equals( "Pichu" ) ) { currentPokemon = new Pikachu( "Pikachu", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Pikachu" ) ) { currentPokemon = new Raichu( "Charmeleon", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Magnemite" ) ) { currentPokemon = new Magneton( "Magneton", lvl, 45 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Magneton" ) ) { currentPokemon = new Magnezone( "Magnezone", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Elekid" ) ) { currentPokemon = new Electabuzz( "Electabuzz", lvl, 45 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Electabuzz" ) ) { currentPokemon = new Electivire( "Electivire", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		//Grass
+		else if ( currentPokemon.getName().equals( "Oddish" ) ) { currentPokemon = new Gloom( "Gloom", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Gloom" ) ) { currentPokemon = new Vileplume( "Vileplume", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Budew" ) ) { currentPokemon = new Roselia( "Roselia", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Roselia" ) ) { currentPokemon = new Roserade( "Roserade", lvl, 36 , xp ); newMove = currentPokemon.getMovesName(3); }
+		//Ice
+		else if ( currentPokemon.getName().equals( "Snorunt" ) ) { currentPokemon = new Glalie( "Glalie", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Spheal" ) ) { currentPokemon = new Sealeo( "Sealeo", lvl, 44 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Sealeo" ) ) { currentPokemon = new Walrein( "Walrein", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		//Fighting
+		else if ( currentPokemon.getName().equals( "Machop" ) ) { currentPokemon = new Machoke( "Machoke", lvl, 44 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Machoke" ) ) { currentPokemon = new Machamp( "Machamp", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Riolu" ) ) { currentPokemon = new Lucario( "Lucario", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		//Flying
+		else if ( currentPokemon.getName().equals( "Spearow" ) ) { currentPokemon = new Fearow( "Fearow", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Zubat" ) ) { currentPokemon = new Golbat( "Golbat", lvl, 44 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Crobat" ) ) { currentPokemon = new Crobat( "Crobat", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		//Rock
+		else if ( currentPokemon.getName().equals( "Geodude" ) ) { currentPokemon = new Graveler( "Graveler", lvl, 44 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Graveler" ) ) { currentPokemon = new Golem( "Golem", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		//Dark
+		else if ( currentPokemon.getName().equals( "Houndour" ) ) { currentPokemon = new Houndoom( "Houndoom", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Poochyena" ) ) { currentPokemon = new Poochyena( "Poochyena", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(2); }
+		//Steel
+		else if ( currentPokemon.getName().equals( "Aron" ) ) { currentPokemon = new Lairon( "Lairon", lvl, 42 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Lairon" ) ) { currentPokemon = new Aggron( "Aggron", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
+		else if ( currentPokemon.getName().equals( "Beldum" ) ) { currentPokemon = new Metang( "Metang", lvl, 45 , xp ); newMove = currentPokemon.getMovesName(2); }
+		else if ( currentPokemon.getName().equals( "Metang" ) ) { currentPokemon = new Metagross( "Metagross", lvl, 101 , xp ); newMove = currentPokemon.getMovesName(3); }
 		
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
@@ -954,7 +1007,7 @@ public class Game {
 		//Displays "New Pokemon has learned New Move!"
 		systemMsg = currentPokemon.getName() + " has learned " + newMove + "!";
 		displaySystemMsg();
-	}*/
+	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	

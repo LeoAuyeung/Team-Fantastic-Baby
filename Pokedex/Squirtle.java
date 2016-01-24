@@ -6,14 +6,14 @@ public class Squirtle extends Pokemon {
 	
 	//Constructor
 	public Squirtle() {
-		super( "Squirtle", 5, "WATER" );
+		super( "Squirtle", 5, 16, "WATER" );
 		addMove("Water Gun");
 		addMove("Bubble Beam");
 	}
 	
 	//Constructor for evolutions
-	public Squirtle( String n, int lvl) {
-		super( n, lvl, "WATER" );
+	public Squirtle( String n, int lvl, int eLvl) {
+		super( n, lvl, eLvl, "WATER" );
 		addMove("Water Gun");
 		addMove("Bubble Beam");
 	}

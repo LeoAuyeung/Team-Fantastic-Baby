@@ -1,21 +1,21 @@
 //Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
-//Oddish.java
+//Budew.java
 package Pokedex;
 
-public class Oddish extends Pokemon {
+public class Budew extends Pokemon {
 	
 	//Constructor
-	public Oddish() {
-		super( "Oddish", 5, 21, "GRASS" );
+	public Budew() {
+		super("Budew", 5, 16, "GRASS");
 		addMove("Seed Bomb");
-		addMove("Razor Leaf");
+		addMove("Magical Leaf");
 	}
 	
 	//Constructor for evolutions
-	public Oddish( String n, int lvl, int eLvl) {
-		super( n, lvl, eLvl, "GRASS" );
+	public Budew( String n, int lvl, int eLvl ) {
+		super( n, lvl, eLvl, "GRASS");
 		addMove("Seed Bomb");
-		addMove("Razor Leaf");
+		addMove("Magical Leaf");
 	}
 	
 	//Pokedex description

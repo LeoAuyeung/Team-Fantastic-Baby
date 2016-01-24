@@ -6,16 +6,16 @@ public class Rattata extends Pokemon {
 	
 	//Constructor
 	public Rattata() {
-		super( "Rattata", 5, "NORMAL" );
+		super( "Rattata", 5, 20, "NORMAL" );
+		addMove("Tackle");
 		addMove("Scratch");
-		addMove("Headbutt");
 	}
 	
 	//Constructor for evolutions
-	public Rattata( String n, int lvl) {
-		super( n, lvl, "NORMAL" );
+	public Rattata( String n, int lvl, int eLvl ) {
+		super( n, lvl, eLvl, "NORMAL" );
+		addMove("Tackle");
 		addMove("Scratch");
-		addMove("Headbutt");
 	}
 	
 	//Pokedex description

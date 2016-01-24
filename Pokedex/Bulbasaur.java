@@ -6,16 +6,16 @@ public class Bulbasaur extends Pokemon {
 	
 	//Constructor
 	public Bulbasaur() {
-		super( "Bulbasaur", 5, "GRASS" );
+		super( "Bulbasaur", 5, 16, "GRASS" );
 		addMove("Vine Whip");
-		addMove("Magical Leaf");
+		addMove("Razor Leaf");
 	}
 	
 	//Constructor for evolutions
-	public Bulbasaur( String n, int lvl) {
-		super( n, lvl, "GRASS" );
+	public Bulbasaur( String n, int lvl, int eLvl) {
+		super( n, lvl, eLvl, "GRASS" );
 		addMove("Vine Whip");
-		addMove("Magical Leaf");
+		addMove("Razor Leaf");
 	}
 	
 	//Pokedex description
