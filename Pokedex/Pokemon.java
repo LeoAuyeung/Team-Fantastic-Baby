@@ -9,7 +9,7 @@ public abstract class Pokemon {
     //mother class governing all Pokemon in the game
     protected boolean wild = false; //boolean for if pkmn is wild or a Trainer's
     protected String name, type;
-    protected int HP, maxHP, attack, baseAttack, defense, baseDefense, speed, level, exp, levelEXP, evolveLevel;
+    protected int HP, maxHP, attack, baseAttack, defense, baseDefense, level, exp, levelEXP, evolveLevel;
 	//Types: Normal, Fighting, Flying, Grass, Fire, Water, Electric, Rock, Ice, Dark, Steel
     protected ArrayList weaknesses = new ArrayList();
 	protected ArrayList strengths = new ArrayList();
@@ -17,7 +17,7 @@ public abstract class Pokemon {
     protected int movesNum;
     protected String[] movesName = {"None","None","None","None"};
 	protected String[] movesType = {"NONE","NONE","NONE","NONE"};
-    protected Integer[] movesDmg = {40,75,90,120}; //hard coded damage for all moves
+    protected Integer[] movesDmg = {50,80,100,130}; //hard coded damage for all moves
     protected Integer[] PP = {25,15,10,5};
     protected Integer[] maxPP = {25,15,10,5};
 	
@@ -54,7 +54,6 @@ public abstract class Pokemon {
 	public void setMaxHP ( int hp ) { maxHP = hp; }
 	public void setAttack ( int atk ) { attack = atk; }
 	public void setDefense ( int def ) { defense = def; }
-	public void setSpeed ( int spd ) { speed = spd; }
 	public void setLevel ( int lvl ) { level = lvl; }
 	public void setLevelEXP ( int lvlxp ) { levelEXP = lvlxp; }
 	public void gainEXP ( int xp ) { if ( level != 100 ) { exp = exp + xp; } }
@@ -69,7 +68,6 @@ public abstract class Pokemon {
 	public int getMaxHP() { return maxHP; }
 	public int getAttack() { return attack; }
 	public int getDefense() { return defense; }
-	public int getSpeed() { return speed; }
 	public int getLevel() { return level; }
 	public int getLevelEXP() { return levelEXP; }
 	public int getEXP() { return exp; }
@@ -101,9 +99,14 @@ public abstract class Pokemon {
 		int oldHP = maxHP;
 		maxHP = (int) ( (2 * 45 * level) / 100) + level + 10;
 		HP += maxHP - oldHP;
-		baseAttack = (int) ( (2 * 50 * level) / 100 ) + 5;
-		baseDefense = (int) ( (2 * 45 * level) / 100 ) + 5;
-		speed = (int) ( (2 * 45 * level) / 100 ) + 5;
+		if ( wild == true ) {
+			baseAttack = (int) ( (2 * 50 * level) / 100 ) + 5;
+			baseDefense = (int) ( (2 * 40 * level) / 100 ) + 5;
+		}
+		else {
+			baseAttack = (int) ( (level * 2.5) + 0.5 );
+			baseDefense = (int) ( (level * 1.5) + 0.5 );
+		}
 		levelEXP = (level * level * level) - ((level - 1) * (level - 1) * (level - 1));
 		resetStats();
 	}
@@ -166,11 +169,11 @@ public abstract class Pokemon {
 		
 		double effectiveness = 1;
 		if ( hasWeak( enemy.getType() ) ) { effectiveness = 0.5; }
-		else if ( hasStr( enemy.getType() ) ) { effectiveness = 40; }
+		else if ( hasStr( enemy.getType() ) ) { effectiveness = 2; }
 		int baseDmg = movesDmg[move];
 		
 		//actual formula for dmg in Pokemon; http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
-		int damageDealt = (int) ( ( ( (2 * getLevel() + 10) / 250 ) * ( getAttack() / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
+		int damageDealt = (int) ( ( ( getAttack() / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
 		
 		enemy.lowerHP(damageDealt);
 		PP[move] -= 1;
@@ -208,4 +211,4 @@ public abstract class Pokemon {
 	//Description of Pokemon
 	public abstract String about();
 	
-}
+}			

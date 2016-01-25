@@ -14,6 +14,7 @@ public class Inventory {
 	public void setPokeball ( int index, int num ) { pokeballs[index] = num; }
 	public void setPotion ( int index, int num ) { potions[index] = num; }
 	public void setBattleItem ( int index, int num ) { battleItems[index] = num; }
+	
 	public void addKeyItem ( String item ) { keyItems.add( item ); }
 	
 	//Accessors

@@ -6,29 +6,42 @@ import Pokedex.*;
 
 public class Trainer {
 	
-	private String name;
+	private String name, type;
 	private Pokemon[] _Pkmn;
 	private int pokemonLeft, totalPokemon;
 	private int difficulty = 1;
+	private boolean gymLeader = false;
 	
 	//Constructor
-	public Trainer ( String n, int d, String type ) {
+	public Trainer ( String n, int d, String t ) {
 		name = n;
+		type = t;
 		difficulty = d;
+		gymLeader = false;
 		_Pkmn = new Pokemon[difficulty];
 		totalPokemon = difficulty;
 		pokemonLeft = totalPokemon;
 		givePokemon(difficulty, type);
 	}
 	
+	//Constructor for gym Leaders
+	public Trainer ( String n, int d, String type, boolean leader ) {
+		this(n, d, type);
+		gymLeader = true;
+	}
+	
 	//Mutators
+	public void setType( String t ) { type = t; }
 	public void setPokemonLeft( int i ) { pokemonLeft = i; }
+	public void addPokemon( Pokemon p ) { _Pkmn[pokemonLeft-1] = p; }
 	
 	//Accessors
 	public String getName() { return name; }
+	public String getType() { return type; }
 	public int getDifficulty() { return difficulty; }
 	public int getPokemonLeft() { return pokemonLeft; }
 	public int getTotalPokemon() { return totalPokemon; }
+	public boolean isGymLeader() { return gymLeader; }
 	public boolean blackedOut() { return pokemonLeft == 0; }
 	public Pokemon getPokemon( int n ) { return _Pkmn[n]; }
 	

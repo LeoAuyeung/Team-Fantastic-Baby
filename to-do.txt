@@ -16,6 +16,7 @@ Leo:
 	- Escape rate
 	- PokeMart prices
 	- Speed (?)
+	- get rid of FOR TESTING displays
 
 Sungbin:
 

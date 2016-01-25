@@ -397,10 +397,13 @@ Changes:
 	- Upon defeating trainer, player gains $$
 	
 - Added trainerBattleStart() which will start a battle with trainer
+- Added legendaryBattleStart() which will start a battle with
+	a legendary Pokemon (currently only Mew)
 	
 - Added encountering wild Pokemon randomly with lvl based on map #
 - Added messages when encountering wild pokemon
-- Added Legendary pokemon
+- Added messages for trainers/gym leaders
+- Added Legendary pokemon (Only using Mew/Mewtwo currently)
 
 - Created a README.txt
 

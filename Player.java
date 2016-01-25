@@ -4,18 +4,18 @@
 public class Player {
 	
     private static String gender, name;
-    private static int xCor, yCor, money, pokemonLeft, quest, mapNum, fromMap;
+    private static int badges, money, mapNum, fromMap, xCor, yCor, pokemonLeft;
     private static String direction;
 	
     //Constructor
     public Player ( String g, String n ) {
 		gender = g;
 		name = n;
-		//default values given to player		
+		badges = 0;
+		money = 5000;
+		//Default map location
 		mapNum = 1;
 		fromMap = mapNum;
-		quest = 0;
-		money = 5000;
 		direction = "RIGHT";
 		xCor = 1;
 		yCor = 3;
@@ -26,11 +26,11 @@ public class Player {
     public static void setY ( int y ) { yCor = y; }
     public static void setMoney ( int m ) { money = m; }
     public static void setPokemonLeft ( int l ) { pokemonLeft = l; }
-    public static void setQuest ( int q ) { quest = q; }
+	public static void setBadges ( int b ) { badges = b; }
     public static void setDirection ( String d ) { direction = d; }
     public static void setMapNum ( int n ) { mapNum = n; }
     public static void setFromMap ( int n ) { fromMap = n; }
-    public static boolean blackedOut() { return pokemonLeft == 0; }
+    public static boolean blackedOut() { return pokemonLeft <= 0; }
 	
     //Accessors
     public static String getGender() { return gender; }
@@ -39,7 +39,7 @@ public class Player {
     public static int getY() { return yCor; }
     public static int getMoney() { return money; }
     public static int getPokemonLeft() { return pokemonLeft; }
-    public static int getQuest() { return quest; }
+    public static int getBadges() { return badges; }
     public static int getMapNum() { return mapNum; }
     public static int getFromMap() { return fromMap; }
     public static String getDirection() { return direction; }

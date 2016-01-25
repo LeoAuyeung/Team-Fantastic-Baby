@@ -890,7 +890,7 @@ public class Game {
 			
 			//If Enemy is still alive
 			else {
-				int move = (int) ( Math.random() + (enemyPokemon.getMovesNum() - 1) );
+				int move = (int) ( Math.random() * (enemyPokemon.getMovesNum()) );
 				while ( enemyPokemon.getPP(move) == 0 ) { move = (int) ( Math.random() + (enemyPokemon.getMovesNum() - 1) ); }
 				//Changes system msg & displays it
 				systemMsg = name + " used " + enemyPokemon.getMovesName(move) + "!";
@@ -919,25 +919,25 @@ public class Game {
 			systemMsg = currentPokemon.getName() + " fainted!";
 			displaySystemMsg();
 			//Prompts for new Pokemon to send out if able
-			while ( currentPokemon.fainted() == true && !Player.blackedOut() ) {
+			while ( currentPokemon.fainted() == true && !( Player.blackedOut() ) ) {
 				displayPokemon();
 				String control = Keyboard.readString();
 				try {
 					selectedPokemon = Integer.parseInt( control );
 					selectedPokemon = selectedPokemon - 1;
+					//Sends out Pokemon
+					if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) && !(_Pokemon.get(selectedPokemon).fainted()) ) {
+						//Displays "Go" msg
+						systemMsg = "Go " + (_Pokemon.get(selectedPokemon)).getName() + "!";
+						displaySystemMsg();
+						currentPokemon = _Pokemon.get(selectedPokemon);
+					}
+					//Trying to swap with fainted Pokemon
+					else if ( _Pokemon.get(selectedPokemon).fainted() ) { systemMsg = "You cannot send out a fainted Pokemon..."; displaySystemMsg(); }
+					//Goes to error message
+					else { systemMsg = "Invalid Pokemon choice..."; displaySystemMsg(); }
 				}
-				catch (Exception e) { battleScreen = 3; }
-				//Sends out Pokemon
-				if ( selectedPokemon < capturedPokemon && !( _Pokemon.get(selectedPokemon).equals(currentPokemon) ) && !(_Pokemon.get(selectedPokemon).fainted()) ) {
-					//Displays "Go" msg
-					systemMsg = "Go " + (_Pokemon.get(selectedPokemon)).getName() + "!";
-					displaySystemMsg();
-					currentPokemon = _Pokemon.get(selectedPokemon);
-				}
-				//Trying to swap with fainted Pokemon
-				else if ( _Pokemon.get(selectedPokemon).fainted() ) { systemMsg = "You cannot send out a fainted Pokemon..."; displaySystemMsg(); }
-				//Goes to error message
-				else { systemMsg = "Invalid Pokemon choice..."; displaySystemMsg(); }
+				catch (Exception e) { systemMsg = "Invalid Pokemon choice..."; displaySystemMsg(); }
 			}
 			
 			//If player has no more Pokemon
@@ -950,12 +950,27 @@ public class Game {
 		
 		//If enemy trainer blacked out
 		else if ( enemyPokemon.getWild() == false && enemy.blackedOut() ) {
+			//Displays victory message
 			systemMsg = Player.getName() + " has defeated " + enemy.getName()+ "!";
 			displaySystemMsg();
+			//Displays gaining money
 			int money = enemy.getDifficulty() * 750;
 			systemMsg = Player.getName() + " has earned $" + money + "!";
 			displaySystemMsg();
 			battleMode = false;
+			
+			//Enemy is a gym leader
+			if ( enemy.isGymLeader() == true ) {
+				Player.setBadges( Player.getBadges() + 1 );
+				systemMsg = Player.getName() + " has earned the " + enemy.getType() + " badge!";
+				displaySystemMsg();
+				//Earning Rock Smash after 1st gym
+				if ( Player.getBadges() == 1 ) { bag.addKeyItem("HM06--Rock Smash"); systemMsg = Player.getName() + " has earned the item 'HM06--Rock Smash'!"; displaySystemMsg(); }
+				//Earning Cut after 2nd gym
+				else if ( Player.getBadges() == 2 ) { bag.addKeyItem("HM01--Cut"); systemMsg = Player.getName() + " has earned the item 'HM01--Cut'!"; displaySystemMsg(); }
+				//Earning a Master Ball after 3rd gym
+				else if ( Player.getBadges() == 3 ) { bag.addAmount(0, 3, 1); systemMsg = Player.getName() + " has earned the item 'HM01--Cut'!"; displaySystemMsg(); }
+			}
 		}
 		
 		//Evolution
@@ -1048,19 +1063,14 @@ public class Game {
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~MISC BATTLE FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	//Capturing pokemon
-	public void capturePokemon( Pokemon p ) {
-		capturedPokemon = capturedPokemon + 1;
-		_Pokemon.set( capturedPokemon - 1, p );
-	}
-	
-	//Starting a Pokemon Battle
+	//~~~~~~~~~~~~~~Starting a Wild Pokemon Battle~~~~~~~~~~~~~~
 	public void battleStart() {
 		battleMode = true;
 		opponentTurn = false;
 		currentPokemon = new Default();
 		//Spawns wild Pokemon & displays message
 		spawnPokemon();
+		enemyPokemon.normalize();
 		systemMsg = "A wild " + enemyPokemon.getName() + " has appeared!";
 		displaySystemMsg();
 		//Player calls out first Pokemon & displays message
@@ -1072,100 +1082,122 @@ public class Game {
 	
 	//Spawns random wild enemy Pokemon
 	public void spawnPokemon() {
-		//Lvl based on # of map
-		int lvl = 15;
+		//Lvl = ( Map num * 8 ) - random num between 0-5
+		int lvl = ( Player.getMapNum() * 8 ) - (int)(Math.random() * 6);
 		Pokemon pkmn;
-		//Random = # of pokemon of given type in game (not including starters/legendaries)
-		int random = (int)(Math.random() * 61);
 		
-		//Spawns a random Pokemon depending on random & map # (# increases -> higher lvl)
-		//Normal
-		if ( random == 0 ) { pkmn = new Rattata (lvl); }
-		else if ( random == 1 ) { pkmn = new Raticate (lvl); }
-		else if ( random == 2 ) { pkmn = new Jigglypuff (lvl); }
-		else if ( random == 3 ) { pkmn = new Wigglytuff (lvl); }
-		else if ( random == 4 ) { pkmn = new Zigzagoon (lvl); }
-		else if ( random == 5 ) { pkmn = new Linoone (lvl); }
-		//Fire
-		else if ( random == 6 ) { pkmn = new Vulpix (lvl); }
-		else if ( random == 7 ) { pkmn = new Ninetales (lvl); }
-		else if ( random == 8 ) { pkmn = new Growlithe (lvl); }
-		else if ( random == 9 ) { pkmn = new Arcanine (lvl); }
-		else if ( random == 10 ) { pkmn = new Ponyta (lvl); }
-		else if ( random == 11 ) { pkmn = new Rapidash (lvl); }
-		//Water
-		else if ( random == 12 ) { pkmn = new Psyduck (lvl); }
-		else if ( random == 13 ) { pkmn = new Golduck (lvl); }
-		else if ( random == 14 ) { pkmn = new Magikarp (lvl); }
-		else if ( random == 15 ) { pkmn = new Gyarados (lvl); }
-		else if ( random == 16 ) { pkmn = new Carvanha (lvl); }
-		else if ( random == 17 ) { pkmn = new Sharpedo (lvl); }
-		//Electric
-		else if ( random == 18 ) { pkmn = new Pichu (lvl); }
-		else if ( random == 19 ) { pkmn = new Pikachu (lvl); }
-		else if ( random == 20 ) { pkmn = new Raichu (lvl); }
-		else if ( random == 21 ) { pkmn = new Magnemite (lvl); }
-		else if ( random == 22 ) { pkmn = new Magneton (lvl); }
-		else if ( random == 23 ) { pkmn = new Magnezone (lvl); }
-		else if ( random == 24 ) { pkmn = new Elekid (lvl); }
-		else if ( random == 25 ) { pkmn = new Electabuzz (lvl); }
-		else if ( random == 26 ) { pkmn = new Electivire (lvl); }
-		//Grass
-		else if ( random == 27 ) { pkmn = new Oddish (lvl); }
-		else if ( random == 28 ) { pkmn = new Gloom (lvl); }
-		else if ( random == 29 ) { pkmn = new Vileplume (lvl); }
-		else if ( random == 30 ) { pkmn = new Budew (lvl); }
-		else if ( random == 31 ) { pkmn = new Roselia (lvl); }
-		else if ( random == 32 ) { pkmn = new Roserade (lvl); }
-		//Ice
-		else if ( random == 33 ) { pkmn = new Snorunt (lvl); }
-		else if ( random == 34 ) { pkmn = new Glalie (lvl); }
-		else if ( random == 35 ) { pkmn = new Spheal (lvl); }
-		else if ( random == 36 ) { pkmn = new Sealeo (lvl); }
-		else if ( random == 37 ) { pkmn = new Walrein (lvl); }
-		//Fighting
-		else if ( random == 38 ) { pkmn = new Machop (lvl); }
-		else if ( random == 39 ) { pkmn = new Machamp (lvl); }
-		else if ( random == 40 ) { pkmn = new Machoke (lvl); }
-		else if ( random == 41 ) { pkmn = new Riolu (lvl); }
-		else if ( random == 42 ) { pkmn = new Lucario (lvl); }
-		//Flying
-		else if ( random == 43 ) { pkmn = new Spearow (lvl); }
-		else if ( random == 44 ) { pkmn = new Fearow (lvl); }
-		else if ( random == 45 ) { pkmn = new Zubat (lvl); }
-		else if ( random == 46 ) { pkmn = new Golbat (lvl); }
-		else if ( random == 47 ) { pkmn = new Crobat (lvl); }
-		//Rock
-		else if ( random == 48 ) { pkmn = new Geodude (lvl); }
-		else if ( random == 49 ) { pkmn = new Graveler (lvl); }
-		else if ( random == 50 ) { pkmn = new Golem (lvl); }
-		//Dark
-		else if ( random == 51 ) { pkmn = new Houndour (lvl); }
-		else if ( random == 52 ) { pkmn = new Houndoom (lvl); }
-		else if ( random == 53 ) { pkmn = new Poochyena (lvl); }
-		else if ( random == 54 ) { pkmn = new Mightyena (lvl); }
-		//Steel
-		else if ( random == 55 ) { pkmn = new Aron (lvl); }
-		else if ( random == 56 ) { pkmn = new Lairon (lvl); }
-		else if ( random == 57 ) { pkmn = new Aggron (lvl); }
-		else if ( random == 58 ) { pkmn = new Beldum (lvl); }
-		else if ( random == 59 ) { pkmn = new Metang (lvl); }
-		else if ( random == 60 ) { pkmn = new Metagross (lvl); }
-		else { pkmn = new Mew (lvl); }
+		//Easiest Pokemon
+		if ( lvl > 0 && lvl <= 16 ) {
+			//Random = # of pokemon in list
+			int random = (int)(Math.random() * 24);
+			if ( random == 0 ) { pkmn = new Rattata (lvl); }
+			else if ( random == 1 ) { pkmn = new Jigglypuff (lvl); }
+			else if ( random == 2 ) { pkmn = new Zigzagoon (lvl); }
+			else if ( random == 3 ) { pkmn = new Vulpix (lvl); }
+			else if ( random == 4 ) { pkmn = new Growlithe (lvl); }
+			else if ( random == 5 ) { pkmn = new Ponyta (lvl); }
+			else if ( random == 6 ) { pkmn = new Psyduck (lvl); }
+			else if ( random == 7 ) { pkmn = new Magikarp (lvl); }
+			else if ( random == 8 ) { pkmn = new Carvanha (lvl); }
+			else if ( random == 9 ) { pkmn = new Pichu (lvl); }
+			else if ( random == 10 ) { pkmn = new Magnemite (lvl); }
+			else if ( random == 11 ) { pkmn = new Elekid (lvl); }
+			else if ( random == 12 ) { pkmn = new Oddish (lvl); }
+			else if ( random == 13 ) { pkmn = new Budew (lvl); }
+			else if ( random == 14 ) { pkmn = new Spheal (lvl); }
+			else if ( random == 15 ) { pkmn = new Machop (lvl); }
+			else if ( random == 16 ) { pkmn = new Riolu (lvl); }
+			else if ( random == 17 ) { pkmn = new Spearow (lvl); }
+			else if ( random == 18 ) { pkmn = new Zubat (lvl); }
+			else if ( random == 19 ) { pkmn = new Geodude (lvl); }
+			else if ( random == 20 ) { pkmn = new Houndour (lvl); }
+			else if ( random == 21 ) { pkmn = new Poochyena (lvl); }
+			else if ( random == 22 ) { pkmn = new Aron (lvl); }
+			else if ( random == 23 ) { pkmn = new Beldum (lvl); }
+			else { pkmn = new Regice (lvl); }
+		}
+		
+		//Medium Pokemon
+		else if ( lvl > 16 && lvl <= 32 ) {
+			//Random = # of pokemon in list
+			int random = (int)(Math.random() * 24);
+			if ( random == 0 ) { pkmn = new Raticate (lvl); }
+			else if ( random == 1 ) { pkmn = new Wigglytuff (lvl); }
+			else if ( random == 2 ) { pkmn = new Linoone (lvl); }
+			else if ( random == 3 ) { pkmn = new Ninetales (lvl); }
+			else if ( random == 4 ) { pkmn = new Arcanine (lvl); }
+			else if ( random == 5 ) { pkmn = new Rapidash (lvl); }
+			else if ( random == 6 ) { pkmn = new Golduck (lvl); }
+			else if ( random == 7 ) { pkmn = new Gyarados (lvl); }
+			else if ( random == 8 ) { pkmn = new Sharpedo (lvl); }
+			else if ( random == 9 ) { pkmn = new Pikachu (lvl); }
+			else if ( random == 10 ) { pkmn = new Magneton (lvl); }
+			else if ( random == 11 ) { pkmn = new Electabuzz (lvl); }
+			else if ( random == 12 ) { pkmn = new Gloom (lvl); }
+			else if ( random == 13 ) { pkmn = new Roselia (lvl); }
+			else if ( random == 14 ) { pkmn = new Snorunt (lvl); }
+			else if ( random == 15 ) { pkmn = new Sealeo (lvl); }
+			else if ( random == 16 ) { pkmn = new Machoke (lvl); }
+			else if ( random == 17 ) { pkmn = new Fearow (lvl); }
+			else if ( random == 18 ) { pkmn = new Golbat (lvl); }
+			else if ( random == 19 ) { pkmn = new Graveler (lvl); }
+			else if ( random == 20 ) { pkmn = new Houndoom (lvl); }
+			else if ( random == 21 ) { pkmn = new Mightyena (lvl); }
+			else if ( random == 22 ) { pkmn = new Lairon (lvl); }
+			else if ( random == 23 ) { pkmn = new Metang (lvl); }
+			else { pkmn = new Regirock (lvl); }
+		}
+		
+		//Hard Pokemon
+		else if ( lvl > 32 && lvl <= 48 ) {
+			//Random = # of pokemon in list
+			int random = (int)(Math.random() * 13);
+			if ( random == 0 ) { pkmn = new Raichu (lvl); }
+			else if ( random == 1 ) { pkmn = new Magnezone (lvl); }
+			else if ( random == 2 ) { pkmn = new Electivire (lvl); }
+			else if ( random == 3 ) { pkmn = new Vileplume (lvl); }
+			else if ( random == 4 ) { pkmn = new Roserade (lvl); }
+			else if ( random == 5 ) { pkmn = new Glalie (lvl); }
+			else if ( random == 6 ) { pkmn = new Walrein (lvl); }
+			else if ( random == 7 ) { pkmn = new Machamp (lvl); }
+			else if ( random == 8 ) { pkmn = new Lucario (lvl); }
+			else if ( random == 9 ) { pkmn = new Crobat (lvl); }
+			else if ( random == 10 ) { pkmn = new Golem (lvl); }
+			else if ( random == 11 ) { pkmn = new Aggron (lvl); }
+			else if ( random == 12 ) { pkmn = new Metagross (lvl); }
+			else { pkmn = new Registeel (lvl); }
+			
+		}
+		else { pkmn = new Regigigas (lvl); }
 		
 		enemyPokemon = pkmn;
 		enemyPokemon.setWild(true);
 	}
 	
-	//Starting a Trainer battle
-	public void trainerBattleStart() {
+	//~~~~~~~~~~~~~~Starting a Trainer battle~~~~~~~~~~~~~~
+	public void trainerBattleStart( boolean leader ) {
 		battleMode = true;
 		opponentTurn = false;
 		//Creation of new trainer
 		String name = randomName();
 		String type = randomType();
-		name = "Foe " + name;
-		enemy = new Trainer ( name, Player.getMapNum(), type );
+		int diff = Player.getMapNum();
+		Pokemon pkmn;
+		enemy = new Trainer ( name, diff, type, leader );
+		//If gym leader, redistributes Pokemon
+		if ( enemy.isGymLeader() ) {
+			name = "Gym Leader " + name;
+			//First gym is rock type
+			if ( Player.getBadges() == 0 ) { enemy.setType("ROCK"); }
+			//Second gym is normal type
+			else if ( Player.getBadges() == 1 ) { enemy.setType("NORMAL"); }
+			//Third gym is Electric type
+			else if ( Player.getBadges() == 2 ) { enemy.setType("ELECTRIC"); }
+			//Champion is Fighting type, has Mewtwo
+			else if ( Player.getBadges() == 3 ) { pkmn = new Mewtwo(); enemy.setType("FIGHTING"); enemy.addPokemon(pkmn); }
+			enemy.givePokemon( diff, enemy.getType() );
+		}
+		else { name = "Foe " + name; }
 		enemyPokemon = new Default();
 		currentPokemon = new Default();
 		//Displays trainer challenging
@@ -1214,6 +1246,30 @@ public class Game {
 		else if ( random == 8 ) { type = "DARK"; }
 		else if ( random == 9 ) { type = "STEEL"; }
 		return type;
+	}
+	
+	//~~~~~~~~~~~~~~Starting a Legendary Pokemon Battle~~~~~~~~~~~~~~
+	public void legendaryBattleStart() {
+		battleMode = true;
+		opponentTurn = false;
+		currentPokemon = new Default();
+		//Spawns wild Pokemon & displays message
+		enemyPokemon = new Mew();
+		systemMsg = "Wild Mew appeared!";
+		displaySystemMsg();
+		//Player calls out first Pokemon & displays message
+		selectedPokemon = 0;
+		currentPokemon = _Pokemon.get(selectedPokemon);
+		systemMsg = "Go get 'em, " + currentPokemon.getName() + "!";
+		displaySystemMsg();
+	}
+	
+	//Capturing pokemon
+	public void capturePokemon( Pokemon p ) {
+		capturedPokemon = capturedPokemon + 1;
+		_Pokemon.set( capturedPokemon - 1, p );
+		( _Pokemon.get( capturedPokemon - 1 ) ).setWild(false);
+		Player.setPokemonLeft( Player.getPokemonLeft() + 1 );
 	}
 	
 	//Ends turn
@@ -1304,7 +1360,7 @@ public class Game {
 		return index;
 	}
 	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END MISC FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PLAYING POKEMON!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
@@ -1339,7 +1395,7 @@ public class Game {
 		capturePokemon(captured);
 		
 		//RUNS GAME:
-		while ( user.getQuest() != 20 ) {			
+		while ( user.getBadges() != 4 ) {			
 			
 			if ( battleMode == false ) {
 				//Not in battle -> display map + map controls
@@ -1362,6 +1418,10 @@ public class Game {
 			System.out.println("battleMode (FOR TESTING): " + battleMode);
 			System.out.println("selectedPkmn (FOR TESTING): " + selectedPokemon);
 			
+		}
+		
+		//Beating the game
+		if ( user.getBadges() == 4 ) {
 		}
 	}
 	
