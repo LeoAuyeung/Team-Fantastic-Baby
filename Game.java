@@ -1411,6 +1411,7 @@ public class Game {
 		battleMode = false;
 		for( int i = 0; i < capturedPokemon; i++ ) {
 			_Pokemon.get(i).restoreHP( 999 );
+			_Pokemon.get(i).restorePP( 999 );
 		}
 	    }
 	}
