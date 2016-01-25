@@ -14,7 +14,7 @@ public class Player {
 		badges = 0;
 		money = 5000;
 		//Default map location
-		mapNum = 6;
+		mapNum = 1;
 		fromMap = mapNum;
 		direction = "RIGHT";
 		xCor = 1;

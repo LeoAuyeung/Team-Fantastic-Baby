@@ -410,5 +410,7 @@ Changes:
 - Misc details:
 	- Changed potions so player cannot use if pkmn hp is 0 (reviving)
 	- Changed timing of displaySystemMsg to be a bit quicker
+	
+- LOTS OF FIXES/DETAILS/MATH/EVERYTHING
 
 ==============================================================

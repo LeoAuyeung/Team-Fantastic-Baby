@@ -1,53 +1,28 @@
-MAIN THINGS TO GET DONE:
+FINAL TO DO:
 
-Leo:
-	
 - Start msg wait times
+	- in startupMsg() just add waitMS(???) in between lines if u want
+	so it doesn't just splatter out a whole bunch of text
+	- or u can have like displayMessage() and make it look pretty
+	
+- Beating the game (at the bottom of game.java, badges == 4)
+	- have a message print out some congratulations thing
+	
+- Interact with block in front (Cut tree, Smash rock)
+	- search for 'command.equals("x")' in file and implement
+	checking block in front. 
+	cut key item = "HM01--Cut"
+	rock smash key item = "HM06--Rock Smash"
+	
+- Adding trainers:
+	- if regular trainer, just use function trainerBattleStart(false);
+	- if gym leader/champion, just use function trainerBattleStart(true);
+	
+- Make it so maps need rock smash/cut to get to portal so u need to beat gym leader
 
-- Beating the game?
+- Make gym leader more visible? i was kinda confused when the (!) was a gym leader
+	maybe put some empty tiles around him so he is noticeable
+	
+- game.java -> spawnPokemon -> int lvl takes care of level of pokemon in each map
 
-Sungbin:
-
-- Add different blocks in map
-	- Grass	^^^
-	- Tree (cuttable)	.T.
-	- Rock (smashable)	o0o
-	- Wall (cannot break)	|| ---
-	- Portals into next/prev rooms [_]
-	- TRAINERS/GYM LEADERS/ELITE FOUR *later
-	- PokeCenter (create save spot for player to respawn if dead)
-	- PokeMart
-		- Do we want player to go inside PokeMart and then talk to 
-			someone at desk to open up shop?
-		- Same idea can be for Pokecenter?
-	- Wild items to pick up (pokeballs, potions, etc; disappears after)
-	- also maybe a Key to show which symbols mean what
-	- have names for maps in top corner (Route 101, Newleaf City, etc.)
-		- ^^^ = grass
-		- vTv = tree
-		- oO0 = rock
-		- || -- __ = walls
-		- P = pkcenter
-		- M = pkmart
-		- [_]= portal
-		- o = pokeball (hard-coded item; disappears after being taken)
-		- + different things for diff types of trainers
-	- IMPLEMENT CONTROL "X" TO INTERACT WITH BLOCK/PLAYER IN FRONT (use direction)
-		- Prompt trainer battles
-		- Cut/smash rocks/trees
-		- Pick up Items (pokeballs)
-
-- Implement PokeCenters/PokeMart
-	- Stand on PokeCenter to restore all Pokemon to full hp
-		- Make player wait a moment to restore Pokemon hp
-	- Stand on PokeMart to open store to buy items
-		- Just add items into inventory.java while removing money
-		- Ability to go "Back" to get out of store
-
-	In Map:
-		- DisplayMap
-		- Enter a Control
-		- If interact:
-			- This tree looks like it can be cut down. 
-				- Use/don't have cut
-			- **You picked up a HM01(Cut) (?) or have this happen after gym battles
+- Change any testing values back (ex: starting map)

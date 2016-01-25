@@ -33,10 +33,10 @@ public class Inventory {
 		if ( item == 0 ) { //Lower Pokeballs
 			setPokeball ( index, getPokeball(index) - 1 );
 		}
-		if ( item == 1 ) { //Lower Potions
+		else if ( item == 1 ) { //Lower Potions
 			setPotion ( index, getPotion(index) - 1 );
 		}
-		if ( item == 2 ) { //Lower BattleItems
+		else if ( item == 2 ) { //Lower BattleItems
 			setBattleItem ( index, getBattleItem(index) - 1 );
 		}
 	}
@@ -46,11 +46,11 @@ public class Inventory {
 			setPokeball ( index, getPokeball(index) + num );
 			if ( getPokeball(index) > 999 ) { setPokeball ( index, 999 ); }
 		}
-		if ( item == 1 ) { //Add Potions
+		else if ( item == 1 ) { //Add Potions
 			setPotion ( index, getPotion(index) + num );
 			if ( getPotion(index) > 999 ) { setPotion ( index, 999 ); }
 		}
-		if ( item == 2 ) { //Add BattleItems
+		else if ( item == 2 ) { //Add BattleItems
 			setBattleItem ( index, getBattleItem(index) + num );
 			if ( getBattleItem(index) > 999 ) { setBattleItem ( index, 999 ); }
 		}

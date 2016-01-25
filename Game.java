@@ -31,12 +31,6 @@ public class Game {
     public void startupMsg() {
 		//startup message from original Pokemon games!
 		
-		/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			
-			//***ADJUST WAIT TIMES LATER***
-			
-		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-		
 		System.out.println("\nHello there! It's a pleasure to meet you!");
 		System.out.println("\nWelcome to the world of Pokemon!");
 		System.out.println("\nMy name is Oak, but everyone just calls me the Pokemon Professor.");
@@ -111,208 +105,208 @@ public class Game {
 	
 	public void displayMapReset() {
         
-	for( int row = 3; row < 17; row++ ) {               //clearing the mid space
-	    for( int column = 3; column < 17; column++ ) {
-		userMap.set(row, column, new Tile("Floor"));
-	    }
-	}		
-	userMap.line( 3, 3, 3, 16, "=" );
-	userMap.line( 4, 3, 15, 3, "||" );
-	userMap.line( 16, 3, 16, 16, "=" );
-	userMap.line( 4, 16, 15, 16, "||" );
-    }
-    public void displayMapMsg() {
-		    
-	String command = "";
-	
-	if( mapScreen == 1 ) {      //Pokecenter
-	    displayMapReset();
-	    splitMsg( 9, "Nurse: Okay, I'll take your pokemons for a few second,",30);       
-	    System.out.println( userMap );
-	    waitMS( 1500 );
-	    
-	    displayMapReset();
-	    System.out.println( userMap );
-	    waitMS( 1500 );
-
-	    displayMapReset();
-	    splitMsg( 9, "Nurse: HP of all your pokemons have been restored!", 30);
-	    System.out.println( userMap );
-	    waitMS( 1500 );
-
-	    userMap = new Map( Player.getMapNum() );
-	    mapScreen = 0;
-	}
-	else if( mapScreen == 2 ) {       // Pokemart
-	    pokemart = new String[21][55];  // set up
-	    
-	    for ( int row = 0; row < pokemart.length; row++ ) {
-		for ( int column = 0; column < pokemart[row].length; column++ ) {
-		    pokemart[row][column] = new String();
-		}
-	    }
-
-	    pokemart[9][0] = "       ============================================";
-	    pokemart[10][0]= "       ||           Not enough money...          ||";
-	    pokemart[11][0]= "       ============================================";
-	    String errorMsg = "";                 // toString()
-	    for ( int row = 0; row < pokemart.length ; row++ ) {
-		for ( int column = 0; column < pokemart[row].length; column++ ) {
-		    errorMsg += pokemart[row][column];
-		}
-		    errorMsg += "\n";
-	    }
-
-	    
-	    while( !command.equals("e") ) {
-	    
-		pokemart[0][0] = "=======================================================";
-		pokemart[1][0] = "||                    | POKEMART |            E: EXIT||";
-		pokemart[2][0] = "||===================================================||";
-		pokemart[3][0] = "|| (1) Poke Ball      200P | (7) Full Restore  2500P ||";
-		pokemart[4][0] = "|| Catches a wild pokemon. | Heals to full HP.       ||";
-		pokemart[5][0] = "||---------------------------------------------------||";
-		pokemart[6][0] = "|| (2) Great Ball     600P | (8) Elixir Potion 1500P ||";
-		pokemart[7][0] = "|| A good ball.            | 10 PP to all moves.     ||";
-		pokemart[8][0] = "||---------------------------------------------------||";
-		pokemart[9][0] = "|| (3) Ultra Ball    1200P | (9) Max Elixir    2250P ||";
-		pokemart[10][0]= "|| A better ball.          | All PP to all moves.    ||";
-		pokemart[11][0]= "||---------------------------------------------------||";
-		pokemart[12][0]= "|| (4) Potion         300P | (10) Protein      1500P ||";
-		pokemart[13][0]= "|| Heals 20 HP.            | Raises the attack by 10.||";
-		pokemart[14][0]= "||---------------------------------------------------||";
-		pokemart[15][0]= "|| (5) Super Potion   700P | (11) Iron         1500P ||";
-		pokemart[16][0]= "|| Heals 50 HP.            | Raises the def by 10.   ||";
-		pokemart[17][0]= "||---------------------------------------------------||";
-		pokemart[18][0]= "|| (6) Hyper Potion  1200P |   Money in Possession:  ||";
-		pokemart[19][0]= "|| Heals 200 HP.           |" + indent(center( Player.getMoney() + "P", 25 ),25) +  "||";		
-		pokemart[20][0] = "=======================================================";
-
-		String retVal = "";                 // toString()
-		for ( int row = 0; row < pokemart.length ; row++ ) {
-		    for ( int column = 0; column < pokemart[row].length; column++ ) {
-			retVal += pokemart[row][column];
-		    }
-		    retVal += "\n";
-		}
-		
-		System.out.println( retVal );
-		command = promptControl();
-	   
-		if( command.equals("1") ) {
-		    if( Player.getMoney() > 200 ) {
-			Player.setMoney(Player.getMoney()-200);
-			bag.addAmount(0,0,1);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("2")) {
-		    if( Player.getMoney() > 600 ) {
-			Player.setMoney(Player.getMoney()-600);
-			bag.addAmount(0,1,1);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("3")) {
-		    if( Player.getMoney() > 1200 ) {
-			bag.addAmount(0,2,1);
-			Player.setMoney(Player.getMoney()-1200);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("4")) {
-		    if( Player.getMoney() > 300 ) {
-			bag.addAmount(1,0,1);
-			Player.setMoney(Player.getMoney()-300);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("5")) {
-		    if( Player.getMoney() > 700 ) {
-			bag.addAmount(1,1,1);
-			Player.setMoney(Player.getMoney()-700);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("6")) {
-		    if( Player.getMoney() > 1200 ) {
-			bag.addAmount(1,2,1);
-			Player.setMoney(Player.getMoney()-1200);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("7")) {
-		    if( Player.getMoney() > 2500 ) {
-			bag.addAmount(1,3,1);
-			Player.setMoney(Player.getMoney()-2500);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
+		for( int row = 3; row < 17; row++ ) {               //clearing the mid space
+			for( int column = 3; column < 17; column++ ) {
+				userMap.set(row, column, new Tile("Floor"));
+			}
 		}		
-		else if( command.equals("8")) {
-		    if( Player.getMoney() > 1500 ) {
-			bag.addAmount(1,4,1);
-			Player.setMoney(Player.getMoney()-1500);
-		    }
-		    else {
-			System.out.println( errorMsg );
+		userMap.line( 3, 3, 3, 16, "=" );
+		userMap.line( 4, 3, 15, 3, "||" );
+		userMap.line( 16, 3, 16, 16, "=" );
+		userMap.line( 4, 16, 15, 16, "||" );
+	}
+    public void displayMapMsg() {
+		
+		String command = "";
+		
+		if( mapScreen == 1 ) {      //Pokecenter
+			displayMapReset();
+			splitMsg( 9, "Nurse: Okay, let me take your Pokemon for a few seconds",30);       
+			System.out.println( userMap );
 			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("9")) {
-		    if( Player.getMoney() > 2250 ) {
-			bag.addAmount(1,5,1);
-			Player.setMoney(Player.getMoney()-2250);
-		    }
-		    else {
-			System.out.println( errorMsg );
+			
+			displayMapReset();
+			System.out.println( userMap );
 			waitMS( 1500 );
-		    }
-		}
-		else if( command.equals("10")) {
-		    if( Player.getMoney() > 1500 ) {
-			bag.addAmount(2,0,1);
-			Player.setMoney(Player.getMoney()-1500);
-		    }
-		    else {
-			System.out.println( errorMsg );
+			
+			displayMapReset();
+			splitMsg( 9, "Nurse: The HPs of your Pokemon have been restored!", 30);
+			System.out.println( userMap );
 			waitMS( 1500 );
-		    }
+			
+			userMap = new Map( Player.getMapNum() );
+			mapScreen = 0;
 		}
-		else if( command.equals("11")) {
-		    if( Player.getMoney() > 1500 ) {
-			bag.addAmount(2,1,1);
-			Player.setMoney(Player.getMoney()-1500);
-		    }
-		    else {
-			System.out.println( errorMsg );
-			waitMS( 1500 );
-		    }
-		}
-	    }// ends while loop
-	    mapScreen = 0;
-	}//ends  pokemart
-    }
+		else if( mapScreen == 2 ) {       // Pokemart
+			pokemart = new String[21][55];  // set up
+			
+			for ( int row = 0; row < pokemart.length; row++ ) {
+				for ( int column = 0; column < pokemart[row].length; column++ ) {
+					pokemart[row][column] = new String();
+				}
+			}
+			
+			pokemart[9][0] = "       ============================================";
+			pokemart[10][0]= "       ||           Not enough money...          ||";
+			pokemart[11][0]= "       ============================================";
+			String errorMsg = "";                 // toString()
+			for ( int row = 0; row < pokemart.length ; row++ ) {
+				for ( int column = 0; column < pokemart[row].length; column++ ) {
+					errorMsg += pokemart[row][column];
+				}
+				errorMsg += "\n";
+			}
+			
+			
+			while( !command.equals("e") ) {
+				
+				pokemart[0][0] = "=======================================================";
+				pokemart[1][0] = "||                    | POKEMART |            E: EXIT||";
+				pokemart[2][0] = "||===================================================||";
+				pokemart[3][0] = "|| (1) Poke Ball      200P | (7) Full Restore  2500P ||";
+				pokemart[4][0] = "|| Catches a wild pokemon. | Heals to full HP.       ||";
+				pokemart[5][0] = "||---------------------------------------------------||";
+				pokemart[6][0] = "|| (2) Great Ball     600P | (8) Elixir Potion 1500P ||";
+				pokemart[7][0] = "|| A good ball.            | 10 PP to all moves.     ||";
+				pokemart[8][0] = "||---------------------------------------------------||";
+				pokemart[9][0] = "|| (3) Ultra Ball    1200P | (9) Max Elixir    2250P ||";
+				pokemart[10][0]= "|| A better ball.          | All PP to all moves.    ||";
+				pokemart[11][0]= "||---------------------------------------------------||";
+				pokemart[12][0]= "|| (4) Potion         300P | (10) Protein      1500P ||";
+				pokemart[13][0]= "|| Heals 20 HP.            | Raises the attack by 10.||";
+				pokemart[14][0]= "||---------------------------------------------------||";
+				pokemart[15][0]= "|| (5) Super Potion   700P | (11) Iron         1500P ||";
+				pokemart[16][0]= "|| Heals 50 HP.            | Raises the def by 10.   ||";
+				pokemart[17][0]= "||---------------------------------------------------||";
+				pokemart[18][0]= "|| (6) Hyper Potion  1200P |   Money in Possession:  ||";
+				pokemart[19][0]= "|| Heals 200 HP.           |" + indent(center( Player.getMoney() + "P", 25 ),25) +  "||";		
+				pokemart[20][0] = "=======================================================";
+				
+				String retVal = "";                 // toString()
+				for ( int row = 0; row < pokemart.length ; row++ ) {
+					for ( int column = 0; column < pokemart[row].length; column++ ) {
+						retVal += pokemart[row][column];
+					}
+					retVal += "\n";
+				}
+				
+				System.out.println( retVal );
+				command = promptControl();
+				
+				if( command.equals("1") ) {
+					if( Player.getMoney() > 200 ) {
+						Player.setMoney(Player.getMoney()-200);
+						bag.addAmount(0,0,1);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("2")) {
+					if( Player.getMoney() > 600 ) {
+						Player.setMoney(Player.getMoney()-600);
+						bag.addAmount(0,1,1);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("3")) {
+					if( Player.getMoney() > 1200 ) {
+						bag.addAmount(0,2,1);
+						Player.setMoney(Player.getMoney()-1200);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("4")) {
+					if( Player.getMoney() > 300 ) {
+						bag.addAmount(1,0,1);
+						Player.setMoney(Player.getMoney()-300);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("5")) {
+					if( Player.getMoney() > 700 ) {
+						bag.addAmount(1,1,1);
+						Player.setMoney(Player.getMoney()-700);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("6")) {
+					if( Player.getMoney() > 1200 ) {
+						bag.addAmount(1,2,1);
+						Player.setMoney(Player.getMoney()-1200);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("7")) {
+					if( Player.getMoney() > 2500 ) {
+						bag.addAmount(1,3,1);
+						Player.setMoney(Player.getMoney()-2500);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}		
+				else if( command.equals("8")) {
+					if( Player.getMoney() > 1500 ) {
+						bag.addAmount(1,4,1);
+						Player.setMoney(Player.getMoney()-1500);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("9")) {
+					if( Player.getMoney() > 2250 ) {
+						bag.addAmount(1,5,1);
+						Player.setMoney(Player.getMoney()-2250);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("10")) {
+					if( Player.getMoney() > 1500 ) {
+						bag.addAmount(2,0,1);
+						Player.setMoney(Player.getMoney()-1500);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+				else if( command.equals("11")) {
+					if( Player.getMoney() > 1500 ) {
+						bag.addAmount(2,1,1);
+						Player.setMoney(Player.getMoney()-1500);
+					}
+					else {
+						System.out.println( errorMsg );
+						waitMS( 1500 );
+					}
+				}
+			}// ends while loop
+			mapScreen = 0;
+		}//ends  pokemart
+	}
     
 	//~~~~~~~~~~~~~~~BATTLE-DISPLAYS~~~~~~~~~~~~~~~~
 	
@@ -344,7 +338,7 @@ public class Game {
 		displayBattlefield();
 		//1/2 of the screen
 		if( systemMsg.length() < 39 ) {
-			Battle.set( 12, 0, "\n         ============================================" );
+			Battle.set( 12, 0, "         ============================================" );
 			Battle.set( 13, 0, "         ||                                        ||" );
 			Battle.set( 14, 0, "         || " + indent(systemMsg, 39) + "||");
 			Battle.set( 15, 0, "         ||                                        ||" );
@@ -505,7 +499,7 @@ public class Game {
 	
 	//Executes Non-Battle Commands
 	
-		public void executeControl( String command ) {
+	public void executeControl( String command ) {
 		int y = Player.getY();
 		int x = Player.getX();
 		Tile from = Map.get( y, x ); // a var for player's original location
@@ -651,7 +645,7 @@ public class Game {
 				//user.setX, user.setY, change map's player coordinates
 				if( to.getType().equals("Grass")||to.getType().equals("Cave") ) {
 					if( (int)(Math.random()*15) == 1 ) {
-						battleStart();		    
+						battleStart();
 					}
 				}	
 			}
@@ -659,8 +653,10 @@ public class Game {
 		
 		
 		if ( command.equals("x") ) {
-			//check block in front using player.getDirection()
-			//we will have: trees, rocks, walls, enemy trainers
+			//IF BLOCK IN FRONT == TREE && bag.hasKeyItem("HM01--Cut") {
+			//OTHERWISE NOTHING HAPPENS
+			//IF BLOCK IN FRONT == ROCK && bag.hasKeyItem("HM06--Rock Smash"){
+			//OTHERWISE NOTHING HAPPENS
 		}
 		
 	}//ends NON-BATTLE COMMANDS
@@ -1170,6 +1166,7 @@ public class Game {
 			if ( Player.blackedOut() ) {
 				systemMsg = Player.getName() + " has blacked out!";
 				displaySystemMsg();
+				//Implement here
 				battleMode = false;
 			}
 		}
@@ -1308,94 +1305,112 @@ public class Game {
 	
 	//Spawns random wild enemy Pokemon
 	public void spawnPokemon() {
-		//Lvl = ( Map num * 8 ) - random num between 0-5
-		int lvl = ( Player.getMapNum() * 8 ) - (int)(Math.random() * 6);
+		//Lvl = ( Map num * 4 ) - random num between 0-2
+		int lvl = ( Player.getMapNum() * 4 ) - (int)(Math.random() * 3);
 		Pokemon pkmn;
 		
 		//Easiest Pokemon
-		if ( lvl > 0 && lvl <= 16 ) {
+		if ( lvl > 0 && lvl <= 10 ) {
 			//Random = # of pokemon in list
-			int random = (int)(Math.random() * 24);
+			int random = (int)(Math.random() * 9);
 			if ( random == 0 ) { pkmn = new Rattata (lvl); }
 			else if ( random == 1 ) { pkmn = new Jigglypuff (lvl); }
 			else if ( random == 2 ) { pkmn = new Zigzagoon (lvl); }
-			else if ( random == 3 ) { pkmn = new Vulpix (lvl); }
-			else if ( random == 4 ) { pkmn = new Growlithe (lvl); }
-			else if ( random == 5 ) { pkmn = new Ponyta (lvl); }
-			else if ( random == 6 ) { pkmn = new Psyduck (lvl); }
-			else if ( random == 7 ) { pkmn = new Magikarp (lvl); }
-			else if ( random == 8 ) { pkmn = new Carvanha (lvl); }
-			else if ( random == 9 ) { pkmn = new Pichu (lvl); }
-			else if ( random == 10 ) { pkmn = new Magnemite (lvl); }
-			else if ( random == 11 ) { pkmn = new Elekid (lvl); }
-			else if ( random == 12 ) { pkmn = new Oddish (lvl); }
-			else if ( random == 13 ) { pkmn = new Budew (lvl); }
-			else if ( random == 14 ) { pkmn = new Spheal (lvl); }
-			else if ( random == 15 ) { pkmn = new Machop (lvl); }
-			else if ( random == 16 ) { pkmn = new Riolu (lvl); }
-			else if ( random == 17 ) { pkmn = new Spearow (lvl); }
-			else if ( random == 18 ) { pkmn = new Zubat (lvl); }
-			else if ( random == 19 ) { pkmn = new Geodude (lvl); }
-			else if ( random == 20 ) { pkmn = new Houndour (lvl); }
-			else if ( random == 21 ) { pkmn = new Poochyena (lvl); }
-			else if ( random == 22 ) { pkmn = new Aron (lvl); }
-			else if ( random == 23 ) { pkmn = new Beldum (lvl); }
-			else { pkmn = new Regice (lvl); }
+			else if ( random == 3 ) { pkmn = new Machop (lvl); }
+			else if ( random == 4 ) { pkmn = new Riolu (lvl); }
+			else if ( random == 5 ) { pkmn = new Houndour (lvl); }
+			else if ( random == 6 ) { pkmn = new Poochyena (lvl); }
+			else if ( random == 7 ) { pkmn = new Aron (lvl); }
+			else { pkmn = new Beldum (lvl); }
+		}
+		
+		//Easy-Medium Pokemon
+		if ( lvl > 0 && lvl <= 20 ) {
+			//Random = # of pokemon in list
+			int random = (int)(Math.random() * 16);
+			else if ( random == 0 ) { pkmn = new Vulpix (lvl); }
+			else if ( random == 1 ) { pkmn = new Growlithe (lvl); }
+			else if ( random == 2 ) { pkmn = new Ponyta (lvl); }
+			else if ( random == 3 ) { pkmn = new Psyduck (lvl); }
+			else if ( random == 4 ) { pkmn = new Magikarp (lvl); }
+			else if ( random == 5 ) { pkmn = new Carvanha (lvl); }
+			else if ( random == 6 ) { pkmn = new Pichu (lvl); }
+			else if ( random == 7 ) { pkmn = new Magnemite (lvl); }
+			else if ( random == 8 ) { pkmn = new Elekid (lvl); }
+			else if ( random == 9 ) { pkmn = new Oddish (lvl); }
+			else if ( random == 10 ) { pkmn = new Budew (lvl); }
+			else if ( random == 11 ) { pkmn = new Spheal (lvl); }
+			else if ( random == 12 ) { pkmn = new Machop (lvl); }
+			else if ( random == 13 ) { pkmn = new Spearow (lvl); }
+			else if ( random == 14 ) { pkmn = new Zubat (lvl); }
+			else { pkmn = new Geodude (lvl); }
 		}
 		
 		//Medium Pokemon
-		else if ( lvl > 16 && lvl <= 32 ) {
+		else if ( lvl > 20 && lvl <= 30 ) {
 			//Random = # of pokemon in list
-			int random = (int)(Math.random() * 24);
+			int random = (int)(Math.random() * 8);
 			if ( random == 0 ) { pkmn = new Raticate (lvl); }
 			else if ( random == 1 ) { pkmn = new Wigglytuff (lvl); }
 			else if ( random == 2 ) { pkmn = new Linoone (lvl); }
-			else if ( random == 3 ) { pkmn = new Ninetales (lvl); }
-			else if ( random == 4 ) { pkmn = new Arcanine (lvl); }
-			else if ( random == 5 ) { pkmn = new Rapidash (lvl); }
-			else if ( random == 6 ) { pkmn = new Golduck (lvl); }
-			else if ( random == 7 ) { pkmn = new Gyarados (lvl); }
-			else if ( random == 8 ) { pkmn = new Sharpedo (lvl); }
-			else if ( random == 9 ) { pkmn = new Pikachu (lvl); }
-			else if ( random == 10 ) { pkmn = new Magneton (lvl); }
-			else if ( random == 11 ) { pkmn = new Electabuzz (lvl); }
-			else if ( random == 12 ) { pkmn = new Gloom (lvl); }
-			else if ( random == 13 ) { pkmn = new Roselia (lvl); }
-			else if ( random == 14 ) { pkmn = new Snorunt (lvl); }
-			else if ( random == 15 ) { pkmn = new Sealeo (lvl); }
-			else if ( random == 16 ) { pkmn = new Machoke (lvl); }
-			else if ( random == 17 ) { pkmn = new Fearow (lvl); }
-			else if ( random == 18 ) { pkmn = new Golbat (lvl); }
-			else if ( random == 19 ) { pkmn = new Graveler (lvl); }
-			else if ( random == 20 ) { pkmn = new Houndoom (lvl); }
-			else if ( random == 21 ) { pkmn = new Mightyena (lvl); }
-			else if ( random == 22 ) { pkmn = new Lairon (lvl); }
-			else if ( random == 23 ) { pkmn = new Metang (lvl); }
-			else { pkmn = new Regirock (lvl); }
+			else if ( random == 3 ) { pkmn = new Machoke (lvl); }
+			else if ( random == 4 ) { pkmn = new Houndoom (lvl); }
+			else if ( random == 5 ) { pkmn = new Mightyena (lvl); }
+			else if ( random == 6 ) { pkmn = new Lairon (lvl); }
+			else { pkmn = new Metang (lvl); }
+		}
+		
+		//Medium-Hard Pokemon
+		else if ( lvl > 30 && lvl <= 40 ) {
+			//Random = # of pokemon in list
+			int random = (int)(Math.random() * 16);
+			if ( random == 0 ) { pkmn = new Ninetales (lvl); }
+			else if ( random == 1 ) { pkmn = new Arcanine (lvl); }
+			else if ( random == 2 ) { pkmn = new Rapidash (lvl); }
+			else if ( random == 3 ) { pkmn = new Golduck (lvl); }
+			else if ( random == 4 ) { pkmn = new Gyarados (lvl); }
+			else if ( random == 5 ) { pkmn = new Sharpedo (lvl); }
+			else if ( random == 6 ) { pkmn = new Pikachu (lvl); }
+			else if ( random == 7 ) { pkmn = new Magneton (lvl); }
+			else if ( random == 8 ) { pkmn = new Electabuzz (lvl); }
+			else if ( random == 9 ) { pkmn = new Gloom (lvl); }
+			else if ( random == 10 ) { pkmn = new Roselia (lvl); }
+			else if ( random == 11 ) { pkmn = new Snorunt (lvl); }
+			else if ( random == 12 ) { pkmn = new Sealeo (lvl); }
+			else if ( random == 13 ) { pkmn = new Fearow (lvl); }
+			else if ( random == 14 ) { pkmn = new Golbat (lvl); }
+			else { pkmn = new Graveler (lvl); }
 		}
 		
 		//Hard Pokemon
-		else if ( lvl > 32 && lvl <= 48 ) {
+		else if ( lvl > 40 && lvl <= 50 ) {
 			//Random = # of pokemon in list
-			int random = (int)(Math.random() * 13);
+			int random = (int)(Math.random() * 7);
+			else if ( random == 0 ) { pkmn = new Pikachu (lvl); }
+			else if ( random == 1 ) { pkmn = new Magneton (lvl); }
+			else if ( random == 2 ) { pkmn = new Electabuzz (lvl); }
+			else if ( random == 3 ) { pkmn = new Gloom (lvl); }
+			else if ( random == 4 ) { pkmn = new Roselia (lvl); }
+			else if ( random == 5 ) { pkmn = new Machamp (lvl); }
+			else { pkmn = new Lucario (lvl); }
+		}
+		
+		//Hardest Pokemon
+		else if ( lvl > 50 ) {
+			//Random = # of pokemon in list
+			int random = (int)(Math.random() * 14);
 			if ( random == 0 ) { pkmn = new Raichu (lvl); }
 			else if ( random == 1 ) { pkmn = new Magnezone (lvl); }
 			else if ( random == 2 ) { pkmn = new Electivire (lvl); }
 			else if ( random == 3 ) { pkmn = new Vileplume (lvl); }
 			else if ( random == 4 ) { pkmn = new Roserade (lvl); }
-			else if ( random == 5 ) { pkmn = new Glalie (lvl); }
 			else if ( random == 6 ) { pkmn = new Walrein (lvl); }
-			else if ( random == 7 ) { pkmn = new Machamp (lvl); }
-			else if ( random == 8 ) { pkmn = new Lucario (lvl); }
 			else if ( random == 9 ) { pkmn = new Crobat (lvl); }
 			else if ( random == 10 ) { pkmn = new Golem (lvl); }
 			else if ( random == 11 ) { pkmn = new Aggron (lvl); }
 			else if ( random == 12 ) { pkmn = new Metagross (lvl); }
-			else { pkmn = new Registeel (lvl); }
-			
+			else { pkmn = new Darkrai (lvl); }
 		}
-		else { pkmn = new Regigigas (lvl); }
-		
 		enemyPokemon = pkmn;
 		enemyPokemon.setWild(true);
 	}
@@ -1578,29 +1593,29 @@ public class Game {
 		String temp = new String( s );
 		int index = 0;
 		if( s.length() > x ) {
-		for( int i = x; i >= 0; i-- ) {
-			if( temp.substring(i).equals(" ") ) {
-				index = i;
-				break;
+			for( int i = x; i >= 0; i-- ) {
+				if( temp.substring(i).equals(" ") ) {
+					index = i;
+					break;
+				}
+				temp = temp.substring(0,i);
 			}
-			temp = temp.substring(0,i);
-		}
 		}
 		return index;
 	}
 	public void splitMsg( int row, String s, int x ) {
 	    int n = 0;	   	    
 	    while( lastWord( s, x ) > 0 ) {
-		for( int column = 5; column < 15; column++ ) { // clearing up space
-		    userMap.set(row+n, column, new Tile() );
+			for( int column = 5; column < 15; column++ ) { // clearing up space
+				userMap.set(row+n, column, new Tile() );
+			}
+			userMap.get( row + n, 5 ).setImage( indent(s.substring(0, lastWord(s,x)),30) );
+			s = s.substring( lastWord(s,x) + 1 );
+			n++;
 		}
-		userMap.get( row + n, 5 ).setImage( indent(s.substring(0, lastWord(s,x)),30) );
-		s = s.substring( lastWord(s,x) + 1 );
-		n++;
-	    }
 	    for( int column = 5; column < 15; column++ ) { // clearing up space
 		    userMap.set(row+n, column, new Tile() );
-	    }
+		}
 	    userMap.get( row + n, 5 ).setImage( indent( s, 30) );	    
 		
 	}
@@ -1612,59 +1627,59 @@ public class Game {
 	public void play() {
 		//startup prompts; only prompts user once
 		startupMsg();
-		String gender = "";
-		while ( !(gender.equals("boy")) && !(gender.equals("girl")) ) {
-			gender = promptGender();
-			gender = gender.toLowerCase();
-		}
-		String name = promptName();
+	String gender = "";
+	while ( !(gender.equals("boy")) && !(gender.equals("girl")) ) {
+		gender = promptGender();
+		gender = gender.toLowerCase();
+	}
+	String name = promptName();
+	
+	//instantiation of classes
+	Player user = new Player(gender, name);
+	userMap = new Map(Player.getMapNum());
+	
+	//sets up _Pokemon ArrayList
+	for( int i = 0; i < 6; i++ ) {
+		_Pokemon.add( new Default() );
+	}
+	
+	//prompts for starter Pokemon, and captures one accordingly
+	capturedPokemon = 0;
+	int starter = 0;
+	while (starter != 1 && starter != 2 && starter != 3) {
+		starter = promptStarter();
+	}
+	if (starter == 1) { captured = new Bulbasaur(); }
+	else if (starter == 2) { captured = new Charmander(); }
+	else if (starter == 3) { captured = new Squirtle(); }
+	capturePokemon(captured);
+	
+	//RUNS GAME:
+	while ( user.getBadges() != 4 ) {			
 		
-		//instantiation of classes
-		Player user = new Player(gender, name);
-		userMap = new Map(Player.getMapNum());
-		
-		//sets up _Pokemon ArrayList
-		for( int i = 0; i < 6; i++ ) {
-			_Pokemon.add( new Default() );
+		if ( battleMode == false ) {
+			//Not in battle -> display map + map controls
+			System.out.println(userMap);
+			displayCommands();
+			String control = promptControl();
+			executeControl(control);
+			//displayMapMsg(); displays map messages when interacting
 		}
-		
-		//prompts for starter Pokemon, and captures one accordingly
-		capturedPokemon = 0;
-		int starter = 0;
-		while (starter != 1 && starter != 2 && starter != 3) {
-			starter = promptStarter();
+		else if ( battleMode == true ) {
+			//In battle -> display battlefield + battle menus
+			displayBattle();
+			String control = promptControl();
+			executeBattleControl(control);
+			//When opponentTurn is true
+			opponentBattle();
+			//After battle has ended: Player black out; Trainer defeated -> gain $$; Evolutions
+			afterBattle();
 		}
-		if (starter == 1) { captured = new Bulbasaur(); }
-		else if (starter == 2) { captured = new Charmander(); }
-		else if (starter == 3) { captured = new Squirtle(); }
-		capturePokemon(captured);
-		
-		//RUNS GAME:
-		while ( user.getBadges() != 4 ) {			
-			
-			if ( battleMode == false ) {
-				//Not in battle -> display map + map controls
-				System.out.println(userMap);
-				displayCommands();
-				String control = promptControl();
-				executeControl(control);
-				//displayMapMsg(); displays map messages when interacting
-			}
-			else if ( battleMode == true ) {
-				//In battle -> display battlefield + battle menus
-				displayBattle();
-				String control = promptControl();
-				executeBattleControl(control);
-				//When opponentTurn is true
-				opponentBattle();
-				//After battle has ended: Player black out; Trainer defeated -> gain $$; Evolutions
-				afterBattle();
-			}
-		}
-		
-		//Beating the game
-		if ( user.getBadges() == 4 ) {
-		}
+	}
+	
+	//Beating the game
+	if ( user.getBadges() == 4 ) {
+	}
 	}
 	
 	public static void main (String[] args) {
