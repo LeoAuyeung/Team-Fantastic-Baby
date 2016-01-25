@@ -2,7 +2,7 @@
 Project -- Pokemon: Fantastic Version
 ==============================================================
 Created by Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
-Project Submitted on January 24, 2016
+Project Submitted on January 25, 2016
 ==============================================================
 
 Welcome to Pokemon: Fantastic Version!
