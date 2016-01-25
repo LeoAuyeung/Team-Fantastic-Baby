@@ -1405,6 +1405,9 @@ public class Game {
 		Player.setY( Player.getRY() );
 		userMap = new Map( Player.getRmap() );
 		battleMode = false;
+		for( int i = 0; i < capturedPokemon; i++ ) {
+			_Pokemon.get(i).restoreHP( 999 );
+		}
 	    }
 	}
 		
