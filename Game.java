@@ -1753,7 +1753,7 @@ public class Game {
     //Capturing pokemon
     public void capturePokemon( Pokemon p ) {
 	capturedPokemon = capturedPokemon + 1;
-	_Pokemon.set( capturedPokemon, p );
+	_Pokemon.set( capturedPokemon - 1, p );
 	Player.setPokemonLeft( Player.getPokemonLeft() + 1 );
     }
 	
