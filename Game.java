@@ -1282,7 +1282,8 @@ public class Game {
 	public int gainEXP() {
 		int gained;
 		//Math for exp gain
-		gained = 500;
+		if ( enemyPokemon.getWild() == false ) { gained = enemyPokemon.getLevel() * 6; }
+		else { gained = enemyPokemon.getLevel() * 4; }
 		currentPokemon.gainEXP(gained);
 		return gained;
 	}
@@ -1415,9 +1416,6 @@ public class Game {
 				//After battle has ended: Player black out; Trainer defeated -> gain $$; Evolutions
 				afterBattle();
 			}
-			System.out.println("battleMode (FOR TESTING): " + battleMode);
-			System.out.println("selectedPkmn (FOR TESTING): " + selectedPokemon);
-			
 		}
 		
 		//Beating the game

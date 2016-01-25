@@ -17,7 +17,7 @@ public abstract class Pokemon {
     protected int movesNum;
     protected String[] movesName = {"None","None","None","None"};
 	protected String[] movesType = {"NONE","NONE","NONE","NONE"};
-    protected Integer[] movesDmg = {50,80,100,130}; //hard coded damage for all moves
+    protected Integer[] movesDmg = {45,70,90,120}; //hard coded damage for all moves
     protected Integer[] PP = {25,15,10,5};
     protected Integer[] maxPP = {25,15,10,5};
 	
@@ -94,21 +94,26 @@ public abstract class Pokemon {
 		normalize();
 	}
 	
-	//Formulas for stats: http://bulbapedia.bulbagarden.net/wiki/Statistic#In_Generation_III_onward
+	//Normalize stats
 	public void normalize() {
 		int oldHP = maxHP;
-		maxHP = (int) ( (2 * 45 * level) / 100) + level + 10;
+		maxHP = 30 + level * 2;
 		HP += maxHP - oldHP;
 		if ( wild == true ) {
-			baseAttack = (int) ( (2 * 50 * level) / 100 ) + 5;
-			baseDefense = (int) ( (2 * 40 * level) / 100 ) + 5;
+			baseAttack = 10 + level * 2;
+			baseDefense = 6 + level * 2;
 		}
 		else {
-			baseAttack = (int) ( (level * 2.5) + 0.5 );
-			baseDefense = (int) ( (level * 1.5) + 0.5 );
+			baseAttack = 12 + (int)(level * 2.5);
+			baseDefense = 8 + (int)(level * 2.2);
 		}
 		levelEXP = (level * level * level) - ((level - 1) * (level - 1) * (level - 1));
 		resetStats();
+	}
+	
+	public void resetStats() {
+		attack = baseAttack;
+		defense = baseDefense;
 	}
 	
 	//Adding moves
@@ -166,22 +171,15 @@ public abstract class Pokemon {
 	//Battle methods
 	public void attack (Pokemon enemy, int n) {
 		int move = n;
-		
 		double effectiveness = 1;
 		if ( hasWeak( enemy.getType() ) ) { effectiveness = 0.5; }
 		else if ( hasStr( enemy.getType() ) ) { effectiveness = 2; }
 		int baseDmg = movesDmg[move];
-		
-		//actual formula for dmg in Pokemon; http://bulbapedia.bulbagarden.net/wiki/Damage#Damage_formula
-		int damageDealt = (int) ( ( ( getAttack() / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
+		//Damage calculation
+		int damageDealt = (int) ( ( ((2.0 * level + 10.0) / 200.0) * ( (double) attack / enemy.getDefense() ) * baseDmg + 2 ) * effectiveness );
 		
 		enemy.lowerHP(damageDealt);
 		PP[move] -= 1;
-	}
-	
-	public void resetStats() {
-		attack = baseAttack;
-		defense = baseDefense;
 	}
 	
 	public void restoreHP( int amount ) {

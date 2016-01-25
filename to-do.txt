@@ -1,22 +1,10 @@
 MAIN THINGS TO GET DONE:
 
 Leo:
+	
+- Start msg wait times
 
-- Implement Trainers
-	- Player walks into vision -> battle
-	*GYM LEADERS only fight when prompted by trainer
-		- after defeat, trainer is rewarded an item (?)
-		
-- Different maps have different Pokemon in evolution tree
-		
-- When done with everything, fix math for:
-	- Exp gain
-	- Damage dealt (effectiveness)
-	- Pokeball catch rate
-	- Escape rate
-	- PokeMart prices
-	- Speed (?)
-	- get rid of FOR TESTING displays
+- Beating the game?
 
 Sungbin:
 
