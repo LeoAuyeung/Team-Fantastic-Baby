@@ -661,6 +661,7 @@ public class Game {
 		if( to.getType().equals("PKCenter") ) { //PKCenter heals every captured pokemon
 		    for( int i = 0; i < capturedPokemon; i++ ) {
 			_Pokemon.get(i).restoreHP( 999 );
+			_Pokemon.get(i).restorePP( 999 );
 		    }
 		    mapScreen = 1;
 		    displayMapMsg();					
@@ -713,6 +714,7 @@ public class Game {
 		if( to.getType().equals("PKCenter") ) {
 		    for( int i = 0; i < capturedPokemon; i++ ) {
 			_Pokemon.get(i).restoreHP( 999 );
+			_Pokemon.get(i).restorePP( 999 );
 		    }
 		    mapScreen = 1;
 		    displayMapMsg();
@@ -766,6 +768,7 @@ public class Game {
 		if( to.getType().equals("PKCenter") ) {
 		    for( int i = 0; i < capturedPokemon; i++ ) {
 			_Pokemon.get(i).restoreHP( 999 );
+			_Pokemon.get(i).restorePP( 999 );
 		    }
 		    mapScreen = 1;
 		    displayMapMsg();
@@ -819,6 +822,7 @@ public class Game {
 		if( to.getType().equals("PKCenter") ) {
 		    for( int i = 0; i < capturedPokemon; i++ ) {
 			_Pokemon.get(i).restoreHP( 999 );
+			_Pokemon.get(i).restorePP( 999 );
 		    }
 		    mapScreen = 1;
 		    displayMapMsg();
