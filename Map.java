@@ -104,7 +104,7 @@ public class Map {
 
 	for ( int row = 0; row < map.length ; row++ ) {
 	    for ( int column = 0; column < map[row].length; column++ ) {
-		map[row][column] = new Tile( "line" );
+		map[row][column] = new Tile( "Grass" );
 	    }
 	}
 	line( 4, 0, 4, 10, "Floor" );
