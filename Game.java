@@ -344,7 +344,7 @@ public class Game {
 		displayBattlefield();
 		//1/2 of the screen
 		if( systemMsg.length() < 39 ) {
-			Battle.set( 12, 0, "         ============================================" );
+			Battle.set( 12, 0, "\n         ============================================" );
 			Battle.set( 13, 0, "         ||                                        ||" );
 			Battle.set( 14, 0, "         || " + indent(systemMsg, 39) + "||");
 			Battle.set( 15, 0, "         ||                                        ||" );
