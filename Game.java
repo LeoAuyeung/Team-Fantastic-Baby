@@ -16,13 +16,14 @@ public class Game {
     private Map userMap;    
     private Battle battle = new Battle();
     private Inventory bag = new Inventory();
-	private Trainer enemy;
+    private String[][] pokemart;
+    private Trainer enemy;	
 	//For keeping track of battles/turns
     private boolean battleMode = false;
     private boolean opponentTurn = false;
     //For display
     private String systemMsg = "";
-	private int battleScreen;
+	private int battleScreen, mapScreen;
 	
     //~~~~~~~~~~~~~~~MISC.~~~~~~~~~~~~~~~~~~~~~~~
 	
@@ -104,14 +105,215 @@ public class Game {
 	
 	public void displayCommands() {
 		System.out.println("============================================================");
-		String commands = "W:UP " + "S:DOWN " + "A:LEFT " + "D:RIGHT " + "X:INTERACT ";
+		String commands =  "W:UP " + "S:DOWN " + "A:LEFT " + "D:RIGHT " + "X:INTERACT |" + indent( center( userMap.getName(),20 ), 20 ) + "|" ;
 		System.out.println( commands );
 	}
 	
-	public void displayMapMsg() {
-		
-	}
+	public void displayMapReset() {
+        
+	for( int row = 3; row < 17; row++ ) {               //clearing the mid space
+	    for( int column = 3; column < 17; column++ ) {
+		userMap.set(row, column, new Tile("Floor"));
+	    }
+	}		
+	userMap.line( 3, 3, 3, 16, "=" );
+	userMap.line( 4, 3, 15, 3, "||" );
+	userMap.line( 16, 3, 16, 16, "=" );
+	userMap.line( 4, 16, 15, 16, "||" );
+    }
+    public void displayMapMsg() {
+		    
+	String command = "";
 	
+	if( mapScreen == 1 ) {      //Pokecenter
+	    displayMapReset();
+	    splitMsg( 9, "Nurse: Okay, I'll take your pokemons for a few second,",30);       
+	    System.out.println( userMap );
+	    waitMS( 1500 );
+	    
+	    displayMapReset();
+	    System.out.println( userMap );
+	    waitMS( 1500 );
+
+	    displayMapReset();
+	    splitMsg( 9, "Nurse: HP of all your pokemons have been restored!", 30);
+	    System.out.println( userMap );
+	    waitMS( 1500 );
+
+	    userMap = new Map( Player.getMapNum() );
+	    mapScreen = 0;
+	}
+	else if( mapScreen == 2 ) {       // Pokemart
+	    pokemart = new String[21][55];  // set up
+	    
+	    for ( int row = 0; row < pokemart.length; row++ ) {
+		for ( int column = 0; column < pokemart[row].length; column++ ) {
+		    pokemart[row][column] = new String();
+		}
+	    }
+
+	    pokemart[9][0] = "       ============================================";
+	    pokemart[10][0]= "       ||           Not enough money...          ||";
+	    pokemart[11][0]= "       ============================================";
+	    String errorMsg = "";                 // toString()
+	    for ( int row = 0; row < pokemart.length ; row++ ) {
+		for ( int column = 0; column < pokemart[row].length; column++ ) {
+		    errorMsg += pokemart[row][column];
+		}
+		    errorMsg += "\n";
+	    }
+
+	    
+	    while( !command.equals("e") ) {
+	    
+		pokemart[0][0] = "=======================================================";
+		pokemart[1][0] = "||                    | POKEMART |            E: EXIT||";
+		pokemart[2][0] = "||===================================================||";
+		pokemart[3][0] = "|| (1) Poke Ball      200P | (7) Full Restore  2500P ||";
+		pokemart[4][0] = "|| Catches a wild pokemon. | Heals to full HP.       ||";
+		pokemart[5][0] = "||---------------------------------------------------||";
+		pokemart[6][0] = "|| (2) Great Ball     600P | (8) Elixir Potion 1500P ||";
+		pokemart[7][0] = "|| A good ball.            | 10 PP to all moves.     ||";
+		pokemart[8][0] = "||---------------------------------------------------||";
+		pokemart[9][0] = "|| (3) Ultra Ball    1200P | (9) Max Elixir    2250P ||";
+		pokemart[10][0]= "|| A better ball.          | All PP to all moves.    ||";
+		pokemart[11][0]= "||---------------------------------------------------||";
+		pokemart[12][0]= "|| (4) Potion         300P | (10) Protein      1500P ||";
+		pokemart[13][0]= "|| Heals 20 HP.            | Raises the attack by 10.||";
+		pokemart[14][0]= "||---------------------------------------------------||";
+		pokemart[15][0]= "|| (5) Super Potion   700P | (11) Iron         1500P ||";
+		pokemart[16][0]= "|| Heals 50 HP.            | Raises the def by 10.   ||";
+		pokemart[17][0]= "||---------------------------------------------------||";
+		pokemart[18][0]= "|| (6) Hyper Potion  1200P |   Money in Possession:  ||";
+		pokemart[19][0]= "|| Heals 200 HP.           |" + indent(center( Player.getMoney() + "P", 25 ),25) +  "||";		
+		pokemart[20][0] = "=======================================================";
+
+		String retVal = "";                 // toString()
+		for ( int row = 0; row < pokemart.length ; row++ ) {
+		    for ( int column = 0; column < pokemart[row].length; column++ ) {
+			retVal += pokemart[row][column];
+		    }
+		    retVal += "\n";
+		}
+		
+		System.out.println( retVal );
+		command = promptControl();
+	   
+		if( command.equals("1") ) {
+		    if( Player.getMoney() > 200 ) {
+			Player.setMoney(Player.getMoney()-200);
+			bag.addAmount(0,0,1);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("2")) {
+		    if( Player.getMoney() > 600 ) {
+			Player.setMoney(Player.getMoney()-600);
+			bag.addAmount(0,1,1);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("3")) {
+		    if( Player.getMoney() > 1200 ) {
+			bag.addAmount(0,2,1);
+			Player.setMoney(Player.getMoney()-1200);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("4")) {
+		    if( Player.getMoney() > 300 ) {
+			bag.addAmount(1,0,1);
+			Player.setMoney(Player.getMoney()-300);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("5")) {
+		    if( Player.getMoney() > 700 ) {
+			bag.addAmount(1,1,1);
+			Player.setMoney(Player.getMoney()-700);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("6")) {
+		    if( Player.getMoney() > 1200 ) {
+			bag.addAmount(1,2,1);
+			Player.setMoney(Player.getMoney()-1200);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("7")) {
+		    if( Player.getMoney() > 2500 ) {
+			bag.addAmount(1,3,1);
+			Player.setMoney(Player.getMoney()-2500);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}		
+		else if( command.equals("8")) {
+		    if( Player.getMoney() > 1500 ) {
+			bag.addAmount(1,4,1);
+			Player.setMoney(Player.getMoney()-1500);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("9")) {
+		    if( Player.getMoney() > 2250 ) {
+			bag.addAmount(1,5,1);
+			Player.setMoney(Player.getMoney()-2250);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("10")) {
+		    if( Player.getMoney() > 1500 ) {
+			bag.addAmount(2,0,1);
+			Player.setMoney(Player.getMoney()-1500);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+		else if( command.equals("11")) {
+		    if( Player.getMoney() > 1500 ) {
+			bag.addAmount(2,1,1);
+			Player.setMoney(Player.getMoney()-1500);
+		    }
+		    else {
+			System.out.println( errorMsg );
+			waitMS( 1500 );
+		    }
+		}
+	    }// ends while loop
+	    mapScreen = 0;
+	}//ends  pokemart
+    }
+    
 	//~~~~~~~~~~~~~~~BATTLE-DISPLAYS~~~~~~~~~~~~~~~~
 	
 	//Main battle display (Player's Pokemon, Enemy Pokemon, Battle Menu)
@@ -232,21 +434,21 @@ public class Game {
 		displayBattlefield();
 		Battle.set( 9, 0,  "                      AVAILABLE POKEMON:              B: BACK" );
 		Battle.set( 10, 0, "------------------------------ ------------------------------" );
-		Battle.set( 11, 0, "|" + indent(" (1) Lv." + _Pokemon.get(0).getLevel() + " " + _Pokemon.get(0).getName() + "(" + _Pokemon.get(0).getType() + ")", 28) + "|" );
+		Battle.set( 11, 0, "|" + indent("(1)Lv." + _Pokemon.get(0).getLevel() + " " + _Pokemon.get(0).getName() + "(" + _Pokemon.get(0).getType() + ")", 28) + "|" );
 		Battle.set( 12, 0, "|" + indent(displayHP( _Pokemon.get(0) ), 28) + "|" );
 		Battle.set( 13, 0, "------------------------------ ------------------------------" );
-		Battle.set( 14, 0, "|" + indent(" (2) Lv." + _Pokemon.get(1).getLevel() + " " + _Pokemon.get(1).getName() + "(" + _Pokemon.get(1).getType() + ")", 28) + "|" );
+		Battle.set( 14, 0, "|" + indent("(2)Lv." + _Pokemon.get(1).getLevel() + " " + _Pokemon.get(1).getName() + "(" + _Pokemon.get(1).getType() + ")", 28) + "|" );
 		Battle.set( 15, 0, "|"+ indent(displayHP( _Pokemon.get(1) ), 28) + "|" );
 		Battle.set( 16, 0, "------------------------------ ------------------------------" );
-		Battle.set( 17, 0, "|" + indent(" (3) Lv." + _Pokemon.get(2).getLevel() + " " + _Pokemon.get(2).getName() + "(" + _Pokemon.get(2).getType() + ")", 28) + "|" );
+		Battle.set( 17, 0, "|" + indent("(3)Lv." + _Pokemon.get(2).getLevel() + " " + _Pokemon.get(2).getName() + "(" + _Pokemon.get(2).getType() + ")", 28) + "|" );
 		Battle.set( 18, 0, "|" + indent(displayHP( _Pokemon.get(2) ), 28) + "|" );
 		Battle.set( 19, 0, "------------------------------ ------------------------------" );
 		// second column
-		Battle.set( 11, 1, " |" + indent(" (4) Lv." + _Pokemon.get(3).getLevel() + " " + _Pokemon.get(3).getName() + "(" + _Pokemon.get(3).getType() + ")", 28) + "|" );
+		Battle.set( 11, 1, " |" + indent("(4)Lv." + _Pokemon.get(3).getLevel() + " " + _Pokemon.get(3).getName() + "(" + _Pokemon.get(3).getType() + ")", 28) + "|" );
 		Battle.set( 12, 1, " |" + indent(displayHP( _Pokemon.get(3) ), 28) + "|" );
-		Battle.set( 14, 1, " |" + indent(" (5) Lv." + _Pokemon.get(4).getLevel() + " " + _Pokemon.get(4).getName() + "(" + _Pokemon.get(4).getType() + ")", 28) + "|" );
+		Battle.set( 14, 1, " |" + indent("(5)Lv." + _Pokemon.get(4).getLevel() + " " + _Pokemon.get(4).getName() + "(" + _Pokemon.get(4).getType() + ")", 28) + "|" );
 		Battle.set( 15, 1, " |" + indent(displayHP( _Pokemon.get(4) ), 28) + "|" );
-		Battle.set( 17, 1, " |" + indent(" (6) Lv." + _Pokemon.get(5).getLevel() + " " + _Pokemon.get(5).getName() + "(" + _Pokemon.get(5).getType() + ")", 28) + "|" );
+		Battle.set( 17, 1, " |" + indent("(6)Lv." + _Pokemon.get(5).getLevel() + " " + _Pokemon.get(5).getName() + "(" + _Pokemon.get(5).getType() + ")", 28) + "|" );
 		Battle.set( 18, 1, " |" + indent(displayHP( _Pokemon.get(5) ), 28) + "|" );
 		System.out.println( battle );
 	}
@@ -303,7 +505,7 @@ public class Game {
 	
 	//Executes Non-Battle Commands
 	
-	public void executeControl( String command ) {
+		public void executeControl( String command ) {
 		int y = Player.getY();
 		int x = Player.getX();
 		Tile from = Map.get( y, x ); // a var for player's original location
@@ -320,7 +522,13 @@ public class Game {
 					for( int i = 0; i < capturedPokemon; i++ ) {
 						_Pokemon.get(i).restoreHP( 999 );
 					}
+					mapScreen = 1;
+					displayMapMsg();					
 				}
+				if( to.getType().equals("PKMart") ) {
+				    mapScreen = 2;
+				    displayMapMsg();
+				}				    
 				if( to.getType().equals("ForwardPortal") ) {				    
 					Player.setMapNum( Player.getMapNum()+1 );
 					userMap = new Map(Player.getMapNum());
@@ -351,7 +559,13 @@ public class Game {
 					for( int i = 0; i < capturedPokemon; i++ ) {
 						_Pokemon.get(i).restoreHP( 999 );
 					}
+					mapScreen = 1;
+					displayMapMsg();
 				}
+				if( to.getType().equals("PKMart") ) {
+				    mapScreen = 2;
+				    displayMapMsg();
+				}				 
 				if( to.getType().equals("ForwardPortal") ) {
 					Player.setMapNum( Player.getMapNum()+1 );
 					userMap = new Map(Player.getMapNum());
@@ -382,7 +596,13 @@ public class Game {
 					for( int i = 0; i < capturedPokemon; i++ ) {
 						_Pokemon.get(i).restoreHP( 999 );
 					}
+					mapScreen = 1;
+					displayMapMsg();
 				}
+				if( to.getType().equals("PKMart") ) {
+				    mapScreen = 2;
+				    displayMapMsg();
+				}				 
 				if( to.getType().equals("ForwardPortal") ) {
 					Player.setMapNum( Player.getMapNum()+1 );
 					userMap = new Map(Player.getMapNum());
@@ -413,7 +633,13 @@ public class Game {
 					for( int i = 0; i < capturedPokemon; i++ ) {
 						_Pokemon.get(i).restoreHP( 999 );
 					}
+					mapScreen = 1;
+					displayMapMsg();
 				}
+				if( to.getType().equals("PKMart") ) {
+				    mapScreen = 2;
+				    displayMapMsg();
+				}		
 				if( to.getType().equals("ForwardPortal") ) {
 					Player.setMapNum( Player.getMapNum()+1 );
 					userMap = new Map(Player.getMapNum());					
@@ -1359,6 +1585,22 @@ public class Game {
 			temp = temp.substring(0,i);
 		}
 		return index;
+	}
+	public void splitMsg( int row, String s, int x ) {
+	    int n = 0;	   	    
+	    while( lastWord( s, x ) > 0 ) {
+		for( int column = 5; column < 15; column++ ) { // clearing up space
+		    userMap.set(row+n, column, new Tile() );
+		}
+		userMap.get( row + n, 5 ).setImage( indent(s.substring(0, lastWord(s,x)),30) );
+		s = s.substring( lastWord(s,x) + 1 );
+		n++;
+	    }
+	    for( int column = 5; column < 15; column++ ) { // clearing up space
+		    userMap.set(row+n, column, new Tile() );
+	    }
+	    userMap.get( row + n, 5 ).setImage( indent( s, 30) );	    
+		
 	}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
