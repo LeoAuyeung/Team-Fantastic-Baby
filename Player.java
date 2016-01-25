@@ -4,7 +4,7 @@
 public class Player {
 	
     private static String gender, name;
-    private static int badges, money, mapNum, fromMap, xCor, yCor, pokemonLeft;
+    private static int badges, money, mapNum, fromMap, xCor, yCor, pokemonLeft, RxCor, RyCor;
     private static String direction;
 	
     //Constructor
@@ -19,11 +19,15 @@ public class Player {
 		direction = "RIGHT";
 		xCor = 1;
 		yCor = 3;
+		RxCor = 11;  // Respawn location
+		RyCor = 14;
 	}		
 	
     //Mutators
     public static void setX ( int x ) { xCor = x; }
     public static void setY ( int y ) { yCor = y; }
+    public static void setRX ( int x ) { RxCor = x; }
+    public static void setRY ( int y ) { RyCor = y; }   
     public static void setMoney ( int m ) { money = m; }
     public static void setPokemonLeft ( int l ) { pokemonLeft = l; }
 	public static void setBadges ( int b ) { badges = b; }
@@ -37,6 +41,8 @@ public class Player {
     public static String getName() { return name; }
     public static int getX() { return xCor; }
     public static int getY() { return yCor; }
+    public static int getRX() { return RxCor; }
+    public static int getRY() { return RyCor; } 
     public static int getMoney() { return money; }
     public static int getPokemonLeft() { return pokemonLeft; }
     public static int getBadges() { return badges; }
