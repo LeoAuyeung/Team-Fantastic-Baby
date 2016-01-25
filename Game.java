@@ -1749,7 +1749,6 @@ public class Game {
     public void capturePokemon( Pokemon p ) {
 	capturedPokemon = capturedPokemon + 1;
 	_Pokemon.set( capturedPokemon - 1, p );
-	( _Pokemon.get( capturedPokemon - 1 ) ).setWild(false);
 	Player.setPokemonLeft( Player.getPokemonLeft() + 1 );
     }
 	
