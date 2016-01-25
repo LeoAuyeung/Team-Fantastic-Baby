@@ -1,5 +1,4 @@
-# Team-Fantastic-Baby
-Team Fantastic Baby -- Leo Au-Yeung &amp; Sungbin Kim
+
 Project -- Pokemon: Fantastic Version
 ==============================================================
 Created by Team Fantastic Baby -- Leo Au-Yeung, Sungbin Kim
