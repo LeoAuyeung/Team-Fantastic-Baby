@@ -663,6 +663,7 @@ public class Game {
 			_Pokemon.get(i).restoreHP( 999 );
 			_Pokemon.get(i).restorePP( 999 );
 		    }
+		    Player.setPokemonLeft( capturedPokemon );
 		    mapScreen = 1;
 		    displayMapMsg();					
 		}
@@ -716,6 +717,7 @@ public class Game {
 			_Pokemon.get(i).restoreHP( 999 );
 			_Pokemon.get(i).restorePP( 999 );
 		    }
+		    Player.setPokemonLeft( capturedPokemon );
 		    mapScreen = 1;
 		    displayMapMsg();
 		}
@@ -770,6 +772,7 @@ public class Game {
 			_Pokemon.get(i).restoreHP( 999 );
 			_Pokemon.get(i).restorePP( 999 );
 		    }
+		    Player.setPokemonLeft( capturedPokemon );
 		    mapScreen = 1;
 		    displayMapMsg();
 		}
@@ -824,6 +827,7 @@ public class Game {
 			_Pokemon.get(i).restoreHP( 999 );
 			_Pokemon.get(i).restorePP( 999 );
 		    }
+		    Player.setPokemonLeft( capturedPokemon );
 		    mapScreen = 1;
 		    displayMapMsg();
 		}
@@ -1413,6 +1417,7 @@ public class Game {
 			_Pokemon.get(i).restoreHP( 999 );
 			_Pokemon.get(i).restorePP( 999 );
 		}
+		Player.setPokemonLeft( capturedPokemon );
 	    }
 	}
 		
