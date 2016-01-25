@@ -1577,12 +1577,14 @@ public class Game {
 	public int lastWord( String s, int x ) { // returns the index where the last word begins
 		String temp = new String( s );
 		int index = 0;
+		if( s.length() > x ) {
 		for( int i = x; i >= 0; i-- ) {
 			if( temp.substring(i).equals(" ") ) {
 				index = i;
 				break;
 			}
 			temp = temp.substring(0,i);
+		}
 		}
 		return index;
 	}
