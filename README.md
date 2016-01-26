@@ -17,42 +17,60 @@ leveling up, and evolving your Pokemon!
 ==============================================================
 
 INSTRUCTIONS:
+
 NOTE: Java development kit is required to run this game:
 http://docs.oracle.com/javase/7/docs/webnotes/install/
 
 To run the game in terminal/command prompt:
+
 	- javac Game.java
 	- java Game
+
 And you're all set to play!
 
 ==============================================================
 
 GAMEPLAY:
+
 Upon creation of character and picking a starter, the player
 will spawn in the first town, and journey through the towns
 to defeat gym leaders and the champion!
 
 Battles:
+
 - Fight:
+
 	Pick from the available moves that the Pokemon can use
+	
 - Bag:
+
 	Poke Balls:
+	
 		Used to catch wild Pokemon
+		
 	Potions:
+	
 		Used to recover HP/PP of Pokemon
+		
 	Battle Items:
+	
 		Used to raise a Pokemon's Attack/Defense
+		
 - Pokemon:
+
 	Pick from the available Pokemon that the player has
 	caught to send them out into battle
 - Run:
+
 	Attempt to flee from battle (Doesn't work in trainer battles)
 
 ==============================================================
 
 AVAILABLE POKEMON:
+
 NOTE: Not all types from Pokemon were incorporated, and neither
 were all the Pokemon for every type; The available types are:
+
 Normal, Fire, Water, Electric, Grass, Ice, Fighting, Flying, Rock, Dark, Steel
 
 Normal:
@@ -117,4 +135,5 @@ Rare/Legendaries:
 - Rock: Regirock
 - Dark: Darkrai
 - Steel: Registeel
+
 ==============================================================
