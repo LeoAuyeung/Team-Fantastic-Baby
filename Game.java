@@ -1772,8 +1772,8 @@ public class Game {
     public int gainEXP() {
 	int gained;
 	//Math for exp gain
-	if ( enemyPokemon.getWild() == false ) { gained = enemyPokemon.getLevel() * 6; }
-	else { gained = enemyPokemon.getLevel() * 4; }
+	if ( enemyPokemon.getWild() == false ) { gained = enemyPokemon.getLevel() * 15; }
+	else { gained = enemyPokemon.getLevel() * 12; }
 	currentPokemon.gainEXP(gained);
 	return gained;
     }
