@@ -16,11 +16,11 @@ public class Trainer {
 	public Trainer ( String n, int d, String t ) {
 		name = n;
 		type = t;
-		difficulty = d;
+		difficulty = d / 3;
 		gymLeader = false;
-		_Pkmn = new Pokemon[difficulty];
-		totalPokemon = difficulty;
+		totalPokemon = difficulty + (int) (Math.random() * difficulty);
 		pokemonLeft = totalPokemon;
+		_Pkmn = Pokemon[totalPokemon];
 		givePokemon(difficulty, type);
 	}
 	
@@ -31,6 +31,7 @@ public class Trainer {
 	}
 	
 	//Mutators
+	public void setName ( String n ) { name = n; }
 	public void setType( String t ) { type = t; }
 	public void setPokemonLeft( int i ) { pokemonLeft = i; }
 	public void addPokemon( Pokemon p ) { _Pkmn[pokemonLeft-1] = p; }
@@ -52,8 +53,8 @@ public class Trainer {
 	
 	public Pokemon give( int diff, String type ) {
 		Pokemon pkmn;
-		//Level = (Difficulty * 10) - random lvl between 0-5
-		int lvl = diff * 10 - (int)(Math.random() * 5);
+		//Level = (Difficulty * 4) - random lvl between 0-2
+		int lvl = diff * 4 - (int)(Math.random() * 3);
 		//Normal
 		if ( type.equals("NORMAL") ) {
 			//Random = # of pokemon of given type in game (not including starters/legendaries)

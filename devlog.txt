@@ -424,4 +424,35 @@ Changes:
 -  Startupmsg and endingmsg added
 - total 13 maps implemented
 - player interaction on maps implemented
+
+==============================================================
+
+**************************************************************
+
+Final Project has been submitted (2016-01-25)
+
+All changes made beyond this point were made after the submission,
+and are mainly details to improve gameplay, add additional
+functionality that was not previously added, and mainly
+additional aesthetic details to improve our game even further!
+
+**************************************************************
+
+==============================================================
+
+Date: 2016-01-26
+--------------------------------------------------------------
+
+User: Leo Au-Yeung
+Changes:
+- Created NEW to-do list for further ideas that we can implement
+- Fixed dialogue within game to better represent dialogue of NPCs
+in Pokemon games (Nurse Joy, Professor Oak)
+- Lowered difficulty of game even further so that the Player won't
+meet a lvl 70 Pokemon in the fifth map -_-
+- Lowered difficulty of trainers
+- Fixed so trainers show "Foe" or "Gym Leader" before their name
+- Improve timing and display of startupMsg
+- Minor details changed
+
 ==============================================================
