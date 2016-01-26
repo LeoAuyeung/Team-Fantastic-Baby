@@ -44,15 +44,15 @@ Battles:
 	
 - Bag:
 
-	Poke Balls:
+	- Poke Balls:
 	
 		Used to catch wild Pokemon
 		
-	Potions:
+	- Potions:
 	
 		Used to recover HP/PP of Pokemon
 		
-	Battle Items:
+	- Battle Items:
 	
 		Used to raise a Pokemon's Attack/Defense
 		
