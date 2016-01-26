@@ -12,6 +12,18 @@ To-Do: Things we want to complete after submission of project:
 	- Every move has different base damage (power)
 	- Every move has an accuracy
 	- Add moves with different effects, not just damage (?)
+		- Healing
+		- Causing statuses
+		- Transform*
+	- Moves outside of battle:
+		- Cut
+		- Fly
+		- Surf
+		- Strength
+		- Defog/Flash*
+		- Fly
+		- Waterfall
+		- Dive/Rock Climb*
 	
 - Statuses:
 	- Sleep
@@ -42,5 +54,21 @@ To-Do: Things we want to complete after submission of project:
 - Items:
 	- Add berries
 	- Add all other HM/TM's (8 HM's in total, 92 TM's)
-	- Add more potions, Poke balls, battle items
+	- Add more potions, Poke balls, battle items, Revive
 	- Add equip items that have different effects depending on the item
+	
+- Day care:
+	- Put pokemon at daycare center to level up slowly
+	- 2 same Pokemon of diff genders can make baby
+	- Ditto + any pokemon except legendary can make baby
+	
+- Pokecenter:
+	- Store Pokemon
+	- Resotre PP!!
+	
+- World Map
+
+- Pokedex:
+	- Adds Pokemon whenever player encounters it
+	
+- Events/storyline*
