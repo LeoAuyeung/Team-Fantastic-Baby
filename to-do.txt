@@ -1,0 +1,46 @@
+To-Do: Things we want to complete after submission of project:
+
+- Game balancing:
+	- Easier exp gain with only 13 maps
+	- Easier to fight against super effective Pokemon
+	
+- Double types:
+	- Pokemon can have 2 types, not just 1
+	
+- Moves:
+	- Every move has a different type
+	- Every move has different base damage (power)
+	- Every move has an accuracy
+	- Add moves with different effects, not just damage (?)
+	
+- Statuses:
+	- Sleep
+	- Paralyzed
+	- Frozen
+	- Burnt
+	- Flinched (Lose 1 turn once)
+	
+- Encountering multiple legendary Pokemon at different areas:
+	- Different maps specifically for different legendaries:
+	Ex: Groudon -- http://bulbapedia.bulbagarden.net/wiki/Terra_Cave
+	Kyogre -- http://bulbapedia.bulbagarden.net/wiki/Marine_Cave
+	Rayquaza -- http://bulbapedia.bulbagarden.net/wiki/Sky_Pillar
+	- Add all legendaries (at least all from one region: Hoenn!)
+	
+- 8 Gym leaders, Elite Four, Champion:
+	Hoenn: http://bulbapedia.bulbagarden.net/wiki/Hoenn#Gym_Leaders
+	http://bulbapedia.bulbagarden.net/wiki/Hoenn#Elite_Four_and_Champion
+	
+- Double Battles (?)
+	- Send out 2 Pokemon at once vs two Pokemon
+	
+- Stats:
+	- More personalized stats for different Pokemon so everyone won't have same stats
+	- Include speed to use to determine who goes first whenever a Pokemon is sent out
+	- Add special attack/defense
+	
+- Items:
+	- Add berries
+	- Add all other HM/TM's (8 HM's in total, 92 TM's)
+	- Add more potions, Poke balls, battle items
+	- Add equip items that have different effects depending on the item
