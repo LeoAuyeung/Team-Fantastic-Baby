@@ -20,7 +20,7 @@ public class Trainer {
 		gymLeader = false;
 		totalPokemon = difficulty + (int) (Math.random() * difficulty);
 		pokemonLeft = totalPokemon;
-		_Pkmn = Pokemon[totalPokemon];
+		_Pkmn = new Pokemon[totalPokemon];
 		givePokemon(difficulty, type);
 	}
 	
